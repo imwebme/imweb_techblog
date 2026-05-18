@@ -9,6 +9,7 @@ import {
   getCategories,
   getTags,
 } from "@/lib/notion/getPosts"
+import { safeAsync } from "@/lib/utils/safeStatic"
 
 type Props = {
   posts: Awaited<ReturnType<typeof getPosts>>
@@ -17,19 +18,19 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  // 노션 API 가 일시적으로 실패해도 사이트 자체는 살아있도록 (빈 상태 UI) graceful fallback.
-  // 영구 실패는 Actions 로그에서 console.error 로 추적 가능.
-  try {
-    const [posts, categories, tags] = await Promise.all([
-      getPosts(),
-      getCategories(),
-      getTags(),
-    ])
-    return { props: { posts, categories, tags } }
-  } catch (err) {
-    console.error("[home] getStaticProps 실패 — 빈 상태로 fallback:", err)
-    return { props: { posts: [], categories: [], tags: [] } }
-  }
+  const props = await safeAsync(
+    async () => {
+      const [posts, categories, tags] = await Promise.all([
+        getPosts(),
+        getCategories(),
+        getTags(),
+      ])
+      return { posts, categories, tags }
+    },
+    { posts: [], categories: [], tags: [] },
+    "home"
+  )
+  return { props }
 }
 
 export default function HomePage({

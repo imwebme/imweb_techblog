@@ -2,6 +2,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next"
 import Link from "next/link"
 import Layout from "@/components/layout/Layout"
 import { getPosts, getTags } from "@/lib/notion/getPosts"
+import { safeAsync } from "@/lib/utils/safeStatic"
 
 type Props = {
   tags: Awaited<ReturnType<typeof getTags>>
@@ -9,13 +10,15 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  try {
-    const [posts, tags] = await Promise.all([getPosts(), getTags()])
-    return { props: { tags, total: posts.length } }
-  } catch (err) {
-    console.error("[tags] getStaticProps 실패 — 빈 상태로 fallback:", err)
-    return { props: { tags: [], total: 0 } }
-  }
+  const props = await safeAsync(
+    async () => {
+      const [posts, tags] = await Promise.all([getPosts(), getTags()])
+      return { tags, total: posts.length }
+    },
+    { tags: [], total: 0 },
+    "tags"
+  )
+  return { props }
 }
 
 export default function TagsPage({

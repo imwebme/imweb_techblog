@@ -13,7 +13,7 @@ export const unwrap = (record: any): any => {
   return record
 }
 
-const findPropId = (
+export const findPropId = (
   schema: Record<string, { name: string; type: string }>,
   names: string[]
 ): string | null => {

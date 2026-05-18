@@ -4,19 +4,15 @@ import { useEffect, useMemo, useState } from "react"
 import Layout from "@/components/layout/Layout"
 import PostCard from "@/components/home/PostCard"
 import { getPosts } from "@/lib/notion/getPosts"
+import { safeAsync } from "@/lib/utils/safeStatic"
 
 type Props = {
   posts: Awaited<ReturnType<typeof getPosts>>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  try {
-    const posts = await getPosts()
-    return { props: { posts } }
-  } catch (err) {
-    console.error("[search] getStaticProps 실패 — 빈 상태로 fallback:", err)
-    return { props: { posts: [] } }
-  }
+  const posts = await safeAsync(() => getPosts(), [], "search")
+  return { props: { posts } }
 }
 
 export default function SearchPage({

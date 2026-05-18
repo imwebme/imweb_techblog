@@ -1,6 +1,7 @@
 import type { ExtendedRecordMap } from "notion-types"
-import { notion, fetchPage } from "./client"
-import { mapBlockToPost, unwrap } from "./mapPage"
+import { fetchPage } from "./client"
+import { enrichAuthorUsers } from "./enrichUsers"
+import { findPropId, mapBlockToPost, unwrap } from "./mapPage"
 import type { TPost } from "@/types"
 
 const CONFIG = require("../../../site.config")
@@ -24,52 +25,6 @@ const fetchDatabaseRecordMap = async (): Promise<ExtendedRecordMap> => {
   return fetchPage(CONFIG.notion.databaseId)
 }
 
-// 공개 게시된 페이지의 recordMap 에는 작성자(notion_user) 정보가 비어있어
-// 별도로 notion.getUsers() 를 호출해 보강합니다.
-const enrichUsersInRecordMap = async (
-  recordMap: ExtendedRecordMap,
-  authorPropId: string,
-  pageIds: string[]
-): Promise<void> => {
-  const userIds = new Set<string>()
-  for (const id of pageIds) {
-    const block = unwrap(recordMap.block[id])
-    const raw = block?.properties?.[authorPropId]
-    if (!raw) continue
-    for (const seg of raw) {
-      const annotations = seg?.[1] || []
-      for (const a of annotations) {
-        if (a?.[0] === "u" && typeof a[1] === "string") userIds.add(a[1])
-      }
-    }
-  }
-  if (userIds.size === 0) return
-
-  try {
-    const resp: any = await (notion as any).getUsers([...userIds])
-    const merged = resp?.recordMapWithRoles?.notion_user
-    if (merged) {
-      recordMap.notion_user = {
-        ...(recordMap.notion_user ?? {}),
-        ...merged,
-      }
-    }
-  } catch {
-    // 작성자 정보 없이도 페이지는 동작해야 하므로 실패는 무시.
-  }
-}
-
-const findPropIdByName = (
-  schema: Record<string, { name?: string; type?: string }>,
-  names: string[]
-): string | null => {
-  const lower = names.map((n) => n.toLowerCase())
-  for (const [id, s] of Object.entries(schema)) {
-    if (s.name && lower.includes(s.name.toLowerCase())) return id
-  }
-  return null
-}
-
 export async function getPosts(): Promise<TPost[]> {
   const recordMap = await fetchDatabaseRecordMap()
 
@@ -87,13 +42,9 @@ export async function getPosts(): Promise<TPost[]> {
   const ids = extractBlockIds(firstQuery)
 
   // 작성자 보강 (notion_user 매핑 추가)
-  const authorPropId = findPropIdByName(schema, [
-    "author",
-    "authors",
-    "작성자",
-  ])
+  const authorPropId = findPropId(schema, ["author", "authors", "작성자"])
   if (authorPropId) {
-    await enrichUsersInRecordMap(recordMap, authorPropId, ids)
+    await enrichAuthorUsers(recordMap, ids, authorPropId)
   }
 
   const posts: TPost[] = []

@@ -9,6 +9,7 @@ import PostActions from "@/components/post/PostActions"
 import Comments from "@/components/post/Comments"
 import { getPostBySlug } from "@/lib/notion/getPostBySlug"
 import { getPosts } from "@/lib/notion/getPosts"
+import { safeAsync } from "@/lib/utils/safeStatic"
 import type { TPost } from "@/types"
 
 const CONFIG = require("../../../site.config")
@@ -19,15 +20,10 @@ type Props = {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const posts = await getPosts()
-    return {
-      paths: posts.map((p) => ({ params: { slug: p.slug } })),
-      fallback: false,
-    }
-  } catch (err) {
-    console.error("[posts/[slug]] getStaticPaths 실패 — 빈 paths 로 fallback:", err)
-    return { paths: [], fallback: false }
+  const posts = await safeAsync(() => getPosts(), [], "posts/[slug]")
+  return {
+    paths: posts.map((p) => ({ params: { slug: p.slug } })),
+    fallback: false,
   }
 }
 
