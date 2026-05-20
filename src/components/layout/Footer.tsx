@@ -38,13 +38,8 @@ export default function Footer() {
                   채용
                 </a>
               </li>
-              <li>
-                <a
-                  href={`mailto:${CONFIG.social.contactEmail}`}
-                  className="hover:text-ink-900"
-                >
-                  Contact
-                </a>
+              <li className="text-ink-700">
+                {CONFIG.social.contactEmail}
               </li>
             </ul>
           </div>
