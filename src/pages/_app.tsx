@@ -4,6 +4,7 @@ import "katex/dist/katex.min.css"
 import "@/styles/globals.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
+import { withBasePath } from "@/lib/utils/withBasePath"
 
 const CONFIG = require("../../site.config")
 
@@ -16,18 +17,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content={CONFIG.brand.primary} />
         <title>{CONFIG.blog.title}</title>
         <meta name="description" content={CONFIG.blog.description} />
-        <link rel="icon" type="image/webp" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/symbol.webp`} />
-        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/symbol.webp`} />
+        <link rel="icon" type="image/webp" href={withBasePath("/symbol.webp")} />
+        <link rel="apple-touch-icon" href={withBasePath("/symbol.webp")} />
         <link
           rel="alternate"
           type="application/rss+xml"
-          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/feed.xml`}
+          href={withBasePath("/feed.xml")}
           title={`${CONFIG.blog.title} RSS`}
         />
         <link
           rel="alternate"
           type="application/atom+xml"
-          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/atom.xml`}
+          href={withBasePath("/atom.xml")}
           title={`${CONFIG.blog.title} Atom`}
         />
         <meta property="og:title" content={CONFIG.blog.title} />
