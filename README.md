@@ -2,6 +2,8 @@
 
 [morethan-log](https://github.com/morethanmin/morethan-log) 를 베이스로, Notion 을 CMS 로 사용하는 정적 사이트입니다. GitHub Pages 로 배포됩니다.
 
+> 📚 함께 보기: [STRUCTURE.md](./STRUCTURE.md) (프로젝트 구조) · [REQUIREMENTS.md](./REQUIREMENTS.md) (요구사항) · [DEPLOY.md](./DEPLOY.md) (운영·배포)
+
 ## 핵심 특징
 
 - **notion-client(비공식 Notion API) 기반 데이터 페치** — 토큰 불필요. 노션 DB 가 "웹에 게시" 되어 있으면 빌드 시 자동으로 가져옵니다.
