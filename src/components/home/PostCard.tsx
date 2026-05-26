@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { TPost } from "@/types"
 import { formatDateShort } from "@/lib/utils/formatDate"
+import CoverImage from "@/components/common/CoverImage"
 
 type Variant = "default" | "featured"
 
@@ -21,31 +22,20 @@ export default function PostCard({
       href={href}
       className="lift-card group flex h-full flex-col overflow-hidden rounded-card bg-white shadow-card hover:shadow-card-hover"
     >
-      {post.cover ? (
-        <div
-          className={`relative w-full overflow-hidden bg-surface ${
-            isFeatured ? "aspect-[16/9]" : "aspect-[16/10]"
-          }`}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={post.cover}
-            alt={post.title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
-            loading="lazy"
-          />
-        </div>
-      ) : (
-        <div
-          className={`flex items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF] ${
-            isFeatured ? "aspect-[16/9]" : "aspect-[16/10]"
-          }`}
-        >
-          <span className="text-3xl sm:text-4xl font-bold text-brand/60 tracking-tight">
-            {post.title.slice(0, 2)}
-          </span>
-        </div>
-      )}
+      <div
+        className={`relative w-full overflow-hidden bg-surface ${
+          isFeatured ? "aspect-[16/9]" : "aspect-[16/10]"
+        }`}
+      >
+        <CoverImage
+          src={post.cover}
+          alt={post.title}
+          title={post.title}
+          className="h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
+          placeholderClassName="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF]"
+          initialsClassName="text-3xl sm:text-4xl font-bold text-brand/60 tracking-tight"
+        />
+      </div>
 
       <div className={`flex flex-1 flex-col ${isFeatured ? "p-7" : "p-5"}`}>
         {post.category && (

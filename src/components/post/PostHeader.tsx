@@ -1,5 +1,6 @@
 import type { TPost } from "@/types"
 import { formatDate } from "@/lib/utils/formatDate"
+import CoverImage from "@/components/common/CoverImage"
 
 // 글 상세 페이지 상단 헤더. 큰 제목 + 메타정보 + 카테고리 칩 구성.
 export default function PostHeader({ post }: { post: TPost }) {
@@ -53,11 +54,13 @@ export default function PostHeader({ post }: { post: TPost }) {
 
       {post.cover && (
         <div className="mt-10 -mx-5 sm:mx-0 sm:rounded-card overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <CoverImage
             src={post.cover}
             alt={post.title}
+            title={post.title}
             className="w-full aspect-[16/9] object-cover"
+            placeholderClassName="flex w-full aspect-[16/9] items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF]"
+            initialsClassName="text-4xl font-bold text-brand/60 tracking-tight"
           />
         </div>
       )}
