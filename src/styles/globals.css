@@ -249,3 +249,123 @@ a {
 .notion-collection-page-properties {
   display: none !important;
 }
+
+/* ── 본문(react-notion-x) 을 블로그 톤앤매너에 맞게 재정의 ───────────────── */
+/* 본문은 PostContent 의 <NotionRenderer> 가 .notion-* 클래스로 렌더링하며,    */
+/* 기본 스타일(노션 룩)은 react-notion-x/src/styles.css 가 담당합니다.          */
+/* globals.css 가 그 뒤에 로드되므로, .notion 하위 선택자(우선순위 우위)로       */
+/* 덮어써 우리 디자인 토큰에 맞춥니다.                                          */
+
+/* 본문 기본 타이포 */
+.notion {
+  font-family: inherit;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--color-text);
+  word-break: keep-all;
+}
+
+.notion-text {
+  padding: 0.2em 0;
+  line-height: 1.85;
+}
+
+/* 제목 — prose 와 동일한 위계/간격 */
+.notion .notion-h1,
+.notion .notion-h2,
+.notion .notion-h3 {
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.notion .notion-h1 {
+  font-size: 1.875rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.notion .notion-h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
+}
+.notion .notion-h3 {
+  font-size: 1.25rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 링크 */
+.notion .notion-link {
+  color: var(--color-brand);
+  border-bottom: 1px solid currentColor;
+  font-weight: 500;
+  opacity: 1;
+  transition: color 0.2s var(--ease-smooth);
+}
+.notion .notion-link:hover {
+  color: var(--color-brand-dark);
+}
+
+/* 인라인 코드 */
+.notion .notion-inline-code {
+  font-family:
+    "JetBrains Mono", "D2Coding", SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--color-surface);
+  color: #d6336c;
+  padding: 0.12em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  border: 1px solid var(--color-border);
+}
+
+/* 인용구 — prose blockquote 와 통일 */
+.notion .notion-quote {
+  border-left: 3px solid var(--color-brand);
+  background: var(--color-surface);
+  border-radius: 0 10px 10px 0;
+  padding: 0.75em 1.1em;
+  margin: 1.5rem 0;
+  color: var(--color-subtext);
+  font-size: 1.05em;
+  font-style: normal;
+}
+
+/* 콜아웃 — 노션에서 어떤 색을 골랐든 일관된 브랜드 톤으로 통일 */
+.notion .notion-callout {
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  margin: 1.5rem 0;
+  border-radius: 14px;
+  background: #f4f8ff;
+  border: 1px solid #e1ecff;
+  color: var(--color-text);
+}
+/* 콜아웃 아이콘(이모지)은 노출하지 않고 깔끔한 박스로 통일 */
+.notion .notion-callout .notion-page-icon-inline {
+  display: none;
+}
+.notion .notion-callout-text {
+  line-height: 1.7;
+}
+
+/* 구분선 */
+.notion .notion-hr {
+  border-top: 1px solid var(--color-border);
+  margin: 2.5rem 0;
+}
+
+/* 이미지 — 카드와 동일한 둥근 모서리 */
+.notion .notion-asset-wrapper-image img,
+.notion .notion-asset-object-fit {
+  border-radius: 12px;
+}
+.notion .notion-asset-caption {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
