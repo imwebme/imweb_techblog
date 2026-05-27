@@ -51,9 +51,9 @@ imweb_techblog_1/
 │   │   ├── home/
 │   │   │   ├── Banner.tsx           메인 상단 고정 배너
 │   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글)
-│   │   │   ├── PostGrid.tsx         글 목록 + 그리드/리스트 뷰 토글
-│   │   │   ├── PostCard.tsx           ↳ 그리드 뷰의 카드
-│   │   │   └── PostListItem.tsx       ↳ 리스트 뷰의 행
+│   │   │   ├── PostGrid.tsx         글 목록 + 그리드/리스트 뷰 토글 + 페이지네이션(9개/페이지)
+│   │   │   ├── PostCard.tsx           ↳ 그리드 뷰의 카드 (썸네일 16:10)
+│   │   │   └── PostListItem.tsx       ↳ 리스트 뷰의 행 (인셋 썸네일 16:10)
 │   │   ├── layout/
 │   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 + 테마 토글 (<sm 은 햄버거+검색바)
 │   │   │   ├── ThemeToggle.tsx      라이트/다크 전환 버튼
@@ -298,4 +298,5 @@ flowchart TB
 | 1 | 노션 신형 attachment 이미지 (`attachment:...`) 가 비공식 API 로 안 풀림 | `public/post-images/` 직접 호스팅 + 노션 thumbnail 에 GitHub Pages URL 임베드 |
 | 2 | 검색이 본문은 포함하지 않음 | 제목/요약/카테고리/태그 substring 만 |
 | 3 | dev 의 `getStaticPaths` 캐시 | 노션에 새 글 추가 후 dev 서버 재시작 |
-| 4 | 글 50건 초과 시 일부 누락 가능성 | `getPosts` 페이지네이션 보강 (TODO) |
+
+> ※ "글 다수 시 누락" 은 `collectionReducerLimit`(client.ts) 로 전량 수집하도록 해결됨. 화면 목록은 `PostGrid` 가 9개/페이지로 나눠 보여줍니다(데이터 페치와 별개).
