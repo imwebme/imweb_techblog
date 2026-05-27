@@ -3,19 +3,12 @@ import { useCallback, useEffect, useState } from "react"
 // 라이트/다크 테마 관리.
 // - 실제 테마 적용(=<html> 의 .dark 클래스)은 _document 의 인라인 스크립트가
 //   페인트 전에 처리(FOUC 방지)하고, 여기서는 토글/구독만 담당합니다.
-// - 사용자가 토글로 명시 선택하면 localStorage 에 저장하고, 선택 전에는 OS 설정을 따릅니다.
+// - 기본은 라이트. 사용자가 토글로 다크를 선택하면 localStorage 에 저장해 유지합니다.
 
 export type Theme = "light" | "dark"
 
 const STORAGE_KEY = "theme"
 const EVENT = "themechange"
-
-function systemPrefersDark(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-color-scheme: dark)").matches
-  )
-}
 
 function currentTheme(): Theme {
   if (typeof document === "undefined") return "light"
@@ -44,19 +37,7 @@ export function useTheme(): [Theme, () => void] {
     const onChange = () => setTheme(currentTheme())
     window.addEventListener(EVENT, onChange)
 
-    // 사용자가 명시 선택하지 않은 경우에만 OS 설정 변화를 실시간 반영
-    const mq = window.matchMedia("(prefers-color-scheme: dark)")
-    const onSystem = (e: MediaQueryListEvent) => {
-      if (localStorage.getItem(STORAGE_KEY)) return
-      document.documentElement.classList.toggle("dark", e.matches)
-      setTheme(currentTheme())
-    }
-    mq.addEventListener?.("change", onSystem)
-
-    return () => {
-      window.removeEventListener(EVENT, onChange)
-      mq.removeEventListener?.("change", onSystem)
-    }
+    return () => window.removeEventListener(EVENT, onChange)
   }, [])
 
   const toggle = useCallback(() => {
@@ -72,5 +53,3 @@ export function useMounted(): boolean {
   useEffect(() => setMounted(true), [])
   return mounted
 }
-
-export { systemPrefersDark }

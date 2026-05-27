@@ -77,7 +77,7 @@ imweb_techblog_1/
 │   │   │   ├── slugify.ts           제목 → URL slug
 │   │   │   ├── safeStatic.ts        getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
-│   │   └── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage·OS 추종)
+│   │   └── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
 │   │
 │   ├── pages/
 │   │   ├── _app.tsx                 전역 CSS, OG meta
@@ -258,7 +258,7 @@ flowchart TB
 ### 다크 모드
 
 - `tailwind.config.js` → `darkMode: "class"`. `<html class="dark">` 여부로 전환.
-- `_document.tsx` 의 인라인 스크립트가 페인트 전에 `localStorage.theme`(없으면 OS 설정)를 읽어 클래스를 주입 → **FOUC 방지**.
+- `_document.tsx` 의 인라인 스크립트가 페인트 전에 `localStorage.theme` 을 읽어 클래스를 주입 → **FOUC 방지**. 저장값이 `dark` 일 때만 다크로 시작(**기본 라이트**).
 - `ThemeToggle` + `useTheme()` 가 토글/저장/구독 담당. 헤더 로고(black/white SVG)와 giscus 테마가 모드에 따라 자동 전환.
 
 ### 재사용 클래스
