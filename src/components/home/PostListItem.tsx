@@ -12,7 +12,7 @@ export default function PostListItem({ post }: { post: TPost }) {
       href={href}
       className="lift-card group flex items-stretch overflow-hidden rounded-card bg-card shadow-card hover:shadow-card-hover"
     >
-      <div className="relative w-28 sm:w-56 shrink-0 aspect-[16/10] bg-surface">
+      <div className="relative hidden sm:block w-28 sm:w-56 shrink-0 aspect-[16/10] bg-surface">
         <CoverImage
           src={post.cover}
           alt={post.title}
@@ -23,7 +23,7 @@ export default function PostListItem({ post }: { post: TPost }) {
         />
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 sm:gap-1.5 px-4 sm:px-5">
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 sm:gap-1.5 px-4 sm:px-5 py-3 sm:py-0">
         <div>
           {post.category && (
             <div className="mb-0 sm:mb-1 text-[11px] font-semibold tracking-wider uppercase text-brand">
