@@ -64,7 +64,9 @@ const CONFIG = {
   // 4) 아래 값 채우고 enabled: true 로 변경
   comments: {
     giscus: {
-      enabled: true,
+      // repo 비공개 전환 시 Discussions 가 외부에 안 보이므로 일시 비활성화.
+      // 팀 repo 이전 후 새 repo 에 giscus 재설치하고 다시 true 로.
+      enabled: false,
       repo: "imweb-techblog/imweb_techblog_1",
       repoId: "R_kgDOScKclg",
       category: "General",
