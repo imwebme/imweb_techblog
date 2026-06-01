@@ -59,7 +59,7 @@ export default function PostHeader({ post }: { post: TPost }) {
             alt={post.title}
             title={post.title}
             className="w-full aspect-[16/9] object-cover"
-            placeholderClassName="flex w-full aspect-[16/9] items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF] dark:from-[#1b2330] dark:to-[#161d27]"
+            placeholderClassName="aspect-[16/9]"
             initialsClassName="text-4xl font-bold text-brand/60 tracking-tight"
           />
         </div>

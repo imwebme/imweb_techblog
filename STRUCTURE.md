@@ -48,7 +48,7 @@ imweb_techblog_1/
 ├── src/
 │   ├── components/
 │   │   ├── common/
-│   │   │   └── CoverImage.tsx       커버/썸네일 (미설정·404 시 placeholder fallback)
+│   │   │   └── CoverImage.tsx       커버/썸네일 (미설정·404 시 placeholder fallback; 기본 그라데이션 내장)
 │   │   ├── home/
 │   │   │   ├── Banner.tsx           메인 상단 고정 배너
 │   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글)
@@ -80,7 +80,8 @@ imweb_techblog_1/
 │   │   │   ├── slugify.ts           제목 → URL slug
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
-│   │   └── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
+│   │   ├── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
+│   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
 │   │
 │   ├── pages/
 │   │   ├── _app.tsx                 전역 CSS, OG meta

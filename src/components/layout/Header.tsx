@@ -34,12 +34,29 @@ export default function Header() {
 
   const navLinkClass =
     "rounded-lg px-3 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
+  const mobileNavLinkClass =
+    "rounded-lg px-2 py-3 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
 
-  const navItems = CONFIG.nav as {
-    label: string
-    href: string
-    external?: boolean
-  }[]
+  type NavItem = { label: string; href: string; external?: boolean }
+  const navItems = CONFIG.nav as NavItem[]
+
+  // 인라인 네비 / 모바일 드롭다운에서 공용으로 사용
+  const renderNavItem = (item: NavItem, className: string) =>
+    item.external ? (
+      <a
+        key={item.href}
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {item.label}
+      </a>
+    ) : (
+      <Link key={item.href} href={item.href} className={className}>
+        {item.label}
+      </Link>
+    )
 
   return (
     <header
@@ -73,23 +90,7 @@ export default function Header() {
         <div className="flex flex-1 sm:flex-none items-center justify-end gap-1 sm:gap-2 min-w-0 pl-3 sm:pl-0">
           {/* 데스크탑(≥sm): 인라인 네비 */}
           <nav className="hidden sm:flex items-center gap-1 sm:gap-2">
-            {navItems.map((item) =>
-              item.external ? (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={navLinkClass}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link key={item.href} href={item.href} className={navLinkClass}>
-                  {item.label}
-                </Link>
-              )
-            )}
+            {navItems.map((item) => renderNavItem(item, navLinkClass))}
           </nav>
 
           {/* 검색 — 모바일에선 남는 폭을 채우고(검색바 노출), ≥sm 에선 고정폭 */}
@@ -162,27 +163,7 @@ export default function Header() {
       {menuOpen && (
         <nav className="sm:hidden border-t border-line bg-[var(--color-header-bg)] backdrop-blur-md">
           <div className="container mx-auto flex flex-col py-2">
-            {navItems.map((item) =>
-              item.external ? (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg px-2 py-3 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-lg px-2 py-3 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
+            {navItems.map((item) => renderNavItem(item, mobileNavLinkClass))}
           </div>
         </nav>
       )}

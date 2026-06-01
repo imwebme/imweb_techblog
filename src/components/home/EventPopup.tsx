@@ -1,49 +1,35 @@
 import { useEffect, useState } from "react"
+import { useDismissible } from "@/lib/useDismissible"
 
 const CONFIG = require("../../../site.config")
 
 // 메인 페이지 이벤트 홍보 팝업.
 // - site.config.js 의 eventPopup.enabled 가 true 일 때만 노출
-// - "오늘 하루 보지 않기" 클릭 시 24시간 동안 안 보임(localStorage)
-// - 일반 닫기(X / 배경 클릭 / ESC)는 저장 없이 닫음 → 다음 진입 때 다시 노출
+// - "오늘 하루 보지 않기" → useDismissible 로 24시간 localStorage 기억
+// - X / 배경 / ESC → 세션 한정 닫기(저장 없음, 다음 진입 시 다시 노출)
 const STORAGE_KEY = "eventPopupDismissedUntil"
+const ONE_DAY_MS = 24 * 60 * 60 * 1000
 
 export default function EventPopup() {
   const ev = CONFIG.eventPopup
-  const [open, setOpen] = useState(false)
+  const { dismissed, dismiss } = useDismissible(STORAGE_KEY)
+  const [closedSession, setClosedSession] = useState(false)
+  const open = !!ev?.enabled && !dismissed && !closedSession
 
-  // 마운트 시 표시 여부 결정 (SSR 과 일치시키려고 기본 false 후 effect 에서 true)
-  useEffect(() => {
-    if (!ev?.enabled) return
-    try {
-      const until = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10)
-      if (Date.now() < until) return
-    } catch {
-      /* localStorage 비활성 환경 무시 */
-    }
-    setOpen(true)
-  }, [ev?.enabled])
-
-  // ESC 로 닫기
+  // ESC 로 닫기 (세션 한정)
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false)
+      if (e.key === "Escape") setClosedSession(true)
     }
     document.addEventListener("keydown", onKey)
     return () => document.removeEventListener("keydown", onKey)
   }, [open])
 
-  if (!ev?.enabled || !open) return null
+  if (!open) return null
 
-  const closeForDay = () => {
-    try {
-      localStorage.setItem(STORAGE_KEY, String(Date.now() + 24 * 60 * 60 * 1000))
-    } catch {
-      /* noop */
-    }
-    setOpen(false)
-  }
+  const closeSession = () => setClosedSession(true)
+  const closeForDay = () => dismiss(ONE_DAY_MS)
 
   return (
     <div
@@ -55,7 +41,7 @@ export default function EventPopup() {
       {/* 배경 (클릭 시 닫힘) */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={() => setOpen(false)}
+        onClick={closeSession}
         aria-hidden
       />
 
@@ -63,7 +49,7 @@ export default function EventPopup() {
       <div className="event-popup-card relative w-full max-w-md rounded-2xl border border-line bg-card p-6 shadow-2xl sm:p-7">
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={closeSession}
           aria-label="닫기"
           className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-500 transition-colors hover:bg-surface hover:text-ink-900"
         >

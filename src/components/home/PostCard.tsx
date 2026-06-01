@@ -32,7 +32,6 @@ export default function PostCard({
           alt={post.title}
           title={post.title}
           className="h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
-          placeholderClassName="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF] dark:from-[#1b2330] dark:to-[#161d27]"
           initialsClassName="text-3xl sm:text-4xl font-bold text-brand/60 tracking-tight"
         />
       </div>
