@@ -10,7 +10,7 @@ import {
   getCategories,
   getTags,
 } from "@/lib/notion/getPosts"
-import { safeAsync } from "@/lib/utils/safeStatic"
+import { safeAsync } from "@/lib/utils/safeAsync"
 
 type Props = {
   posts: Awaited<ReturnType<typeof getPosts>>

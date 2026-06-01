@@ -78,7 +78,7 @@ imweb_techblog_1/
 │   │   ├── utils/
 │   │   │   ├── formatDate.ts        "2026-05-13" → "2026.05.13"
 │   │   │   ├── slugify.ts           제목 → URL slug
-│   │   │   ├── safeStatic.ts        getStaticProps try/catch + fallback 헬퍼
+│   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
 │   │   └── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
 │   │
@@ -285,7 +285,7 @@ flowchart TB
 |---|---|
 | `< 640px` | 카드 1열, 헤더는 햄버거 메뉴 + 검색바, 사이드바 토글, 푸터 2열, 리스트 뷰 썸네일 숨김(텍스트 전용) |
 | `640~1024px` | 카드 2열, 인라인 네비 + 검색, 사이드바 토글 (펼치면 2컬럼) |
-| `≥ 1024px` | 좌측 사이드바 (220px) + 본문, 카드 3열 |
+| `≥ 1024px` | 좌측 사이드바 (220px) + 본문, 카드 3열 |ㄹ
 
 ---
 

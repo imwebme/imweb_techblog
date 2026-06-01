@@ -2,7 +2,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next"
 import Link from "next/link"
 import Layout from "@/components/layout/Layout"
 import { getPosts, getTags } from "@/lib/notion/getPosts"
-import { safeAsync } from "@/lib/utils/safeStatic"
+import { safeAsync } from "@/lib/utils/safeAsync"
 
 type Props = {
   tags: Awaited<ReturnType<typeof getTags>>

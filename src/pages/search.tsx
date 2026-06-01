@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import Layout from "@/components/layout/Layout"
 import PostCard from "@/components/home/PostCard"
 import { getPosts } from "@/lib/notion/getPosts"
-import { safeAsync } from "@/lib/utils/safeStatic"
+import { safeAsync } from "@/lib/utils/safeAsync"
 
 type Props = {
   posts: Awaited<ReturnType<typeof getPosts>>

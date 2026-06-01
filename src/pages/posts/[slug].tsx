@@ -9,7 +9,7 @@ import PostActions from "@/components/post/PostActions"
 import Comments from "@/components/post/Comments"
 import { getPostBySlug } from "@/lib/notion/getPostBySlug"
 import { getPosts } from "@/lib/notion/getPosts"
-import { safeAsync } from "@/lib/utils/safeStatic"
+import { safeAsync } from "@/lib/utils/safeAsync"
 import type { TPost } from "@/types"
 
 const CONFIG = require("../../../site.config")
