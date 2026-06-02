@@ -6,9 +6,9 @@ import CoverImage from "@/components/common/CoverImage"
 export default function PostHeader({ post }: { post: TPost }) {
   return (
     <header className="container mx-auto max-w-prose pt-16 pb-10">
-      {post.category && (
+      {post.category.length > 0 && (
         <div className="mb-4 text-sm font-semibold tracking-wider uppercase text-brand">
-          {post.category}
+          {post.category.join(" · ")}
         </div>
       )}
       <h1 className="text-[2rem] sm:text-[2.5rem] leading-[1.2] font-bold tracking-[-0.03em] text-ink-900">

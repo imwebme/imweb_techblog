@@ -57,7 +57,7 @@ npm run lint       # next lint
 | title      | Title        | (필수)                           | 글 제목                                                    |
 | slug       | Text         | `slug`, `url`                    | URL 의 일부. 비워두면 title 을 자동 변환                   |
 | status     | Select       | `status`, `상태`                 | `Public` 만 노출. `PublicOnDetail` 등은 빌드에서 제외       |
-| category   | Select       | `category`, `카테고리`           | 좌측 사이드바 카테고리 필터에 사용                         |
+| category   | Multi-select | `category`, `카테고리`           | 좌측 사이드바 카테고리 필터에 사용. 한 글이 여러 카테고리에 속할 수 있음 |
 | tags       | Multi-select | `tags`, `태그`                   | 좌측 사이드바 태그 필터에 사용                             |
 | summary    | Text         | `summary`, `description`, `요약` | 카드/메타 description 에 사용                              |
 | date       | Date         | `date`, `published`, `발행일`    | 미설정 시 페이지 생성일 사용                               |

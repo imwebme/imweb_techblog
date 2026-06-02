@@ -79,17 +79,17 @@ describe("snapshotFromRecordMap", () => {
     expect(posts.map((p) => p.title)).toEqual(["최신글", "중간글", "오래된글"])
   })
 
-  it("카테고리는 스키마 정의 순서를 유지하고 0건도 노출한다", () => {
+  it("카테고리는 스키마 정의 순서를 유지하고 0건도 노출한다 (multi-select)", () => {
     const rm = buildRecordMap([
-      { id: "1", title: "a", status: "Public", category: "Design" },
-      { id: "2", title: "b", status: "Public", category: "Engineering" },
-      { id: "3", title: "c", status: "Public", category: "Engineering" },
+      { id: "1", title: "a", status: "Public", category: ["Design"] },
+      { id: "2", title: "b", status: "Public", category: ["Engineering"] },
+      { id: "3", title: "c", status: "Public", category: ["Engineering", "Design"] },
     ])
     const { categories } = snapshotFromRecordMap(rm)
-    // 스키마 순서: Engineering, Design, Culture (Culture 는 0건)
+    // 스키마 순서: Engineering, Design, Culture (Culture 는 0건). 한 글이 여러 카테고리에 속하면 각각 카운트.
     expect(categories).toEqual([
       { name: "Engineering", count: 2 },
-      { name: "Design", count: 1 },
+      { name: "Design", count: 2 },
       { name: "Culture", count: 0 },
     ])
   })

@@ -37,9 +37,9 @@ export default function PostCard({
       </div>
 
       <div className={`flex flex-1 flex-col ${isFeatured ? "p-7" : "p-5"}`}>
-        {post.category && (
+        {post.category.length > 0 && (
           <div className="mb-2 text-xs font-semibold tracking-wider uppercase text-brand">
-            {post.category}
+            {post.category.join(" · ")}
           </div>
         )}
         <h3

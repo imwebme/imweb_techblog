@@ -24,9 +24,9 @@ export default function PostListItem({ post }: { post: TPost }) {
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 sm:gap-1.5 px-4 sm:px-5 py-5 sm:py-0">
         <div>
-          {post.category && (
+          {post.category.length > 0 && (
             <div className="mb-0 sm:mb-1 text-[11px] font-semibold tracking-wider uppercase text-brand">
-              {post.category}
+              {post.category.join(" · ")}
             </div>
           )}
           <h3 className="text-sm sm:text-[1.05rem] font-bold tracking-[-0.02em] text-ink-900 leading-tight sm:leading-snug line-clamp-2">

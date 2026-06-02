@@ -44,7 +44,7 @@ export default function HomePage({
 
   const filtered = useMemo(() => {
     return posts.filter((p) => {
-      if (activeCategory && p.category !== activeCategory) return false
+      if (activeCategory && !p.category.includes(activeCategory)) return false
       if (activeTag && !p.tags.includes(activeTag)) return false
       return true
     })

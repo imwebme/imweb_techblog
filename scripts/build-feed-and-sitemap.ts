@@ -37,7 +37,8 @@ async function buildRss(posts: Awaited<ReturnType<typeof getPosts>>) {
       link: url,
       description: p.summary || undefined,
       date: p.date ? new Date(p.date) : new Date(),
-      category: p.category ? [{ name: p.category }] : undefined,
+      category:
+        p.category.length > 0 ? p.category.map((c) => ({ name: c })) : undefined,
       author:
         p.authors.length > 0
           ? p.authors.map((a) => ({ name: a.name }))

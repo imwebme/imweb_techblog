@@ -32,7 +32,7 @@ export default function SearchPage({
     const needle = q.trim().toLowerCase()
     if (!needle) return []
     return posts.filter((p) => {
-      const haystack = [p.title, p.summary, p.category, ...p.tags]
+      const haystack = [p.title, p.summary, ...p.category, ...p.tags]
         .filter(Boolean)
         .join(" ")
         .toLowerCase()

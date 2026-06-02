@@ -13,7 +13,7 @@ export type TPost = {
   title: string
   summary: string
   cover: string | null
-  category: string | null
+  category: string[]
   tags: string[]
   authors: TAuthor[]
   date: string // ISO 8601

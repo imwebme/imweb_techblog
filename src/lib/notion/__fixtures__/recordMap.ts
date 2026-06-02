@@ -19,7 +19,7 @@ export const SCHEMA = {
   [PROP.status]: { name: "status", type: "select" },
   [PROP.category]: {
     name: "category",
-    type: "select",
+    type: "multi_select",
     // 카테고리는 스키마 정의 순서가 사이드바 노출 순서가 됨
     options: [{ value: "Engineering" }, { value: "Design" }, { value: "Culture" }],
   },
@@ -32,7 +32,7 @@ export type PostInput = {
   id: string
   title: string
   status?: string
-  category?: string
+  category?: string[]
   tags?: string[]
   summary?: string
   date?: string // ISO "YYYY-MM-DD"
@@ -49,7 +49,7 @@ const buildBlock = (post: PostInput) => {
   }
   if (post.status !== undefined) properties[PROP.status] = textProp(post.status)
   if (post.category !== undefined)
-    properties[PROP.category] = textProp(post.category)
+    properties[PROP.category] = multiSelectProp(post.category)
   if (post.tags !== undefined) properties[PROP.tags] = multiSelectProp(post.tags)
   if (post.summary !== undefined)
     properties[PROP.summary] = textProp(post.summary)

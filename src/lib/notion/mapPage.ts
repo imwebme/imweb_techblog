@@ -167,7 +167,7 @@ export const mapBlockToPost = (
     title,
     summary: pickText(block, schema, ["summary", "description", "요약"]),
     cover: pickThumbnail(block, schema, recordMap),
-    category: pickSelect(block, schema, ["category", "카테고리"]),
+    category: pickMultiSelect(block, schema, ["category", "카테고리"]),
     tags: pickMultiSelect(block, schema, ["tags", "태그"]),
     authors: pickAuthors(block, schema, recordMap),
     date:

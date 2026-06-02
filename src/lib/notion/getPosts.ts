@@ -86,8 +86,9 @@ export const snapshotFromRecordMap = (
     []
   const categoryCounts = new Map<string, number>()
   for (const p of posts) {
-    if (!p.category) continue
-    categoryCounts.set(p.category, (categoryCounts.get(p.category) || 0) + 1)
+    for (const c of p.category) {
+      categoryCounts.set(c, (categoryCounts.get(c) || 0) + 1)
+    }
   }
   const categories = categoryOptions.map((o) => ({
     name: o.value,

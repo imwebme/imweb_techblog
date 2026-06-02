@@ -211,7 +211,7 @@ Layout
 | `title` | Title | ✅ | 글 제목 |
 | `slug` | Text | 권장 | URL 의 일부. 영문 소문자 + 하이픈 |
 | `status` | Select | ✅ | `Public` 만 노출. `PublicOnDetail` 등은 빌드 제외 |
-| `category` | Select | 권장 | 사이드바 카테고리 (옵션 정의 순서 유지) |
+| `category` | Multi-select | 권장 | 사이드바 카테고리 (옵션 정의 순서 유지, 한 글에 여러 카테고리 가능) |
 | `tags` | Multi-select | 선택 | 사이드바 태그 |
 | `summary` | Text | 권장 | 카드/메타 description |
 | `date` | Date | 권장 | 발행일 (정렬 키) |
