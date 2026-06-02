@@ -42,6 +42,7 @@ imweb_techblog/
 │   ├── symbol_white.png             흰색 심볼 (채용 CTA 구분자)
 │   ├── OG_imweb_tech.png            OG 기본 이미지
 │   ├── robots.txt
+│   ├── CNAME                        커스텀 도메인 (tech.imweb.me)
 │   ├── .nojekyll                    GitHub Pages 가 Jekyll 처리 건너뛰게
 │   └── post-images/                 노션 thumbnail 직접 호스팅 (attachment 우회)
 │
@@ -235,7 +236,7 @@ flowchart TB
   PB["postbuild<br/>(feed/sitemap 생성)"]
   AR["upload-pages-artifact"]
   D["deploy-pages"]
-  GH["https://imwebme.github.io/imweb_techblog/"]
+  GH["https://tech.imweb.me/"]
 
   T1 --> A
   T2 --> A
@@ -303,8 +304,9 @@ flowchart TB
 
 | 파일 | 책임 |
 |---|---|
-| **`site.config.js`** | 블로그명, 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup) |
-| `next.config.js` | basePath (GitHub Pages), 정적 export, image unoptimized |
+| **`site.config.js`** | 블로그명, 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), `siteUrl` (RSS·sitemap·OG 의 절대 URL 기준) |
+| `next.config.js` | basePath (CNAME 있으면 ""; 없으면 `/imweb_techblog` 폴백 — `??` 로 빈 문자열 보존), 정적 export, image unoptimized |
+| `public/CNAME` | 커스텀 도메인 (`tech.imweb.me`). 이 파일이 있으면 `configure-pages` 가 basePath 를 비웁니다 |
 | `tailwind.config.js` | 컬러/타이포/이징 토큰 → Tailwind 유틸로 노출 |
 | `.github/workflows/deploy.yml` | 빌드 + Pages 배포 (push / cron / 수동) |
 
@@ -314,7 +316,7 @@ flowchart TB
 
 | | 한계 | 우회 |
 |---|---|---|
-| 1 | 노션 신형 attachment 이미지 (`attachment:...`) 가 비공식 API 로 안 풀림 | `public/post-images/` 직접 호스팅 + 노션 thumbnail 에 GitHub Pages URL 임베드 |
+| 1 | 노션 신형 attachment 이미지 (`attachment:...`) 가 비공식 API 로 안 풀림 | `public/post-images/` 직접 호스팅 + 노션 thumbnail 에 사이트 URL (`https://tech.imweb.me/post-images/<파일명>`) 임베드 |
 | 2 | 검색이 본문은 포함하지 않음 | 제목/요약/카테고리/태그 substring 만 |
 | 3 | dev 의 `getStaticPaths` 캐시 | 노션에 새 글 추가 후 dev 서버 재시작 |
 

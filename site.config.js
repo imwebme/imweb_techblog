@@ -7,7 +7,7 @@ const CONFIG = {
     author: "Imweb Tech",
     language: "ko-KR",
     timezone: "Asia/Seoul",
-    siteUrl: "https://imwebme.github.io/imweb_techblog",
+    siteUrl: "https://tech.imweb.me",
   },
 
   // ── 브랜드 컬러 ─────────────────────────────────────────────────────────

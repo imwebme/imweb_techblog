@@ -70,7 +70,7 @@ npm run lint       # next lint
 
 노션의 신형 attachment 업로드(`attachment:<uuid>:<file>`) 는 비공식 API 로 풀어낼 수 없으므로 다음 두 방법 중 하나로 사용합니다.
 
-1. **레포에 이미지 커밋 (권장)**: 이미지를 [`public/post-images/`](./public/post-images/) 에 올린 뒤, 노션 `thumbnail` 컬럼에 GitHub Pages URL 임베드. 예: `https://imwebme.github.io/imweb_techblog/post-images/<파일명>`
+1. **레포에 이미지 커밋 (권장)**: 이미지를 [`public/post-images/`](./public/post-images/) 에 올린 뒤, 노션 `thumbnail` 컬럼에 사이트 URL 임베드. 예: `https://tech.imweb.me/post-images/<파일명>`
 2. **외부 URL**: Unsplash 등 외부 호스팅의 URL 을 그대로 임베드
 
 ## 디자인 커스터마이징
@@ -101,9 +101,11 @@ Tailwind 토큰은 [`tailwind.config.js`](./tailwind.config.js) 에, 본문(`.no
 
 자세한 절차는 [DEPLOY.md](./DEPLOY.md) 참고.
 
-### 사용자 페이지(<owner>.github.io)로 배포하려면
+### 도메인 / basePath
 
-`next.config.js` 의 `basePath` 는 환경변수 `BASE_PATH` 로 제어됩니다. 사용자 페이지로 배포하는 경우 GitHub Actions 에서 `BASE_PATH=""` 로 비워두면 됩니다.
+운영 도메인은 [`tech.imweb.me`](https://tech.imweb.me) (CNAME: [`public/CNAME`](./public/CNAME)). GitHub Pages 의 `actions/configure-pages` 가 커스텀 도메인을 감지하면 `BASE_PATH` 가 빈 문자열로 주입되고, `next.config.js` 는 이를 그대로 사용합니다. 커스텀 도메인을 떼면 자동으로 `/imweb_techblog` 프로젝트 페이지로 폴백합니다.
+
+`<owner>.github.io` 사용자 페이지로 옮기려면 CNAME 을 지우고 `BASE_PATH=""` 를 명시한 뒤 저장소 이름을 `<owner>.github.io` 로 바꾸면 됩니다.
 
 ## 라이선스
 

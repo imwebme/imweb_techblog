@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 
 // GitHub Pages 정적 배포 설정
-// - 사용자 페이지(github.io)가 아닌 프로젝트 페이지(/imweb_techblog)일 경우 basePath 가 필요합니다.
-// - CI 환경에서는 GITHUB_PAGES=true, BASE_PATH=/imweb_techblog 를 주입합니다.
+// - 커스텀 도메인 (tech.imweb.me) 에 CNAME 이 붙어 있으면 basePath 는 "".
+//   workflow 의 `configure-pages` 가 그 사실을 감지하고 BASE_PATH 를 ""로 주입합니다.
+// - 프로젝트 페이지 (`<owner>.github.io/<repo>`) 로 떨어지는 경우만 `/imweb_techblog` 폴백.
+// - `??` 를 쓰는 이유: `||` 로 두면 빈 문자열도 falsy 라 폴백이 잘못 발동해 자산이 깨집니다.
 const isGithubPages = process.env.GITHUB_PAGES === "true"
-const basePath = isGithubPages ? process.env.BASE_PATH || "/imweb_techblog" : ""
+const basePath = isGithubPages ? (process.env.BASE_PATH ?? "/imweb_techblog") : ""
 
 const nextConfig = {
   reactStrictMode: true,
