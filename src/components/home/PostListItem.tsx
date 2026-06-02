@@ -10,7 +10,7 @@ export default function PostListItem({ post }: { post: TPost }) {
   return (
     <Link
       href={href}
-      className="lift-card group flex items-stretch overflow-hidden rounded-card bg-card shadow-card hover:shadow-card-hover"
+      className="lift-card group flex sm:flex-row-reverse items-stretch overflow-hidden rounded-card bg-card shadow-card hover:shadow-card-hover"
     >
       <div className="relative hidden sm:block w-28 sm:w-56 shrink-0 aspect-[16/10] bg-surface">
         <CoverImage
