@@ -229,16 +229,23 @@ flowchart TB
   T1["main 브랜치 push"]
   T2["30분 cron"]
   T3["수동 Run workflow"]
+  A["GitHub Actions<br/>(deploy.yml)"]
+  I["npm ci"]
+  B["next build<br/>(출력: ./out)"]
+  PB["postbuild<br/>(feed/sitemap 생성)"]
+  AR["upload-pages-artifact"]
+  D["deploy-pages"]
+  GH["https://imwebme.github.io/imweb_techblog/"]
+
   T1 --> A
   T2 --> A
   T3 --> A
-  A["GitHub Actions<br/>(deploy.yml)"]
-  A --> I["npm ci"]
-  I --> B["next build<br/>(출력: ./out)"]
-  B --> PB["postbuild<br/>(feed/sitemap 생성)"]
-  PB --> AR["upload-pages-artifact"]
-  AR --> D["deploy-pages"]
-  D --> GH["https://imwebme.github.io/imweb_techblog/"]
+  A --> I
+  I --> B
+  B --> PB
+  PB --> AR
+  AR --> D
+  D --> GH
 ```
 
 **트리거**
