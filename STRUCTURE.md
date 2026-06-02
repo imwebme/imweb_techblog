@@ -54,7 +54,7 @@ imweb_techblog/
 │   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글)
 │   │   │   ├── PostGrid.tsx         글 목록 + 그리드/리스트 뷰 토글 + 페이지네이션(9개/페이지)
 │   │   │   ├── PostCard.tsx           ↳ 그리드 뷰의 카드 (썸네일 16:10)
-│   │   │   ├── PostListItem.tsx       ↳ 리스트 뷰의 행 (썸네일 16:10, 카드에 flush, <sm 은 썸네일 숨김)
+│   │   │   ├── PostListItem.tsx       ↳ 리스트 뷰의 행 (썸네일 16:10, 카드에 flush, sm+ 우측 배치, <sm 은 썸네일 숨김)
 │   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글)
 │   │   ├── layout/
 │   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 + 테마 토글 (<sm 은 햄버거+검색바)
@@ -212,6 +212,8 @@ Layout
 | `slug` | Text | 권장 | URL 의 일부. 영문 소문자 + 하이픈 |
 | `status` | Select | ✅ | `Public` 만 노출. `PublicOnDetail` 등은 빌드 제외 |
 | `category` | Multi-select | 권장 | 사이드바 카테고리 (옵션 정의 순서 유지, 한 글에 여러 카테고리 가능) |
+
+> 속성명에 운영 메모를 붙여도(예: `tags(최대 3개)`) `findPropId` 가 prefix 매칭으로 인식합니다.
 | `tags` | Multi-select | 선택 | 사이드바 태그 |
 | `summary` | Text | 권장 | 카드/메타 description |
 | `date` | Date | 권장 | 발행일 (정렬 키) |
@@ -285,8 +287,8 @@ flowchart TB
 | 폭 | 적용 |
 |---|---|
 | `< 640px` | 카드 1열, 헤더는 햄버거 메뉴 + 검색바, 사이드바 토글, 푸터 2열, 리스트 뷰 썸네일 숨김(텍스트 전용) |
-| `640~1024px` | 카드 2열, 인라인 네비 + 검색, 사이드바 토글 (펼치면 2컬럼) |
-| `≥ 1024px` | 좌측 사이드바 (220px) + 본문, 카드 3열 |ㄹ
+| `640~1024px` | 카드 2열, 인라인 네비 + 검색, 사이드바 토글 (펼치면 2컬럼), 리스트 뷰 썸네일 우측 배치 |
+| `≥ 1024px` | 좌측 사이드바 (220px) + 본문, 카드 3열, 리스트 뷰 썸네일 우측 배치 |
 
 ---
 
