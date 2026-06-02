@@ -5,6 +5,8 @@ type Item = { name: string; count: number }
 type SidebarProps = {
   categories: Item[]
   tags: Item[]
+  // 전체 글 수 (multi-select 라 카테고리 카운트 합과 다를 수 있어 별도로 전달)
+  totalPosts: number
   activeCategory: string | null
   activeTag: string | null
   onCategoryChange: (next: string | null) => void
@@ -27,12 +29,12 @@ export default function Sidebar(props: SidebarProps) {
 function DesktopFilters({
   categories,
   tags,
+  totalPosts,
   activeCategory,
   activeTag,
   onCategoryChange,
   onTagChange,
 }: SidebarProps) {
-  const totalCategory = categories.reduce((s, c) => s + c.count, 0)
   const totalTag = tags.reduce((s, t) => s + t.count, 0)
 
   return (
@@ -44,7 +46,7 @@ function DesktopFilters({
             <li>
               <CategoryRow
                 label="전체"
-                count={totalCategory}
+                count={totalPosts}
                 active={activeCategory === null && activeTag === null}
                 onClick={() => {
                   onCategoryChange(null)
@@ -90,6 +92,7 @@ function DesktopFilters({
 function NarrowFilters({
   categories,
   tags,
+  totalPosts,
   activeCategory,
   activeTag,
   onCategoryChange,
@@ -101,7 +104,6 @@ function NarrowFilters({
     : activeTag
       ? `# ${activeTag}`
       : null
-  const totalCategory = categories.reduce((s, c) => s + c.count, 0)
 
   return (
     <div className="lg:hidden mb-6">
@@ -158,7 +160,7 @@ function NarrowFilters({
               <div className="flex flex-wrap gap-1.5">
                 <CategoryChip
                   label="전체"
-                  count={totalCategory}
+                  count={totalPosts}
                   active={activeCategory === null && activeTag === null}
                   onClick={() => {
                     onCategoryChange(null)

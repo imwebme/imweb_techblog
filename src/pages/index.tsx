@@ -73,6 +73,7 @@ export default function HomePage({
             <Sidebar
               categories={categories}
               tags={tags}
+              totalPosts={posts.length}
               activeCategory={activeCategory}
               activeTag={activeTag}
               onCategoryChange={setActiveCategory}
