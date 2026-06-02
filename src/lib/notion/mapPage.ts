@@ -143,7 +143,7 @@ const pickAuthors = (
       // 노션 표시 규칙에 따라 name 우선, 없으면 한국식(성+이름) 으로 조합.
       const fullName = `${u.family_name ?? ""}${u.given_name ?? ""}`.trim()
       const name = u.name || fullName || "Imweb"
-      return { name, avatar: u.profile_photo ?? undefined } as TAuthor
+      return { name, avatar: u.profile_photo ?? null } as TAuthor
     })
     .filter(Boolean) as TAuthor[]
 }

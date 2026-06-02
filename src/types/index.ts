@@ -4,7 +4,8 @@ export type TPostStatus = "Public" | "Private" | "Draft"
 
 export type TAuthor = {
   name: string
-  avatar?: string
+  // getStaticProps 는 undefined 직렬화 불가 → null 로 통일
+  avatar: string | null
 }
 
 export type TPost = {
