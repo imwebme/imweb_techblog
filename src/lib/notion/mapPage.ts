@@ -13,6 +13,9 @@ export const unwrap = (record: any): any => {
   return record
 }
 
+// 스키마에서 후보 이름들 중 하나와 매치되는 prop id 를 찾습니다.
+// 1차: 정확 일치 (대소문자 무시) — 의도된 정확한 매핑
+// 2차: prefix 매치 — 노션에서 사용자가 메모를 붙인 경우 ("tags(최대 3개)")도 잡아냄
 export const findPropId = (
   schema: Record<string, { name: string; type: string }>,
   names: string[]
@@ -20,6 +23,10 @@ export const findPropId = (
   const lower = names.map((n) => n.toLowerCase())
   for (const [id, s] of Object.entries(schema)) {
     if (lower.includes(s.name?.toLowerCase())) return id
+  }
+  for (const [id, s] of Object.entries(schema)) {
+    const n = s.name?.toLowerCase() || ""
+    if (lower.some((cand) => n.startsWith(cand))) return id
   }
   return null
 }
