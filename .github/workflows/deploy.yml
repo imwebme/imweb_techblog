@@ -57,7 +57,7 @@ jobs:
           # notion-client(비공식 API)를 사용하므로 NOTION_TOKEN 은 필요 없습니다.
           # 노션 DB 페이지가 "웹에 게시(Share to web)" 되어 있으면 빌드 시 자동으로 가져옵니다.
           GITHUB_PAGES: "true"
-          # 사용자 페이지(imweb-techblog.github.io)가 아닌 프로젝트 페이지에 배포되므로 basePath 필요
+          # 사용자 페이지(imwebme.github.io)가 아닌 프로젝트 페이지에 배포되므로 basePath 필요
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: |

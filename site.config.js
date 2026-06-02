@@ -7,7 +7,7 @@ const CONFIG = {
     author: "Imweb Tech",
     language: "ko-KR",
     timezone: "Asia/Seoul",
-    siteUrl: "https://imweb-techblog.github.io/imweb_techblog_1",
+    siteUrl: "https://imwebme.github.io/imweb_techblog",
   },
 
   // ── 브랜드 컬러 ─────────────────────────────────────────────────────────
@@ -67,7 +67,9 @@ const CONFIG = {
       // repo 비공개 전환 시 Discussions 가 외부에 안 보이므로 일시 비활성화.
       // 팀 repo 이전 후 새 repo 에 giscus 재설치하고 다시 true 로.
       enabled: false,
-      repo: "imweb-techblog/imweb_techblog_1",
+      repo: "imwebme/imweb_techblog",
+      // ↓ 새 repo 에 giscus 재설치 후 https://giscus.app 에서 발급받아 갱신 필요
+      // repoId/categoryId 는 옛 값이므로 enabled: true 로 켜기 전 반드시 교체
       repoId: "R_kgDOScKclg",
       category: "General",
       categoryId: "DIC_kwDOScKcls4C9BhC",

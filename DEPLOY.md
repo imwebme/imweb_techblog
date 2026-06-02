@@ -1,6 +1,6 @@
 # 배포 가이드
 
-이 프로젝트는 `imweb-techblog/imweb_techblog_1` 저장소를 기반으로 운영됩니다.
+이 프로젝트는 `imwebme/imweb_techblog` 저장소를 기반으로 운영됩니다.
 
 빌드 시 노션 데이터는 **비공식 Notion API(`notion-client`)** 로 가져옵니다. **Integration 토큰이 필요하지 않습니다.** 대신 노션 DB 페이지가 "웹에 게시(Share to web)" 되어 있어야 합니다.
 
@@ -29,7 +29,7 @@ git push origin main
 
 `.github/workflows/deploy.yml` 이 `push: branches: [main]` 트리거 + 30분 cron(노션 변경 반영용)으로 동작하여 GitHub Pages 로 자동 배포합니다.
 
-배포 후 사이트는 [https://imweb-techblog.github.io/imweb_techblog_1](https://imweb-techblog.github.io/imweb_techblog_1) 에서 확인할 수 있습니다.
+배포 후 사이트는 [https://imwebme.github.io/imweb_techblog](https://imwebme.github.io/imweb_techblog) 에서 확인할 수 있습니다.
 
 ## 로컬 개발
 
@@ -59,7 +59,7 @@ npx serve out -l 4000
 
 노션의 신형 첨부 업로드(`attachment:<uuid>:<file>`)는 비공식 API 로 풀어낼 수 없습니다. 카드 썸네일을 노출하려면:
 
-- 이미지를 [`public/post-images/`](./public/post-images/) 에 커밋 → 노션 `thumbnail` 컬럼에 GitHub Pages URL (`https://imweb-techblog.github.io/imweb_techblog_1/post-images/<파일명>`) 임베드
+- 이미지를 [`public/post-images/`](./public/post-images/) 에 커밋 → 노션 `thumbnail` 컬럼에 GitHub Pages URL (`https://imwebme.github.io/imweb_techblog/post-images/<파일명>`) 임베드
 - 또는 Unsplash 등 외부 호스팅 URL 임베드
 
 ## 트러블슈팅
@@ -72,13 +72,13 @@ npx serve out -l 4000
 ## 사이트를 외부에 공개하지 않으려면
 
 ```bash
-gh api -X DELETE /repos/imweb-techblog/imweb_techblog_1/pages
+gh api -X DELETE /repos/imwebme/imweb_techblog/pages
 ```
 
 다시 켤 때:
 
 ```bash
-gh api -X POST /repos/imweb-techblog/imweb_techblog_1/pages -f "build_type=workflow"
+gh api -X POST /repos/imwebme/imweb_techblog/pages -f "build_type=workflow"
 gh workflow run "Deploy to GitHub Pages" --ref main
 ```
 

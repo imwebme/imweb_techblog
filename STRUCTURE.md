@@ -33,7 +33,7 @@
 ## 3. 디렉터리 구조
 
 ```
-imweb_techblog_1/
+imweb_techblog/
 ├── public/
 │   ├── banner.webp                  메인 상단 슬로건 배너
 │   ├── Logo_ImwebTech_black.svg      헤더 로고 (라이트 모드)
@@ -236,7 +236,7 @@ flowchart TB
   B --> PB["postbuild<br/>(feed/sitemap 생성)"]
   PB --> AR["upload-pages-artifact"]
   AR --> D["deploy-pages"]
-  D --> GH["https://imweb-techblog.github.io/imweb_techblog_1/"]
+  D --> GH["https://imwebme.github.io/imweb_techblog/"]
 ```
 
 **트리거**
