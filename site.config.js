@@ -57,6 +57,15 @@ const CONFIG = {
     address: "서울 강남구 테헤란로 501 VPLEX",
   },
 
+  // ── 분석 (Google Analytics 4) ───────────────────────────────────────────
+  // PIPA opt-in 기준: 사용자가 동의 배너에서 "동의" 누르기 전까지는
+  // gtag 스크립트 자체를 로드하지 않습니다.
+  // 측정 ID 는 GA4 → 관리 → 데이터 스트림에서 발급(`G-XXXXXXXXXX`).
+  analytics: {
+    enabled: true,
+    measurementId: "G-B0EJFYJCZ9",
+  },
+
   // ── 댓글 (giscus) ───────────────────────────────────────────────────────
   // 1) 레포 Settings → General → Features → Discussions 활성화
   // 2) https://github.com/apps/giscus 설치 (해당 레포에 접근 권한 부여)

@@ -5,6 +5,8 @@ import "@/styles/globals.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import { withBasePath } from "@/lib/utils/withBasePath"
+import Analytics from "@/components/common/Analytics"
+import ConsentBanner from "@/components/common/ConsentBanner"
 
 const CONFIG = require("../../site.config")
 
@@ -40,7 +42,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} />
       </Head>
+      <Analytics />
       <Component {...pageProps} />
+      <ConsentBanner />
     </>
   )
 }

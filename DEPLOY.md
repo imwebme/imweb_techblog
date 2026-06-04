@@ -83,6 +83,15 @@ gh api -X POST /repos/imwebme/imweb_techblog/pages -f "build_type=workflow"
 gh workflow run "Deploy to GitHub Pages" --ref main
 ```
 
+## Google Analytics 4
+
+운영용 측정 ID 는 [`site.config.js`](./site.config.js) 의 `analytics.measurementId` 에서 관리합니다.
+
+- **측정 ID 새로 발급**: GA4 → 관리 → 데이터 스트림 → `웹` 스트림 생성 (URL: `https://tech.imweb.me`). 우상단 `G-` 로 시작하는 10자리 측정 ID 를 복사.
+- **동의 흐름**: 첫 방문 시 하단 배너에서 `동의` / `거부` 둘 중 하나를 선택해야 GA 가 작동합니다. 거부하면 `gtag` 스크립트 자체가 로드되지 않습니다.
+- **테스트**: 동의를 누른 뒤 GA4 보고서 → 실시간 에서 본인 접속이 잡히는지 확인. 안 잡히면 광고 차단기/브라우저 추적 차단을 의심.
+- **꺼두려면**: `analytics.enabled` 를 `false` 로. 배너도 같이 사라집니다.
+
 ## 도메인 / basePath 메모
 
 - 현 운영: 커스텀 도메인 `tech.imweb.me` ([`public/CNAME`](./public/CNAME)). `actions/configure-pages` 가 이를 감지해 `BASE_PATH=""` 을 주입하고, `next.config.js` 는 그 값을 그대로 사용합니다 (`??` 로 빈 문자열 보존).

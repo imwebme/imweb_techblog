@@ -26,7 +26,8 @@
 | 데이터 | **notion-client** (비공식 Notion API) |
 | 본문 렌더 | **react-notion-x** + Prism (코드) + KaTeX (수식) |
 | 댓글 | **giscus** (GitHub Discussions, 테마 연동) |
-| 호스팅 | GitHub Pages + GitHub Actions |
+| 분석 | **GA4** (opt-in 동의 배너 — 동의 전에는 gtag 자체 미로드) |
+| 호스팅 | GitHub Pages + GitHub Actions (커스텀 도메인 `tech.imweb.me`) |
 
 ---
 
@@ -49,7 +50,9 @@ imweb_techblog/
 ├── src/
 │   ├── components/
 │   │   ├── common/
-│   │   │   └── CoverImage.tsx       커버/썸네일 (미설정·404 시 placeholder fallback; 기본 그라데이션 내장)
+│   │   │   ├── CoverImage.tsx       커버/썸네일 (미설정·404 시 placeholder fallback; 기본 그라데이션 내장)
+│   │   │   ├── Analytics.tsx        GA4 — 동의 후 gtag 로드 + 라우트 변경 시 page_view
+│   │   │   └── ConsentBanner.tsx    하단 고정 쿠키 동의 배너 (동의/거부 영구 저장)
 │   │   ├── home/
 │   │   │   ├── Banner.tsx           메인 상단 고정 배너
 │   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글)
@@ -82,7 +85,8 @@ imweb_techblog/
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
 │   │   ├── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
-│   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
+│   │   ├── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
+│   │   └── useConsent.ts            GA4 동의 상태 훅 (pending/granted/denied, localStorage 영구)
 │   │
 │   ├── pages/
 │   │   ├── _app.tsx                 전역 CSS, OG meta
@@ -169,6 +173,8 @@ flowchart LR
 ---
 
 ## 6. 컴포넌트 트리
+
+> `_app` 에서 `<Analytics />` (GA4 — 동의 후 gtag 로드 + 라우트 변경 시 page_view) 와 `<ConsentBanner />` (pending 상태에서만 노출되는 동의 배너) 가 모든 페이지 공통으로 마운트됩니다.
 
 ### 홈 (`/`)
 
@@ -304,7 +310,7 @@ flowchart TB
 
 | 파일 | 책임 |
 |---|---|
-| **`site.config.js`** | 블로그명, 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), `siteUrl` (RSS·sitemap·OG 의 절대 URL 기준) |
+| **`site.config.js`** | 블로그명, 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), GA4(analytics), `siteUrl` (RSS·sitemap·OG 의 절대 URL 기준) |
 | `next.config.js` | basePath (CNAME 있으면 ""; 없으면 `/imweb_techblog` 폴백 — `??` 로 빈 문자열 보존), 정적 export, image unoptimized |
 | `public/CNAME` | 커스텀 도메인 (`tech.imweb.me`). 이 파일이 있으면 `configure-pages` 가 basePath 를 비웁니다 |
 | `tailwind.config.js` | 컬러/타이포/이징 토큰 → Tailwind 유틸로 노출 |
