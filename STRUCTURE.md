@@ -36,7 +36,7 @@
 ```
 imweb_techblog/
 ├── public/
-│   ├── banner.webp                  메인 상단 슬로건 배너
+│   ├── banner_official_2400_405.png 메인 상단 슬로건 배너 (2400×405, 5.92:1)
 │   ├── Logo_ImwebTech_black.svg      헤더 로고 (라이트 모드)
 │   ├── Logo_ImwebTech_white.svg      헤더 로고 (다크 모드)
 │   ├── symbol.webp                  favicon (구름 심볼)
