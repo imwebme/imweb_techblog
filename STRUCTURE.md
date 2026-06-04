@@ -26,7 +26,7 @@
 | 데이터 | **notion-client** (비공식 Notion API) |
 | 본문 렌더 | **react-notion-x** + Prism (코드) + KaTeX (수식) |
 | 댓글 | **giscus** (GitHub Discussions, 테마 연동) |
-| 분석 | **GA4** (opt-in 동의 배너 — 동의 전에는 gtag 자체 미로드) |
+| 분석 | **GA4** (동의 배너 없이 전수 집계 — 모든 방문에 gtag 로드) |
 | 호스팅 | GitHub Pages + GitHub Actions (커스텀 도메인 `tech.imweb.me`) |
 
 ---
@@ -51,8 +51,7 @@ imweb_techblog/
 │   ├── components/
 │   │   ├── common/
 │   │   │   ├── CoverImage.tsx       커버/썸네일 (미설정·404 시 placeholder fallback; 기본 그라데이션 내장)
-│   │   │   ├── Analytics.tsx        GA4 — 동의 후 gtag 로드 + 라우트 변경 시 page_view
-│   │   │   └── ConsentBanner.tsx    하단 고정 쿠키 동의 배너 (동의/거부 영구 저장)
+│   │   │   └── Analytics.tsx        GA4 — gtag 로드(전수) + 라우트 변경 시 page_view
 │   │   ├── home/
 │   │   │   ├── Banner.tsx           메인 상단 고정 배너
 │   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글)
@@ -85,8 +84,7 @@ imweb_techblog/
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
 │   │   ├── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
-│   │   ├── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
-│   │   └── useConsent.ts            GA4 동의 상태 훅 (pending/granted/denied, localStorage 영구)
+│   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
 │   │
 │   ├── pages/
 │   │   ├── _app.tsx                 전역 CSS, OG meta
@@ -174,7 +172,7 @@ flowchart LR
 
 ## 6. 컴포넌트 트리
 
-> `_app` 에서 `<Analytics />` (GA4 — 동의 후 gtag 로드 + 라우트 변경 시 page_view) 와 `<ConsentBanner />` (pending 상태에서만 노출되는 동의 배너) 가 모든 페이지 공통으로 마운트됩니다.
+> `_app` 에서 `<Analytics />` (GA4 — 동의 배너 없이 gtag 로드 + 라우트 변경 시 page_view) 가 모든 페이지 공통으로 마운트됩니다.
 
 ### 홈 (`/`)
 

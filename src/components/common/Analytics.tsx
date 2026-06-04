@@ -1,16 +1,12 @@
 import { useEffect } from "react"
 import Script from "next/script"
 import { useRouter } from "next/router"
-import { useConsent } from "@/lib/useConsent"
 
 const CONFIG = require("../../../site.config")
 
-// Google Analytics 4. PIPA opt-in 기준 — 동의 전에는 gtag 스크립트 자체를
-// 마운트하지 않습니다 (cookieless 1st-party 가 아닌 한 분석/광고 쿠키도
-// 명시 동의 대상). 동의 후엔 Pages Router 의 라우트 변경 이벤트마다
-// page_view 를 수동으로 보냅니다 (자동 페이지뷰는 첫 로드만 잡힘).
-//
-// 거부 상태에선 아무 스크립트도 로드되지 않습니다.
+// Google Analytics 4. 동의 배너 없이 모든 방문에 대해 gtag 를 로드합니다.
+// Pages Router 의 라우트 변경 이벤트마다 page_view 를 수동으로 보냅니다
+// (자동 페이지뷰는 첫 로드만 잡히므로).
 
 declare global {
   interface Window {
@@ -20,11 +16,9 @@ declare global {
 }
 
 export default function Analytics() {
-  const { status } = useConsent()
   const router = useRouter()
   const cfg = CONFIG.analytics
-  const enabled =
-    !!cfg?.enabled && !!cfg?.measurementId && status === "granted"
+  const enabled = !!cfg?.enabled && !!cfg?.measurementId
 
   useEffect(() => {
     if (!enabled) return

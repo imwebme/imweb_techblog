@@ -6,7 +6,6 @@ import type { AppProps } from "next/app"
 import Head from "next/head"
 import { withBasePath } from "@/lib/utils/withBasePath"
 import Analytics from "@/components/common/Analytics"
-import ConsentBanner from "@/components/common/ConsentBanner"
 
 const CONFIG = require("../../site.config")
 
@@ -44,7 +43,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Analytics />
       <Component {...pageProps} />
-      <ConsentBanner />
     </>
   )
 }

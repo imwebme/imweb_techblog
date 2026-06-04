@@ -58,9 +58,9 @@ const CONFIG = {
   },
 
   // ── 분석 (Google Analytics 4) ───────────────────────────────────────────
-  // PIPA opt-in 기준: 사용자가 동의 배너에서 "동의" 누르기 전까지는
-  // gtag 스크립트 자체를 로드하지 않습니다.
+  // 동의 배너 없이 모든 방문에 대해 gtag 를 로드합니다(전수 집계).
   // 측정 ID 는 GA4 → 관리 → 데이터 스트림에서 발급(`G-XXXXXXXXXX`).
+  // enabled: false 면 로드 안 함.
   analytics: {
     enabled: true,
     measurementId: "G-B0EJFYJCZ9",
