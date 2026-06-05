@@ -40,6 +40,44 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} />
+        {/*
+          JSON-LD 구조화 데이터.
+          - WebSite: 사이트명·별칭(검색 매칭에 핵심)·검색 액션을 명시
+          - Organization: 회사 정체성 — 지식 그래프 후보가 됩니다
+        */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: CONFIG.blog.title,
+              alternateName: CONFIG.blog.alternateNames,
+              url: CONFIG.blog.siteUrl,
+              description: CONFIG.blog.description,
+              inLanguage: CONFIG.blog.language,
+              potentialAction: {
+                "@type": "SearchAction",
+                target: `${CONFIG.blog.siteUrl}/search?q={search_term_string}`,
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: CONFIG.company.name,
+              alternateName: "아임웹",
+              url: CONFIG.social.homepage,
+              logo: `${CONFIG.blog.siteUrl}/Logo_ImwebTech_black.svg`,
+              sameAs: [CONFIG.social.careers, CONFIG.blog.siteUrl],
+            }),
+          }}
+        />
       </Head>
       <Analytics />
       <Component {...pageProps} />

@@ -308,7 +308,7 @@ flowchart TB
 
 | 파일 | 책임 |
 |---|---|
-| **`site.config.js`** | 블로그명, 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), GA4(analytics), `siteUrl` (RSS·sitemap·OG 의 절대 URL 기준) |
+| **`site.config.js`** | 블로그명, `alternateNames` (SEO 별칭), 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), GA4(analytics), `siteUrl` (RSS·sitemap·OG·JSON-LD 절대 URL 기준) |
 | `next.config.js` | basePath (CNAME 있으면 ""; 없으면 `/imweb_techblog` 폴백 — `??` 로 빈 문자열 보존), 정적 export, image unoptimized |
 | `public/CNAME` | 커스텀 도메인 (`tech.imweb.me`). 이 파일이 있으면 `configure-pages` 가 basePath 를 비웁니다 |
 | `tailwind.config.js` | 컬러/타이포/이징 토큰 → Tailwind 유틸로 노출 |

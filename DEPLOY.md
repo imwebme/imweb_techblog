@@ -83,6 +83,20 @@ gh api -X POST /repos/imwebme/imweb_techblog/pages -f "build_type=workflow"
 gh workflow run "Deploy to GitHub Pages" --ref main
 ```
 
+## Google Search Console — 검색 노출
+
+`tech.imweb.me` 가 구글 검색에 정상 노출되려면 Search Console 등록이 필요합니다. (코드 측 SEO — `<title>`, `<meta description>`, `JSON-LD`, `sitemap.xml`, `robots.txt` — 는 이미 다 박혀 있습니다.)
+
+1. https://search.google.com/search-console 접속 → **속성 추가** → **URL 접두어**: `https://tech.imweb.me/`
+2. **소유권 확인**: 가장 쉬운 방법은 **HTML 태그** 방식.
+   - 발급받은 `<meta name="google-site-verification" content="..." />` 의 content 값을 [`site.config.js`](./site.config.js) 의 `blog` 블록에 `googleSiteVerification: "..."` 같은 필드로 임시 추가하거나, [`_app.tsx`](./src/pages/_app.tsx) 의 `<Head>` 안에 직접 한 줄 박아 푸시.
+   - 인증 완료 후 그 메타는 빼도 됩니다 (Search Console 이 기억).
+3. **사이트맵 제출**: 좌측 메뉴 **Sitemaps** → `https://tech.imweb.me/sitemap.xml` 추가.
+4. **URL 검사** 도구로 `https://tech.imweb.me/` 입력 → **색인 생성 요청**. (보통 며칠 안에 색인됨.)
+5. 며칠 뒤 구글에서 `site:tech.imweb.me` 검색해 인덱싱된 페이지 수 확인.
+
+> 검색에 `아임웹 기술블로그` 로 노출되도록 `site.config.js` 의 `blog.alternateNames` 와 JSON-LD `WebSite.alternateName` 으로 별칭이 박혀 있습니다. 색인 후 1~4주 뒤부터 키워드 매칭이 안정됩니다.
+
 ## Google Analytics 4
 
 운영용 측정 ID 는 [`site.config.js`](./site.config.js) 의 `analytics.measurementId` 에서 관리합니다.

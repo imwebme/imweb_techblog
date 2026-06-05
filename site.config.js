@@ -3,7 +3,10 @@ const CONFIG = {
   // ── 사이트 기본 정보 ──────────────────────────────────────────────────────
   blog: {
     title: "아임웹 테크",
-    description: "아임웹 기술 조직의 이야기를 담습니다.",
+    // SEO 별칭 — JSON-LD schema:WebSite#alternateName 으로 노출.
+    // 사용자가 검색할 만한 표현을 모아둡니다.
+    alternateNames: ["아임웹 기술블로그", "아임웹 기술 블로그", "Imweb Tech Blog"],
+    description: "아임웹 기술블로그 — 기술 조직의 이야기를 담습니다.",
     author: "Imweb Tech",
     language: "ko-KR",
     timezone: "Asia/Seoul",
