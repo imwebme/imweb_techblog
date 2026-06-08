@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDismissible } from "@/lib/useDismissible"
+import { withBasePath } from "@/lib/utils/withBasePath"
 
 const CONFIG = require("../../../site.config")
 
@@ -46,12 +47,12 @@ export default function EventPopup() {
       />
 
       {/* 카드 — 사이즈 적당히, 화면 너무 안 가리게 */}
-      <div className="event-popup-card relative w-full max-w-md rounded-2xl border border-line bg-card p-6 shadow-2xl sm:p-7">
+      <div className="event-popup-card relative w-full max-w-md overflow-hidden rounded-2xl border border-line bg-card shadow-2xl">
         <button
           type="button"
           onClick={closeSession}
           aria-label="닫기"
-          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-500 transition-colors hover:bg-surface hover:text-ink-900"
+          className="absolute right-3 top-3 z-10 inline-flex h-8 w-8 items-center justify-center rounded-md bg-card/80 text-ink-500 backdrop-blur transition-colors hover:bg-surface hover:text-ink-900"
         >
           <svg
             width="16"
@@ -68,6 +69,18 @@ export default function EventPopup() {
           </svg>
         </button>
 
+        {ev.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          // 이미지 본래 비율 그대로 — 16:9, OG(40:21), 1:1 등 어떤 비율도 자동 적응.
+          <img
+            src={withBasePath(ev.image)}
+            alt={ev.title || "event"}
+            className="block w-full h-auto"
+            loading="eager"
+          />
+        )}
+
+        <div className="p-6 sm:p-7">
         {ev.badge && (
           <div className="text-[11px] font-semibold uppercase tracking-wider text-brand">
             {ev.badge}
@@ -119,6 +132,7 @@ export default function EventPopup() {
         >
           오늘 하루 보지 않기
         </button>
+        </div>
       </div>
     </div>
   )

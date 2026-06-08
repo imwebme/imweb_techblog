@@ -100,15 +100,15 @@ const CONFIG = {
   // 개발자 행사 등 홍보용. enabled: false 면 안 뜸. 메인(/)에서만 노출.
   // 사용자가 "오늘 하루 보지 않기" 누르면 24시간 동안 안 보임(localStorage).
   eventPopup: {
-    enabled: false,
-    badge: "DEV EVENT",
-    title: "아임웹 테크 데이 2026",
-    description:
-      "아임웹의 첫번째 외부 행사에 초대합니다.\n키노트부터 기술 세션, 네트워킹까지 많은 기대 부탁드립니다.",
-    date: "2026.07.15 (수) · 14:00",
-    place: "서울 강남 VPLEX 9F",
+    enabled: true,
+    image: "/brandcon_banner.png",
+    badge: "EVENT",
+    title: "BRANDCON26",
+    description: "깊이를 만든 브랜드 리더들의 성장 인사이트",
+    date: "2026.07.26 (화)",
+    place: "COEX GRAND BALLROOM",
     ctaLabel: "지금 신청하기",
-    ctaHref: "https://career.imweb.me",
+    ctaHref: "https://brandcon.imweb.me/26",
   },
 }
 
