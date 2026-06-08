@@ -6,10 +6,22 @@ const CONFIG = require("../../../site.config")
 
 // 메인 페이지 이벤트 홍보 팝업.
 // - site.config.js 의 eventPopup.enabled 가 true 일 때만 노출
-// - "오늘 하루 보지 않기" → useDismissible 로 24시간 localStorage 기억
+// - "오늘 하루 보지 않기" → 그날의 로컬 자정까지만 숨김 (캘린더 기준 "오늘")
 // - X / 배경 / ESC → 세션 한정 닫기(저장 없음, 다음 진입 시 다시 노출)
 const STORAGE_KEY = "eventPopupDismissedUntil"
-const ONE_DAY_MS = 24 * 60 * 60 * 1000
+
+// 지금부터 다음 로컬 자정까지의 ms.
+// 24h 슬라이딩이 아니라 캘린더 "오늘" 끝까지만 숨겨, 라벨과 동작을 일치시킵니다.
+const msUntilNextMidnight = () => {
+  const now = new Date()
+  const next = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1,
+    0, 0, 0, 0
+  )
+  return next.getTime() - now.getTime()
+}
 
 export default function EventPopup() {
   const ev = CONFIG.eventPopup
@@ -30,7 +42,7 @@ export default function EventPopup() {
   if (!open) return null
 
   const closeSession = () => setClosedSession(true)
-  const closeForDay = () => dismiss(ONE_DAY_MS)
+  const closeForDay = () => dismiss(msUntilNextMidnight())
 
   return (
     <div
