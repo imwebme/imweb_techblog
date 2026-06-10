@@ -100,7 +100,7 @@ const CONFIG = {
   // 개발자 행사 등 홍보용. enabled: false 면 안 뜸. 메인(/)에서만 노출.
   // 사용자가 "오늘 하루 보지 않기" 누르면 24시간 동안 안 보임(localStorage).
   eventPopup: {
-    enabled: true,
+    enabled: false,
     image: "/brandcon_banner.png",
     badge: "EVENT",
     title: "BRANDCON26",
