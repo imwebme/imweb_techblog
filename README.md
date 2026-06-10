@@ -110,10 +110,6 @@ Tailwind 토큰은 [`tailwind.config.js`](./tailwind.config.js) 에, 본문(`.no
 
 `<owner>.github.io` 사용자 페이지로 옮기려면 CNAME 을 지우고 `BASE_PATH=""` 를 명시한 뒤 저장소 이름을 `<owner>.github.io` 로 바꾸면 됩니다.
 
-## 라이선스
-
-MIT.
-
 ## Contact
 
 아임웹 Developer Relations  
