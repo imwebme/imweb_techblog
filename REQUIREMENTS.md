@@ -224,19 +224,7 @@ URL 임베드를 권장
 
 ---
 
-## 10. 알려진 제약 / 추후 과제
-
-| # | 제약 / 이슈 | 영향 | 단기 우회책 | 장기 해결 |
-|---|---|---|---|---|
-| 1 | 노션 신형 attachment (`attachment:<uuid>:<file>`) 이미지가 비공식 API 로 안 풀림 | 카드 썸네일/페이지 커버 누락 | 외부 이미지 URL 임베드 / `public/post-images/` 직접 호스팅 | 공식 Notion Integration 토큰 발급 받아 `@notionhq/client` 로 전환 |
-| 2 | 좋아요(Like) 글로벌 카운트 미지원 | 사용자 피드백 신호 약함 | 댓글의 reaction 으로 대체 | 외부 백엔드 (Lyket / Firebase 등) 도입 |
-| 3 | 검색이 클라이언트 사이드 substring | 본문 내 텍스트는 검색 안 됨 | 제목/요약/카테고리/태그만 검색 | 빌드 타임 본문 인덱싱 (Pagefind 등) |
-| 4 | `getStaticPaths` 가 dev 모드에서 캐싱 | 노션에 새 글 추가 후 상세 페이지 404 | dev 서버 재시작 | 운영에는 영향 없음 |
-| 5 | 글이 50건을 초과하면 첫 페이지만 가져올 수 있음 | 50건 이상 시 누락 가능 | 아직 발생 안 함 | `notion.getCollectionData()` 페이지네이션 보강 |
-
----
-
-## 11. 변경 이력 (Changelog)
+## 10. 변경 이력 (Changelog)
 
 > 자세한 내역은 GitHub commit history 참고. 주요 변경만 요약.
 
@@ -250,6 +238,16 @@ URL 임베드를 권장
 | 2026-05-14 | 최근 글 2개 그리드, 전체 글 그리드/리스트 토글 |
 | 2026-05-14 | 메인 배너 (banner.webp) 추가 |
 | 2026-05-21 | RSS(feed.xml) / Atom(atom.xml) / sitemap.xml 자동 생성 |
+| 2026-05-25 | 노션 파싱·스냅샷 단위 테스트 도입, 글 목록 페이지네이션 한계 제거 |
+| 2026-05-26 | 본문(`react-notion-x`) 톤앤매너 재정의, 푸터 좁은 화면 2열, 커버 이미지 fallback |
+| 2026-05-27 | 다크모드 재도입(기본 라이트), 로고 SVG 교체, 모바일 헤더(햄버거+검색바), 페이지네이션, 리스트 썸네일 16:10 flush |
+| 2026-05-28 | 채용 CTA 하단 LED 전광판 |
+| 2026-05-29 | 메인 이벤트 팝업, 모바일 리스트 뷰 썸네일 숨김 |
+| 2026-06-02 | 카테고리 multi-select 마이그레이션, 팀 레포 이전(`imwebme/imweb_techblog`), 리스트 썸네일 우측 배치(sm+), `findPropId` prefix 매치 폴백 |
+| 2026-06-04 | 커스텀 도메인 `tech.imweb.me` + CNAME, `BASE_PATH ??` 수정, GA4 도입(전수 집계), 메인 배너 공식 이미지로 교체 |
+| 2026-06-05 | SEO 정비 — JSON-LD(WebSite·Organization), `blog.alternateNames`, robots.txt sitemap URL 정정, Google Search Console 등록 |
+| 2026-06-08 | 이벤트 팝업 — 자유 비율 이미지 + 캘린더 자정 리셋, BRANDCON26 적용 |
+| 2026-06-10 | 이벤트 팝업 닫기 버튼 가시성 개선, README 정리 (라이선스 표기 제거, Contact 추가) |
 
 ---
 
