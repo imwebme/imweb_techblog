@@ -9,16 +9,20 @@ export default function PostActions({ post }: { post: TPost }) {
 
   const onShare = async () => {
     const url = typeof window !== "undefined" ? window.location.href : ""
-    const data = { title: post.title, text: post.summary || "", url }
-
     const nav = typeof navigator !== "undefined" ? (navigator as any) : null
 
-    if (nav?.share) {
+    // 데스크톱(마우스) → 클립보드 복사로 통일.
+    // 모바일·태블릿(터치) 에서만 OS 공유 시트를 띄워 메신저·AirDrop 등으로 보냄.
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(pointer: coarse)").matches
+
+    if (isTouchDevice && nav?.share) {
       try {
-        await nav.share(data)
+        await nav.share({ title: post.title, text: post.summary || "", url })
         return
       } catch {
-        // 사용자가 공유 시트를 닫은 경우 — fallback 으로 진행하지 않고 종료
+        // 사용자가 공유 시트를 닫은 경우 — fallback 없이 종료
         return
       }
     }

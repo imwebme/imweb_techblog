@@ -134,7 +134,7 @@ a {
   width: max-content;
   white-space: nowrap;
   will-change: transform;
-  animation: cta-marquee 22s linear infinite;
+  animation: cta-marquee 25s linear infinite;
 }
 .cta-led {
   color: #ffffff;
