@@ -59,7 +59,7 @@ export default function RecruitRibbon() {
         type="button"
         onClick={close}
         aria-label="배너 닫기"
-        className="absolute right-1 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md bg-black text-white/70 shadow-[-12px_0_12px_rgba(0,0,0,0.9)] transition-colors hover:text-white"
+        className="absolute right-2 top-1/2 z-10 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white ring-1 ring-white/25 backdrop-blur-sm transition-colors hover:bg-white/25"
       >
         <svg
           width="16"
