@@ -39,14 +39,14 @@ const CONFIG = {
   // external: true 면 새 탭으로 엽니다(외부 URL).
   nav: [
     { label: "글", href: "/" },
-    { label: "팀 소개", href: "https://team.imweb.me/", external: true },
+    { label: "채용", href: "https://career.imweb.me", external: true },
     { label: "개발자센터", href: "https://developers.imweb.me/", external: true },
   ],
 
   // ── 외부 링크 / 푸터 ────────────────────────────────────────────────────
   social: {
     homepage: "https://imweb.me",
-    careers: "https://team.imweb.me/",
+    careers: "https://career.imweb.me",
     contactEmail: "tech@imweb.me",
   },
 

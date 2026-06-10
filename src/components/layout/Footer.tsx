@@ -35,7 +35,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-ink-900"
                 >
-                  팀 소개
+                  채용
                 </a>
               </li>
               <li className="text-ink-700">
