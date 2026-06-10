@@ -113,7 +113,3 @@ Tailwind 토큰은 [`tailwind.config.js`](./tailwind.config.js) 에, 본문(`.no
 ## 라이선스
 
 MIT.
-
-## 참고
-
-데이터베이스 스키마는 [morethan-log](https://github.com/morethanmin/morethan-log) 를 참고했습니다.
