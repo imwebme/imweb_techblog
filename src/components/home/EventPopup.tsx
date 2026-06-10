@@ -64,7 +64,7 @@ export default function EventPopup() {
           type="button"
           onClick={closeSession}
           aria-label="닫기"
-          className="absolute right-3 top-3 z-10 inline-flex h-8 w-8 items-center justify-center rounded-md bg-card/80 text-ink-500 backdrop-blur transition-colors hover:bg-surface hover:text-ink-900"
+          className="absolute right-3 top-3 z-10 inline-flex h-[30px] w-[30px] items-center justify-center rounded-full bg-black/55 text-white shadow-md backdrop-blur-sm transition-colors hover:bg-black/75"
         >
           <svg
             width="16"
