@@ -62,7 +62,7 @@ imweb_techblog/
 │   │   ├── layout/
 │   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 + 테마 토글 (<sm 은 햄버거+검색바)
 │   │   │   ├── ThemeToggle.tsx      라이트/다크 전환 버튼
-│   │   │   ├── RecruitRibbon.tsx    채용 CTA 하단 고정 LED 마퀴 (recruitCTA 토글)
+│   │   │   ├── RecruitRibbon.tsx    채용 CTA 하단 고정 LED 마퀴 (홈 `/` 에서만, recruitCTA 토글)
 │   │   │   ├── Footer.tsx           메뉴 + 회사 정보 + 저작권 (좁은 화면 2열)
 │   │   │   └── Layout.tsx           페이지 wrapper
 │   │   └── post/
@@ -191,7 +191,7 @@ Layout
 │       ├── PostListItem*   (list 모드, 기본; <sm 은 썸네일 숨김)
 │       └── Pagination      ‹ 1 2 3 … › (글 수 > 9 일 때)
 ├── Footer
-└── RecruitRibbon           하단 고정 LED 마퀴 (recruitCTA 활성 시, 모든 페이지)
+└── RecruitRibbon           하단 고정 LED 마퀴 (recruitCTA 활성 시, 홈 `/` 에서만)
 ```
 
 ### 글 상세 (`/posts/<slug>/`)
@@ -203,8 +203,8 @@ Layout
 ├── PostContent             <NotionRenderer /> + dynamic Code/Collection/Equation/Modal
 ├── PostActions             공유 버튼 (Web Share API + clipboard fallback)
 ├── Comments                giscus (활성 시, 테마 연동)
-├── Footer
-└── RecruitRibbon           하단 고정 LED 마퀴 (recruitCTA 활성 시)
+└── Footer
+     (글 상세에는 RecruitRibbon 미노출 — 홈 전용)
 ```
 
 ---

@@ -1,17 +1,22 @@
+import { useRouter } from "next/router"
 import { withBasePath } from "@/lib/utils/withBasePath"
 import { useDismissible } from "@/lib/useDismissible"
 
 const CONFIG = require("../../../site.config")
 
 // 채용 이벤트 CTA — 화면 하단에 고정(fixed)되어 스크롤해도 계속 노출됩니다.
+// 홈(`/`)에서만 노출하고, 글 상세·태그·검색·소개 등 다른 페이지에선 미렌더.
 // site.config.js 의 recruitCTA.enabled 가 true 이고 href 가 있을 때만 표시.
 // 사용자가 닫으면 localStorage 에 영구 기억해 다시 안 띄웁니다.
 const STORAGE_KEY = "recruitCTADismissed"
 
 export default function RecruitRibbon() {
+  const router = useRouter()
   const cta = CONFIG.recruitCTA
   const { dismissed, dismiss } = useDismissible(STORAGE_KEY)
 
+  // 홈에서만 노출
+  if (router.pathname !== "/") return null
   if (!cta?.enabled || !cta.href || dismissed) return null
 
   const close = () => dismiss() // ttl 미지정 = 영구
