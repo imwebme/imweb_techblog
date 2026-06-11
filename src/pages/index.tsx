@@ -1,5 +1,6 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import { useRouter } from "next/router"
 import Layout from "@/components/layout/Layout"
 import Banner from "@/components/home/Banner"
 import PostGrid from "@/components/home/PostGrid"
@@ -39,8 +40,50 @@ export default function HomePage({
   categories,
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter()
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [activeTag, setActiveTag] = useState<string | null>(null)
+
+  // URL `?category=...&tag=...` → state 동기화.
+  // 첫 마운트와 글에서 뒤로가기로 돌아오는 경우 모두 이 effect 가 잡습니다.
+  useEffect(() => {
+    if (!router.isReady) return
+    const c =
+      typeof router.query.category === "string" ? router.query.category : null
+    const t = typeof router.query.tag === "string" ? router.query.tag : null
+    setActiveCategory(c)
+    setActiveTag(t)
+  }, [router.isReady, router.query.category, router.query.tag])
+
+  // state → URL 동기화 (사용자가 필터 클릭한 직후).
+  // 현재 URL 의 쿼리와 같으면 router.replace 를 호출하지 않아 무한 루프를 방지합니다.
+  useEffect(() => {
+    if (!router.isReady) return
+    const sameCategory = (router.query.category ?? null) === (activeCategory ?? null)
+    const sameTag = (router.query.tag ?? null) === (activeTag ?? null)
+    if (sameCategory && sameTag) return
+    const query: Record<string, string> = {}
+    if (activeCategory) query.category = activeCategory
+    if (activeTag) query.tag = activeTag
+    router.replace(
+      { pathname: "/", query },
+      undefined,
+      { scroll: false, shallow: true }
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCategory, activeTag, router.isReady])
+
+  // Sidebar 의 양쪽 콜백(onCategoryChange, onTagChange) 호출이 같은 이벤트
+  // 안에서 일어나도 React 18 자동 batching 으로 한 번에 처리됩니다.
+  // 여기서 mutual exclusion 만 한 번 더 보강.
+  const onCategoryChange = (next: string | null) => {
+    setActiveCategory(next)
+    if (next !== null) setActiveTag(null)
+  }
+  const onTagChange = (next: string | null) => {
+    setActiveTag(next)
+    if (next !== null) setActiveCategory(null)
+  }
 
   const filtered = useMemo(() => {
     return posts.filter((p) => {
@@ -76,8 +119,8 @@ export default function HomePage({
               totalPosts={posts.length}
               activeCategory={activeCategory}
               activeTag={activeTag}
-              onCategoryChange={setActiveCategory}
-              onTagChange={setActiveTag}
+              onCategoryChange={onCategoryChange}
+              onTagChange={onTagChange}
             />
           )}
 

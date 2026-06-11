@@ -7,6 +7,9 @@ type ViewMode = "grid" | "list"
 
 // 한 페이지에 보여줄 글 수. 이 수를 넘으면 페이지네이션이 노출됩니다.
 const PAGE_SIZE = 9
+// 사용자가 마지막에 고른 뷰 모드는 localStorage 에 영구 저장.
+// 첫 페인트는 'list' 디폴트 → useEffect 에서 저장값으로 갱신 (useTheme 와 동일 패턴).
+const VIEW_STORAGE_KEY = "postViewMode"
 
 // 본문 영역의 포스트 리스트. 그리드/리스트 토글 + 페이지네이션 지원.
 // 사이드바 우측 메인 컬럼 안에서 사용됩니다.
@@ -22,6 +25,25 @@ export default function PostGrid({
   const [viewMode, setViewMode] = useState<ViewMode>("list")
   const [page, setPage] = useState(1)
   const sectionRef = useRef<HTMLElement>(null)
+
+  // 첫 마운트 시 localStorage 에서 마지막 뷰 모드 복원
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(VIEW_STORAGE_KEY)
+      if (v === "grid" || v === "list") setViewMode(v)
+    } catch {
+      /* localStorage 비활성 환경 무시 */
+    }
+  }, [])
+
+  const handleViewChange = (next: ViewMode) => {
+    setViewMode(next)
+    try {
+      localStorage.setItem(VIEW_STORAGE_KEY, next)
+    } catch {
+      /* noop */
+    }
+  }
 
   // 필터가 바뀌어 목록이 달라지면 1페이지로 초기화
   useEffect(() => {
@@ -54,7 +76,7 @@ export default function PostGrid({
           </h2>
           <span className="text-sm text-ink-500">{posts.length}개</span>
         </div>
-        <ViewToggle value={viewMode} onChange={setViewMode} />
+        <ViewToggle value={viewMode} onChange={handleViewChange} />
       </div>
 
       {viewMode === "grid" ? (
