@@ -43,6 +43,9 @@ export default function HomePage({
   const router = useRouter()
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  // hydration 이 끝난 후에만 state → URL 동기화 effect 가 동작하게 막아,
+  // 첫 마운트 시 state(null) 가 URL 의 쿼리를 빈 값으로 덮어쓰는 race 를 방지.
+  const [hydrated, setHydrated] = useState(false)
 
   // URL `?category=...&tag=...` → state 동기화.
   // 첫 마운트와 글에서 뒤로가기로 돌아오는 경우 모두 이 effect 가 잡습니다.
@@ -53,12 +56,13 @@ export default function HomePage({
     const t = typeof router.query.tag === "string" ? router.query.tag : null
     setActiveCategory(c)
     setActiveTag(t)
+    setHydrated(true)
   }, [router.isReady, router.query.category, router.query.tag])
 
   // state → URL 동기화 (사용자가 필터 클릭한 직후).
-  // 현재 URL 의 쿼리와 같으면 router.replace 를 호출하지 않아 무한 루프를 방지합니다.
+  // hydration 후, 그리고 현재 URL 의 쿼리와 다를 때만 replace 호출.
   useEffect(() => {
-    if (!router.isReady) return
+    if (!hydrated) return
     const sameCategory = (router.query.category ?? null) === (activeCategory ?? null)
     const sameTag = (router.query.tag ?? null) === (activeTag ?? null)
     if (sameCategory && sameTag) return
@@ -71,7 +75,7 @@ export default function HomePage({
       { scroll: false, shallow: true }
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeCategory, activeTag, router.isReady])
+  }, [activeCategory, activeTag, hydrated])
 
   // Sidebar 의 양쪽 콜백(onCategoryChange, onTagChange) 호출이 같은 이벤트
   // 안에서 일어나도 React 18 자동 batching 으로 한 번에 처리됩니다.
