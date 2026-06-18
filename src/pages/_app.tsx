@@ -19,8 +19,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="google-site-verification" content="eIlyGmoKucsv01nHB9zAG-U1tdvXMuV5hWL8bU6z_fo" />
         <title>{CONFIG.blog.title}</title>
         <meta name="description" content={CONFIG.blog.description} />
-        <link rel="icon" type="image/webp" href={withBasePath("/symbol.webp")} />
-        <link rel="apple-touch-icon" href={withBasePath("/symbol.webp")} />
+        <link rel="icon" type="image/png" href={withBasePath("/imweb_Favicon_512_512.png")} />
+        <link rel="apple-touch-icon" href={withBasePath("/imweb_Favicon_512_512.png")} />
         <link
           rel="alternate"
           type="application/rss+xml"

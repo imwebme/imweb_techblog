@@ -39,7 +39,8 @@ imweb_techblog/
 │   ├── banner_official_2400_405.png 메인 상단 슬로건 배너 (2400×405, 5.92:1)
 │   ├── Logo_ImwebTech_black.svg      헤더 로고 (라이트 모드)
 │   ├── Logo_ImwebTech_white.svg      헤더 로고 (다크 모드)
-│   ├── symbol.webp                  favicon (구름 심볼)
+│   ├── imweb_Favicon_512_512.png    favicon (512×512)
+│   ├── symbol.webp                  (옛 favicon, 미사용 — 정리 예정)
 │   ├── symbol_white.png             흰색 심볼 (채용 CTA 구분자)
 │   ├── OG_imweb_tech.png            OG 기본 이미지
 │   ├── robots.txt
