@@ -18,7 +18,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content={CONFIG.brand.primary} />
         <meta name="google-site-verification" content="eIlyGmoKucsv01nHB9zAG-U1tdvXMuV5hWL8bU6z_fo" />
         <title>{CONFIG.blog.title}</title>
-        <meta name="description" content={CONFIG.blog.description} />
+        <meta name="description" content={CONFIG.blog.description} key="description" />
         <link rel="icon" type="image/png" href={withBasePath("/imweb_Favicon_512_512.png")} />
         <link rel="apple-touch-icon" href={withBasePath("/imweb_Favicon_512_512.png")} />
         <link
@@ -33,14 +33,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           href={withBasePath("/atom.xml")}
           title={`${CONFIG.blog.title} Atom`}
         />
-        <meta property="og:title" content={CONFIG.blog.title} />
-        <meta property="og:description" content={CONFIG.blog.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="ko_KR" />
-        <meta property="og:site_name" content={CONFIG.blog.title} />
-        <meta property="og:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} />
+        <meta property="og:title" content={CONFIG.blog.title} key="og:title" />
+        <meta property="og:description" content={CONFIG.blog.description} key="og:description" />
+        <meta property="og:type" content="website" key="og:type" />
+        <meta property="og:locale" content="ko_KR" key="og:locale" />
+        <meta property="og:site_name" content={CONFIG.blog.title} key="og:site_name" />
+        <meta property="og:url" content={CONFIG.blog.siteUrl} key="og:url" />
+        <meta property="og:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} key="og:image" />
+        <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+        <meta name="twitter:title" content={CONFIG.blog.title} key="twitter:title" />
+        <meta name="twitter:description" content={CONFIG.blog.description} key="twitter:description" />
+        <meta name="twitter:image" content={`${CONFIG.blog.siteUrl}/OG_imweb_tech.png`} key="twitter:image" />
         {/*
           JSON-LD 구조화 데이터.
           - WebSite: 사이트명·별칭(검색 매칭에 핵심)·검색 액션을 명시

@@ -40,15 +40,25 @@ export default function PostPage({
   recordMap,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const ogTitle = `${post.title} — ${CONFIG.blog.title}`
+  const ogDescription = post.summary || CONFIG.blog.description
+  // og:image 는 절대 URL 이어야 슬랙·페이스북 등 파서가 안정적으로 인식.
+  // post.cover 는 노션 thumbnail 컬럼의 URL — 운영자가 절대 URL 로 박는다는 전제.
+  // 비어 있으면 사이트 디폴트 OG 이미지로 fallback.
+  const ogImage = post.cover || `${CONFIG.blog.siteUrl}/OG_imweb_tech.png`
+  const ogUrl = `${CONFIG.blog.siteUrl}/posts/${post.slug}/`
   return (
     <Layout>
       <Head>
         <title>{ogTitle}</title>
-        <meta name="description" content={post.summary || CONFIG.blog.description} />
-        <meta property="og:title" content={ogTitle} />
-        <meta property="og:description" content={post.summary || CONFIG.blog.description} />
-        {post.cover && <meta property="og:image" content={post.cover} />}
-        <meta property="og:type" content="article" />
+        <meta name="description" content={ogDescription} key="description" />
+        <meta property="og:title" content={ogTitle} key="og:title" />
+        <meta property="og:description" content={ogDescription} key="og:description" />
+        <meta property="og:type" content="article" key="og:type" />
+        <meta property="og:url" content={ogUrl} key="og:url" />
+        <meta property="og:image" content={ogImage} key="og:image" />
+        <meta name="twitter:title" content={ogTitle} key="twitter:title" />
+        <meta name="twitter:description" content={ogDescription} key="twitter:description" />
+        <meta name="twitter:image" content={ogImage} key="twitter:image" />
       </Head>
       <PostHeader post={post} />
       <PostContent recordMap={recordMap} />
