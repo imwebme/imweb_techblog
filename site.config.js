@@ -39,14 +39,14 @@ const CONFIG = {
   // external: true 면 새 탭으로 엽니다(외부 URL).
   nav: [
     { label: "글", href: "/" },
-    { label: "채용", href: "https://team.imweb.me/?utm_source=techblog&utm_medium=blog", external: true },
+    { label: "채용", href: "https://team.imweb.me/career?utm_source=techblog&utm_medium=blog", external: true },
     { label: "개발자센터", href: "https://developers.imweb.me/", external: true },
   ],
 
   // ── 외부 링크 / 푸터 ────────────────────────────────────────────────────
   social: {
     homepage: "https://imweb.me",
-    careers: "https://team.imweb.me/?utm_source=techblog&utm_medium=blog",
+    careers: "https://team.imweb.me/career?utm_source=techblog&utm_medium=blog",
     contactEmail: "tech@imweb.me",
   },
 
@@ -93,7 +93,7 @@ const CONFIG = {
   recruitCTA: {
     enabled: true, // 이벤트 끝나면 false
     label: "아임웹은 지금 채용 중! 보상금 100만 원",
-    href: "https://team.imweb.me/?utm_source=techblog&utm_medium=blog",
+    href: "https://team.imweb.me/career?utm_source=techblog&utm_medium=blog",
   },
 
   // ── 메인 페이지 이벤트 팝업 ─────────────────────────────────────────────
