@@ -70,6 +70,7 @@ imweb_techblog/
 │   │       ├── PostHeader.tsx       제목·메타·태그·커버
 │   │       ├── PostContent.tsx      <NotionRenderer /> 래핑
 │   │       ├── PostActions.tsx      공유 버튼
+│   │       ├── PostNavigation.tsx   이전/다음 글 카드 (발행일 인접)
 │   │       └── Comments.tsx         giscus 임베드 (테마 연동)
 │   │
 │   ├── lib/
@@ -203,6 +204,7 @@ Layout
 ├── PostHeader              카테고리 라벨 / 제목 / 요약 / 작성자·날짜 / 태그 칩 / 커버
 ├── PostContent             <NotionRenderer /> + dynamic Code/Collection/Equation/Modal
 ├── PostActions             공유 버튼 (Web Share API + clipboard fallback)
+├── PostNavigation          이전/다음 글 카드 (발행일 인접 기준)
 ├── Comments                giscus (활성 시, 테마 연동)
 └── Footer
      (글 상세에는 RecruitRibbon 미노출 — 홈 전용)

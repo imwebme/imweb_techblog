@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout"
 import PostHeader from "@/components/post/PostHeader"
 import PostContent from "@/components/post/PostContent"
 import PostActions from "@/components/post/PostActions"
+import PostNavigation, { type AdjacentPost } from "@/components/post/PostNavigation"
 import Comments from "@/components/post/Comments"
 import { getPostBySlug } from "@/lib/notion/getPostBySlug"
 import { getPosts } from "@/lib/notion/getPosts"
@@ -17,6 +18,8 @@ const CONFIG = require("../../../site.config")
 type Props = {
   post: TPost
   recordMap: ExtendedRecordMap
+  prev: AdjacentPost
+  next: AdjacentPost
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,12 +35,23 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const result = await getPostBySlug(slug)
   if (!result) return { notFound: true }
   const { recordMap, ...post } = result
-  return { props: { post, recordMap } }
+
+  // 인접 글 계산 — getPosts 는 최신순 반환.
+  // idx 0 이 가장 최신, idx length-1 이 가장 예전.
+  const posts = await safeAsync(() => getPosts(), [] as TPost[], `posts/${slug}/nav`)
+  const idx = posts.findIndex((p) => p.slug === slug)
+  const pickAdj = (p: TPost | undefined): AdjacentPost =>
+    p ? { slug: p.slug, title: p.title } : null
+  const next = idx > 0 ? pickAdj(posts[idx - 1]) : null // 더 최신
+  const prev = idx >= 0 && idx < posts.length - 1 ? pickAdj(posts[idx + 1]) : null // 더 예전
+  return { props: { post, recordMap, prev, next } }
 }
 
 export default function PostPage({
   post,
   recordMap,
+  prev,
+  next,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const ogTitle = `${post.title} — ${CONFIG.blog.title}`
   const ogDescription = post.summary || CONFIG.blog.description
@@ -63,6 +77,7 @@ export default function PostPage({
       <PostHeader post={post} />
       <PostContent recordMap={recordMap} />
       <PostActions post={post} />
+      <PostNavigation prev={prev} next={next} />
       <Comments />
 
       <div className="container mx-auto max-w-prose pb-24 text-sm">
