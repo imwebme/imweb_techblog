@@ -295,6 +295,22 @@ a {
   line-height: 1.7;
 }
 
+/* 노션 표 — 본문 너비에 맞춤. react-notion-x 가 컬럼별로 inline width 를 박아
+   본문을 넘치는 경우가 있어 !important 로 균등 배분. */
+.notion .notion-simple-table {
+  width: 100% !important;
+  table-layout: fixed;
+  margin: 1.5rem 0;
+}
+.notion .notion-simple-table th,
+.notion .notion-simple-table td,
+.notion .notion-simple-table-header,
+.notion .notion-simple-table-cell {
+  width: auto !important;
+  min-width: 0 !important;
+  word-break: break-word;
+}
+
 /* 구분선 */
 .notion .notion-hr {
   border-top: 1px solid var(--color-border);
