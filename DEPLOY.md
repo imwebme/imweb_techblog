@@ -67,6 +67,7 @@ npx serve out -l 4000
 
 - **빌드 단계에서 `missing user <uuid>` 경고** — 페이지의 모든 사용자 참조를 `notion.getUsers()` 로 보강하지만, 일부 케이스(권한이 부족한 사용자 ID 등)는 풀리지 않을 수 있습니다. 렌더링에 영향은 없습니다.
 - **"잠시만 기다려주세요" 화면이 표시됨** — 노션 API 호출이 retry 후에도 실패한 경우의 graceful fallback. Actions 로그의 `console.error` 흔적을 확인하고, 보통은 다음 cron(30분 이내) 또는 수동 트리거로 자연 복구됩니다.
+- **모든 노션 요청이 `403 Forbidden`** ("웹에 게시" 는 정상인데) — www.notion.so 앞단 Cloudflare 가 UA 없는 요청을 봇으로 차단하는 케이스. [`src/lib/notion/client.ts`](./src/lib/notion/client.ts) 가 브라우저 UA 를 명시해 우회하고, 빌드 산출물이 비어 있으면 [`scripts/verify-build.mjs`](./scripts/verify-build.mjs) 가 배포 전에 실패시킵니다 (2026-08-05 전 글 미노출 장애로 도입). 재발하면 UA 문자열 갱신을 먼저 시도해 보세요.
 - **빌드가 실패하며 "page not found" 같은 메시지** — 1번 단계의 "Publish to web" 가 풀려있을 가능성이 큽니다. 다시 켜주세요.
 - **글이 50건이 넘어가면** 첫 페이지만 가져올 수 있습니다. 그때는 `src/lib/notion/getPosts.ts` 에서 `notion.getCollectionData(...)` 페이지네이션을 보강해야 합니다.
 
