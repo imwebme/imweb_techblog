@@ -69,6 +69,11 @@ jobs:
           # GitHub Pages 가 Jekyll 처리를 건너뛰도록 .nojekyll 보장
           touch ./out/.nojekyll
 
+      # 노션 fetch 가 실패해도 빌드는 성공으로 끝나므로(safeAsync fallback),
+      # 글 0건짜리 사이트가 배포되는 것을 여기서 막습니다.
+      - name: Verify build (글 0건이면 배포 중단)
+        run: node scripts/verify-build.mjs
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
