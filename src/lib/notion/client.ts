@@ -1,9 +1,24 @@
 import { NotionAPI } from "notion-client"
 import type { ExtendedRecordMap } from "notion-types"
 
+// notion-client 는 요청에 User-Agent 를 붙이지 않습니다. www.notion.so 앞단의
+// Cloudflare 가 UA 없는 POST 를 봇으로 보고 403(Attention Required) 을 돌려주기
+// 때문에, 모든 요청에 브라우저 UA 를 명시합니다. (2026-08-05 전 글 미노출 장애)
+// 생성자의 ofetchOptions.headers 는 getPage / getUsers 등 모든 호출에 적용됩니다.
+const BROWSER_USER_AGENT =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
+  "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+
 // 비공식(public) Notion API 클라이언트.
 // 토큰이 필요 없으며, 노션 페이지가 "웹에 게시(Share to web)" 되어 있어야 합니다.
-const notion = new NotionAPI()
+const notion = new NotionAPI({
+  ofetchOptions: {
+    headers: {
+      "user-agent": BROWSER_USER_AGENT,
+      accept: "*/*",
+    },
+  },
+})
 
 // 컬렉션(=글 DB) 한 번에 가져오는 최대 행 수.
 // notion-client 의 reducer 기본값은 999 이지만, 비공식 API 에는 cursor 기반
