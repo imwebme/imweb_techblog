@@ -12,17 +12,23 @@ export default function PostListItem({ post }: { post: TPost }) {
       href={href}
       className="lift-card group flex sm:flex-row-reverse items-stretch overflow-hidden rounded-card bg-card shadow-card hover:shadow-card-hover"
     >
-      <div className="relative hidden sm:block w-28 sm:w-56 shrink-0 aspect-[16/10] bg-surface">
-        <CoverImage
-          src={post.cover}
-          alt={post.title}
-          title={post.title}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
-          initialsClassName="text-xl font-bold text-brand/60 tracking-tight"
-        />
-      </div>
+      {post.cover && (
+        <div className="relative hidden sm:block w-28 sm:w-56 shrink-0 aspect-[16/10] bg-surface">
+          <CoverImage
+            src={post.cover}
+            alt={post.title}
+            title={post.title}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
+            initialsClassName="text-xl font-bold text-brand/60 tracking-tight"
+          />
+        </div>
+      )}
 
-      <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 sm:gap-1.5 px-4 sm:px-5 py-5 sm:py-0">
+      <div
+        className={`flex min-w-0 flex-1 flex-col justify-center gap-0.5 sm:gap-1.5 px-4 sm:px-5 py-5 ${
+          post.cover ? "sm:py-0" : "sm:py-6"
+        }`}
+      >
         <div>
           {post.category.length > 0 && (
             <div className="mb-0 sm:mb-1 text-[11px] font-semibold tracking-wider uppercase text-brand">
