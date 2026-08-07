@@ -182,6 +182,7 @@ export const mapBlockToPost = (
       (block.created_time
         ? new Date(block.created_time).toISOString().slice(0, 10)
         : ""),
+    createdTime: block.created_time ?? 0,
     status,
     featured: pickCheckbox(block, schema, ["featured", "추천", "pinned"]),
   }

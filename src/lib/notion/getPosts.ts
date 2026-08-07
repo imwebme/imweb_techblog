@@ -76,7 +76,11 @@ export const snapshotFromRecordMap = (
   }
   const posts = allPosts
     .filter((p) => p.status === "Public" || (p.status as string) === "공개")
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    // 최신순. date 가 같은 날이면 먼저 작성된(노션 생성 시각이 이른) 글을
+    // 위로 — 같은 날 발행한 시리즈(1편/2편)가 읽기 순서대로 보이도록.
+    .sort((a, b) =>
+      a.date !== b.date ? (a.date < b.date ? 1 : -1) : a.createdTime - b.createdTime
+    )
 
   // ── categories: 스키마 정의 순서로 고정, 0건 카테고리도 노출 ──────────
   const categoryPropId = findPropId(schema, ["category", "카테고리"])

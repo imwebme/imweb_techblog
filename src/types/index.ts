@@ -18,6 +18,8 @@ export type TPost = {
   tags: string[]
   authors: TAuthor[]
   date: string // ISO 8601
+  // 노션 페이지 생성 시각 (ms epoch). date 가 같은 날일 때 정렬 tie-break 용.
+  createdTime: number
   status: TPostStatus
   featured: boolean
 }
