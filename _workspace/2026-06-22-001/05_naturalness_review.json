@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "run_id": "2026-06-22-001",
+    "reviewer": "naturalness-reviewer",
+    "genre": "기술 블로그 (엔지니어링 회고/설명체, 격식체 ~습니다)",
+    "rewrite_intervention": "매우 보수적 — 쉼표 6곳 제거 외 단어 치환·어순 변경·삽입·종결어미 변경 0건",
+    "change_rate_char": 0.082,
+    "change_rate_note": "원문 7337자 대비 6자(쉼표 6개) 감소. 어휘·구조 변경 전무. humanize 변경률 권장범위(5~30%) 하한 한참 아래 — 의도적 초보수 윤문이며 원문 자체가 사람 손이 많이 간 글이라 정상.",
+    "score_before": 8.0,
+    "score_after": 4.0,
+    "score_improvement_pct": 50.0,
+    "score_improvement_note": "severity_weighted_score 8.0 → 4.0. 절대 점수가 원래 매우 낮아(원문이 이미 자연스러움) 50% 하락이 A등급 임계(70%)에 미달하나, 이는 원문의 낮은 베이스라인 때문이지 윤문 부실이 아님. 잔존 절대량(S2 2건, S1 0건)이 핵심 지표.",
+    "s1_residual": 0,
+    "s2_residual": 2,
+    "over_polish_signals": [],
+    "over_polish_note": "전 6개 edit이 순수 쉼표 삭제. 문학화·장르이탈·구어화·리듬 과조작·어휘 바꿔치기 신호가 구조적으로 발생 불가능. 격식체 ~습니다 계열 133회 보존, ~해요/~네요 0건.",
+    "naturalness_qualitative": "조사·어미 자연. 문단 흐름·인과 연결 끊김 없음. 읽을 때 걸리는 어순·비문 없음. 쉼표 제거 6곳 모두 한국어 호흡상 더 매끄러워짐(역접 -지만/-는데는 연결어미 자체가 호흡 단위라 쉼표가 잉여였음).",
+    "verdict": "accept_with_note",
+    "quality_level": "B",
+    "quality_level_reason": "S1 0건·과윤문 0신호로 A의 자연도 요건은 충족하나, (1) score 개선 50%로 A의 70% 미달, (2) 손쉽게 제거 가능한 진성 C-11 잔존 1건이 남아 B로 한 단계 보류. 2차 윤문 강제 트리거(S1 잔존 또는 S2 4건+)에는 해당 없음 → accept 계열 유지."
+  },
+  "residual_findings": [
+    {
+      "id": "r001",
+      "category": "C-11",
+      "severity": "S2",
+      "scope": "span",
+      "text_span": "챙겨야 하지만,",
+      "location": "본문 문단 '판단과 실행을 나눴습니다' 마지막 문장 (rewrite 29행)",
+      "context": "경계를 두뇌에 두면 새 진입로가 생길 때마다 검증을 다시 챙겨야 하지만, 데이터 앞에 두면 한 번만 단단히 지키면 됩니다.",
+      "reason": "윤문본에 유일하게 잔존한 진성 C-11. 원본 02_detection.json의 ~지만, 6건 중 5건과 ~는데, 1건은 제거됐으나, 이 1건(원본 off~1867, 29행)은 윤문 범위에서 누락돼 그대로 남음. 역접 -지만 직후 쉼표는 영어 comma-after-conjunction 잔흔으로 taxonomy 단일 최강 분리도(4.84배) 지표. 단 전체 1회 출현이라 보수적 S2.",
+      "action": "round_2_target_optional",
+      "suggested_fix": "쉼표 1개 제거: '~검증을 다시 챙겨야 하지만 데이터 앞에 두면 한 번만 단단히 지키면 됩니다.' (다른 5건과 동일 처리. 의미·구조 불변, 1글자 삭제)"
+    },
+    {
+      "id": "r002",
+      "category": "C-11",
+      "severity": "S2",
+      "scope": "document",
+      "text_span": "병렬 연결어미 '~고,' 누적",
+      "reason": "'~고,' 29회. 한국어 관용이라 개별 무해하나 3항목 연속 체인이 일부 잔존. 원본에도 동일 존재했고 이번 보수 윤문 범위 밖이었음. C-12 쉼표포함률 0.38(<0.50 임계)이라 단독 finding은 아니며, 잔향 수준. 자연도에 실질 악영향 없음.",
+      "action": "none",
+      "suggested_fix": "(선택) 3항목 연속 체인 1~2곳만 마지막 항목을 '~며'·'그리고'로 변주. 필수 아님 — 과윤문 위험 고려 시 미적용 권장."
+    }
+  ],
+  "over_polish_findings": [],
+  "unclassified_candidates": [],
+  "axis_summary": {
+    "axis_1_ai_tell_residual": "PASS — S1 0건, S2 2건(임계 3건 이하), weighted_score 8.0→4.0. 절대 잔존 미미.",
+    "axis_2_over_polish": "PASS — 6개 edit 전부 순수 쉼표 삭제. 과윤문 신호 0/5.",
+    "axis_3_korean_naturalness": "PASS — 조사·어미 자연, 흐름 끊김·비문 없음, 쉼표 제거가 호흡을 오히려 개선."
+  },
+  "next_action": {
+    "type": "accept_with_note",
+    "targets": ["r001"],
+    "note": "현 윤문본을 최종 출력으로 승인하되 잔존 1건(r001, 29행 '하지만,')을 기록. 완벽주의 차원에서 쉼표 1개를 추가 제거하면 A등급(잔존 ~지만, 0건) 도달 가능하나, 전체 자연도·내용 무결성에는 영향 없어 현 상태로도 출고 가능.",
+    "round_2_required": false,
+    "rollback_required": false,
+    "human_review_required": false
+  }
+}

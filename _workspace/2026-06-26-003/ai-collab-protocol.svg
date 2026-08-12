@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="560" viewBox="0 0 680 560" role="img">
+<title>AI 협업 프로토콜로 preStop 값을 정한 라운드</title>
+<desc>AI A가 일반론으로 60~90초를 추정하자 AI B가 반박해 개발 환경에서 실측했고, 최악 전파 9.5초를 잰 뒤 사람이 2배 마진을 붙여 20초로 확정한 흐름과, 추정·실측·확정을 나란히 놓은 비교 축.</desc>
+<style>
+text{font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Helvetica Neue',sans-serif;fill:#1a1a1a;}
+.t{font-size:15px;font-weight:500;}
+.ts{font-size:12.5px;font-weight:400;fill:#333333;}
+</style>
+<defs>
+<marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#777777"/></marker>
+</defs>
+
+<rect x="0" y="0" width="680" height="560" fill="#ffffff"/>
+
+<text class="t" x="40" y="34">AI 협업 프로토콜 · preStop 값을 정한 라운드</text>
+
+<rect x="64" y="58" width="244" height="66" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<text class="t" x="186" y="86" text-anchor="middle">AI A · 추정</text>
+<text class="ts" x="186" y="106" text-anchor="middle">일반론상 60~90초 필요</text>
+
+<rect x="372" y="58" width="244" height="66" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text class="t" x="494" y="86" text-anchor="middle">AI B · 반박·검증</text>
+<text class="ts" x="494" y="106" text-anchor="middle">근거는? 실측하자</text>
+
+<line x1="312" y1="80" x2="366" y2="80" stroke="#777777" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="368" y1="104" x2="314" y2="104" stroke="#777777" stroke-width="1.5" marker-end="url(#ah)"/>
+
+<line x1="186" y1="126" x2="300" y2="164" stroke="#777777" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="494" y1="126" x2="380" y2="164" stroke="#777777" stroke-width="1.5" marker-end="url(#ah)"/>
+
+<rect x="195" y="168" width="290" height="66" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text class="t" x="340" y="196" text-anchor="middle">개발 환경에서 실측</text>
+<text class="ts" x="340" y="216" text-anchor="middle">실제 전파 최악 9.5초</text>
+
+<line x1="340" y1="234" x2="340" y2="266" stroke="#777777" stroke-width="1.5" marker-end="url(#ah)"/>
+
+<rect x="195" y="270" width="290" height="60" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text class="t" x="340" y="296" text-anchor="middle">사람 판정</text>
+<text class="ts" x="340" y="316" text-anchor="middle">실측의 2배 마진</text>
+
+<line x1="340" y1="330" x2="340" y2="362" stroke="#777777" stroke-width="1.5" marker-end="url(#ah)"/>
+
+<rect x="195" y="366" width="290" height="54" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text class="t" x="340" y="398" text-anchor="middle">확정 · preStop = 20초</text>
+
+<text class="ts" x="40" y="452">추정 vs 실측 vs 확정</text>
+
+<rect x="430" y="482" width="180" height="14" rx="3" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
+<text class="ts" x="520" y="478" text-anchor="middle">추정 60~90초</text>
+
+<line x1="70" y1="499" x2="610" y2="499" stroke="#999999" stroke-width="1.5"/>
+<text class="ts" x="70" y="518" text-anchor="middle">0초</text>
+<text class="ts" x="610" y="518" text-anchor="middle">90초</text>
+
+<line x1="127" y1="491" x2="127" y2="507" stroke="#0F6E56" stroke-width="2.5"/>
+<text class="ts" x="127" y="478" text-anchor="middle">실측 9.5초</text>
+
+<line x1="190" y1="491" x2="190" y2="507" stroke="#185FA5" stroke-width="2.5"/>
+<text class="ts" x="190" y="533" text-anchor="middle">확정 20초</text>
+
+<text class="ts" x="40" y="552">측정이 추정을 이긴다. 갈라지는 지점만 사람이 판정.</text>
+</svg>
