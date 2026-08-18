@@ -38,3 +38,7 @@ next-env.d.ts
 
 # claude code local session state
 .claude/
+
+# 스킬·에이전트 작업 산출물 (글 초안·중간 결과물). 로컬 전용.
+_workspace/
+drafts/
