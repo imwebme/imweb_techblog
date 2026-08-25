@@ -4,12 +4,19 @@ import "katex/dist/katex.min.css"
 import "@/styles/globals.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { withBasePath } from "@/lib/utils/withBasePath"
 import Analytics from "@/components/common/Analytics"
 
 const CONFIG = require("../../site.config")
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+  // canonical — 쿼리스트링(UTM 등)이 붙은 URL 이 별개 문서로 색인되는 걸 막는다.
+  // 글 상세는 자기 URL 을 알고 있어 같은 key 로 이 값을 덮어쓴다(next/head 는 key 로 중복 제거).
+  const canonicalPath = router.asPath.split(/[?#]/)[0]
+  const canonicalUrl = `${CONFIG.blog.siteUrl.replace(/\/$/, "")}${canonicalPath}`
+
   return (
     <>
       <Head>
@@ -19,6 +26,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="google-site-verification" content="eIlyGmoKucsv01nHB9zAG-U1tdvXMuV5hWL8bU6z_fo" />
         <title>{CONFIG.blog.title}</title>
         <meta name="description" content={CONFIG.blog.description} key="description" />
+        <link rel="canonical" href={canonicalUrl} key="canonical" />
         <link rel="icon" type="image/png" href={withBasePath("/imweb_Favicon_512_512.png")} />
         <link rel="apple-touch-icon" href={withBasePath("/imweb_Favicon_512_512.png")} />
         <link

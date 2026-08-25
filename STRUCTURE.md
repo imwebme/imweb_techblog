@@ -102,7 +102,7 @@ imweb_techblog/
 │   └── types/index.ts               TPost / TAuthor / TPostStatus
 │
 ├── scripts/
-│   └── build-feed-and-sitemap.ts    postbuild — RSS/Atom/sitemap 생성
+│   └── build-feed-and-sitemap.ts    postbuild — RSS/Atom/sitemap + 옛 슬러그 리다이렉트 스텁 생성
 ├── .github/workflows/deploy.yml     CI: build + Pages 배포
 ├── next.config.js                   output: "export", basePath, image config
 ├── tailwind.config.js               컬러/타이포/easing 토큰
@@ -133,6 +133,13 @@ imweb_techblog/
 | `/feed.xml` | RSS 2.0 (최근 20개 글) |
 | `/atom.xml` | Atom 1.0 |
 | `/sitemap.xml` | 모든 페이지 + 글 목록 |
+| `/posts/<옛슬러그>/` | 리다이렉트 스텁 — `site.config.js` 의 `seo.slugAliases` 기준 생성 |
+
+**옛 슬러그 리다이렉트**: 정적 배포(GitHub Pages)라 서버 301 을 쓸 수 없어, 옛 경로에
+`canonical` + `meta refresh` + `location.replace` 를 담은 스텁 HTML 을 만들어 대신합니다.
+canonical 이 검색엔진에 정본 위치를 알려 링크 신호를 새 글로 넘기고, refresh 가 실제 방문자를
+옮깁니다. `noindex` 는 일부러 넣지 않습니다 — canonical 과 신호가 충돌해 통합이 아니라
+색인 삭제로 처리될 수 있기 때문입니다. 대상 글이 없거나 살아있는 슬러그와 겹치면 건너뛰고 경고합니다.
 
 외부 링크 (네비):
 - 채용 → https://career.imweb.me
@@ -240,7 +247,7 @@ flowchart TB
   A["GitHub Actions<br/>(deploy.yml)"]
   I["npm ci"]
   B["next build<br/>(출력: ./out)"]
-  PB["postbuild<br/>(feed/sitemap 생성)"]
+  PB["postbuild<br/>(feed/sitemap/리다이렉트 스텁 생성)"]
   AR["upload-pages-artifact"]
   D["deploy-pages"]
   GH["https://tech.imweb.me/"]
@@ -311,7 +318,7 @@ flowchart TB
 
 | 파일 | 책임 |
 |---|---|
-| **`site.config.js`** | 블로그명, `alternateNames` (SEO 별칭), 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), GA4(analytics), `siteUrl` (RSS·sitemap·OG·JSON-LD 절대 URL 기준) |
+| **`site.config.js`** | 블로그명, `alternateNames` (SEO 별칭), 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), GA4(analytics), `seo.slugAliases` (옛 슬러그 → 새 슬러그 리다이렉트), `siteUrl` (RSS·sitemap·OG·JSON-LD 절대 URL 기준) |
 | `next.config.js` | basePath (CNAME 있으면 ""; 없으면 `/imweb_techblog` 폴백 — `??` 로 빈 문자열 보존), 정적 export, image unoptimized |
 | `public/CNAME` | 커스텀 도메인 (`tech.imweb.me`). 이 파일이 있으면 `configure-pages` 가 basePath 를 비웁니다 |
 | `tailwind.config.js` | 컬러/타이포/이징 토큰 → Tailwind 유틸로 노출 |
@@ -326,5 +333,6 @@ flowchart TB
 | 1 | 노션 신형 attachment 이미지 (`attachment:...`) 가 비공식 API 로 안 풀림 | `public/post-images/` 직접 호스팅 + 노션 thumbnail 에 사이트 URL (`https://tech.imweb.me/post-images/<파일명>`) 임베드 |
 | 2 | 검색이 본문은 포함하지 않음 | 제목/요약/카테고리/태그 substring 만 |
 | 3 | dev 의 `getStaticPaths` 캐시 | 노션에 새 글 추가 후 dev 서버 재시작 |
+| 4 | 정적 배포라 서버 301 리다이렉트 불가 | 슬러그를 바꿨으면 `site.config.js` 의 `seo.slugAliases` 에 옛 슬러그를 등록 — 빌드가 canonical+meta refresh 스텁을 생성 |
 
 > ※ "글 다수 시 누락" 은 `collectionReducerLimit`(client.ts) 로 전량 수집하도록 해결됨. 화면 목록은 `PostGrid` 가 9개/페이지로 나눠 보여줍니다(데이터 페치와 별개).

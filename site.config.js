@@ -13,6 +13,26 @@ const CONFIG = {
     siteUrl: "https://tech.imweb.me",
   },
 
+  // ── SEO ─────────────────────────────────────────────────────────────────
+  seo: {
+    // 슬러그를 바꾼 글의 "옛 슬러그 → 새 슬러그" 매핑.
+    //
+    // 정적 배포(GitHub Pages)라 서버 301 을 쓸 수 없으므로, 빌드 시 옛 경로에
+    // canonical + meta refresh 스텁 페이지를 생성해 리다이렉트를 대신합니다.
+    // 이렇게 해야 이미 공유된 링크(링크드인 등)와 검색 색인이 404 로 끊기지 않고
+    // 새 글로 이어집니다.
+    //
+    // 경로가 아니라 "슬러그"만 적습니다. (예: /posts/foo/ → "foo")
+    // 대상 슬러그가 없거나 살아있는 글과 이름이 겹치면 빌드 시 건너뛰고 경고합니다.
+    slugAliases: {
+      // 2026-07-21 개명 — 슬러그·제목 동시 변경
+      "legacy-to-verifiable-stage": "build-stage-ai-native",
+      "eks-11-clusters-upgrade": "eks-11clusters-upgrade",
+      // 오타 슬러그로 공유된 링크 구제
+      "eks-11-clusters-upgrad": "eks-11clusters-upgrade",
+    },
+  },
+
   // ── 브랜드 컬러 ─────────────────────────────────────────────────────────
   // 차분한 흑백 + 강한 포커스 블루.
   brand: {

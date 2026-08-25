@@ -60,11 +60,42 @@ export default function PostPage({
   // 비어 있으면 사이트 디폴트 OG 이미지로 fallback.
   const ogImage = post.cover || `${CONFIG.blog.siteUrl}/OG_imweb_tech.png`
   const ogUrl = `${CONFIG.blog.siteUrl}/posts/${post.slug}/`
+
+  // 글 단위 구조화 데이터. 사이트 전역(_app)의 WebSite/Organization 과 달리
+  // 작성자·발행일·이미지를 명시해 검색 결과에서 글로 인식되게 한다.
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: ogDescription,
+    url: ogUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": ogUrl },
+    image: [ogImage],
+    datePublished: post.date,
+    dateModified: post.date,
+    inLanguage: CONFIG.blog.language,
+    author:
+      post.authors.length > 0
+        ? post.authors.map((a) => ({ "@type": "Person", name: a.name }))
+        : [{ "@type": "Organization", name: CONFIG.blog.author }],
+    publisher: {
+      "@type": "Organization",
+      name: CONFIG.company.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${CONFIG.blog.siteUrl}/Logo_ImwebTech_black.svg`,
+      },
+    },
+    ...(post.category.length > 0 && { articleSection: post.category }),
+    ...(post.tags.length > 0 && { keywords: post.tags.join(", ") }),
+  }
+
   return (
     <Layout>
       <Head>
         <title>{ogTitle}</title>
         <meta name="description" content={ogDescription} key="description" />
+        <link rel="canonical" href={ogUrl} key="canonical" />
         <meta property="og:title" content={ogTitle} key="og:title" />
         <meta property="og:description" content={ogDescription} key="og:description" />
         <meta property="og:type" content="article" key="og:type" />
@@ -73,6 +104,10 @@ export default function PostPage({
         <meta name="twitter:title" content={ogTitle} key="twitter:title" />
         <meta name="twitter:description" content={ogDescription} key="twitter:description" />
         <meta name="twitter:image" content={ogImage} key="twitter:image" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+        />
       </Head>
       <PostHeader post={post} />
       <PostContent recordMap={recordMap} />
