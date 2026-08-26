@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react"
 // 호출처는 호출하는 카드/박스의 sizing 만 부모 컨테이너에서 잡으면 되고,
 // 글마다 다른 이니셜 크기는 initialsClassName 로 주입합니다.
 const DEFAULT_PLACEHOLDER_CLASS =
-  "flex h-full w-full items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF] dark:from-[#1b2330] dark:to-[#161d27]"
+  "flex h-full w-full items-center justify-center bg-gradient-to-br from-[#EAF2FF] to-[#DDE8FF]"
 
 type CoverImageProps = {
   src?: string | null

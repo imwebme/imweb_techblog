@@ -8,7 +8,7 @@ type ViewMode = "grid" | "list"
 // 한 페이지에 보여줄 글 수. 이 수를 넘으면 페이지네이션이 노출됩니다.
 const PAGE_SIZE = 9
 // 사용자가 마지막에 고른 뷰 모드는 localStorage 에 영구 저장.
-// 첫 페인트는 'list' 디폴트 → useEffect 에서 저장값으로 갱신 (useTheme 와 동일 패턴).
+// 첫 페인트는 'list' 디폴트 → useEffect 에서 저장값으로 갱신 (hydration mismatch 회피).
 const VIEW_STORAGE_KEY = "postViewMode"
 
 // 본문 영역의 포스트 리스트. 그리드/리스트 토글 + 페이지네이션 지원.

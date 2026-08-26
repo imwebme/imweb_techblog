@@ -26,25 +26,6 @@
   color-scheme: light;
 }
 
-/* ── 다크 테마 팔레트 (<html class="dark">) ──────────────────────────────── */
-.dark {
-  --color-bg: #0f1115;
-  --color-card: #181b20;
-  --color-surface: #1f242b;
-  --color-text: #e7eaee;
-  --color-subtext: #a7b0bc;
-  --color-muted: #6b7480;
-  --color-border: #2a2f37;
-  /* 브랜드 블루는 다크에서도 가독성이 좋아 그대로 유지 */
-  --color-brand: #3182f6;
-  --color-brand-dark: #1b64da;
-  --color-header-bg: rgba(15, 17, 21, 0.8);
-
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.35);
-  --shadow-card-hover: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 32px rgba(0, 0, 0, 0.45);
-  color-scheme: dark;
-}
-
 /* ── 베이스 ──────────────────────────────────────────────────────────────── */
 html,
 body {
@@ -329,11 +310,3 @@ a {
   margin-top: 0.5rem;
 }
 
-/* 다크 모드 전용 본문 보정 */
-.dark .notion .notion-callout {
-  background: rgba(49, 130, 246, 0.12);
-  border-color: rgba(49, 130, 246, 0.28);
-}
-.dark .notion .notion-inline-code {
-  color: #ff8faa;
-}

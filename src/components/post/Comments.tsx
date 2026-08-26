@@ -1,5 +1,4 @@
 import Giscus from "@giscus/react"
-import { useTheme } from "@/lib/useTheme"
 
 const CONFIG = require("../../../site.config")
 
@@ -7,7 +6,6 @@ const CONFIG = require("../../../site.config")
 // 설정이 비어있으면 아무것도 렌더링하지 않습니다.
 // site.config.js 의 comments.giscus 참고.
 export default function Comments() {
-  const [theme] = useTheme()
   const g = CONFIG.comments?.giscus
   if (!g?.enabled || !g.repoId || !g.categoryId) return null
 
@@ -26,7 +24,7 @@ export default function Comments() {
         reactionsEnabled={g.reactionsEnabled || "1"}
         emitMetadata="0"
         inputPosition={g.inputPosition || "bottom"}
-        theme={theme === "dark" ? "dark" : "light"}
+        theme="light"
         lang={g.lang || "ko"}
         loading="lazy"
       />

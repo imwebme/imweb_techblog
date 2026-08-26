@@ -21,7 +21,6 @@
 | Framework | **Next.js 14** (`output: "export"` 로 정적 export) |
 | 언어 | TypeScript + React 18 |
 | 스타일 | Tailwind CSS + CSS 변수 토큰 (`globals.css`) |
-| 테마 | **라이트/다크 모드** (`darkMode: "class"` + CSS 변수, 토글 + OS 추종) |
 | 폰트 | Pretendard (한글) |
 | 데이터 | **notion-client** (비공식 Notion API) |
 | 본문 렌더 | **react-notion-x** + Prism (코드) + KaTeX (수식) |
@@ -38,7 +37,6 @@ imweb_techblog/
 ├── public/
 │   ├── banner_official_2400_405.png 메인 상단 슬로건 배너 (2400×405, 5.92:1)
 │   ├── Logo_ImwebTech_black.svg      헤더 로고 (라이트 모드)
-│   ├── Logo_ImwebTech_white.svg      헤더 로고 (다크 모드)
 │   ├── imweb_Favicon_512_512.png    favicon (512×512)
 │   ├── symbol.webp                  (옛 favicon, 미사용 — 정리 예정)
 │   ├── symbol_white.png             흰색 심볼 (채용 CTA 구분자)
@@ -55,14 +53,13 @@ imweb_techblog/
 │   │   │   └── Analytics.tsx        GA4 — gtag 로드(전수) + 라우트 변경 시 page_view
 │   │   ├── home/
 │   │   │   ├── Banner.tsx           메인 상단 고정 배너
-│   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글)
+│   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글; 태그는 상위 12개만)
 │   │   │   ├── PostGrid.tsx         글 목록 + 그리드/리스트 뷰 토글 + 페이지네이션(9개/페이지)
 │   │   │   ├── PostCard.tsx           ↳ 그리드 뷰의 카드 (썸네일 16:10)
 │   │   │   ├── PostListItem.tsx       ↳ 리스트 뷰의 행 (썸네일 16:10, 카드에 flush, sm+ 우측 배치, <sm 은 썸네일 숨김)
 │   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글, 선택적 상단 배너 이미지 — 비율 자동)
 │   │   ├── layout/
-│   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 + 테마 토글 (<sm 은 햄버거+검색바)
-│   │   │   ├── ThemeToggle.tsx      라이트/다크 전환 버튼
+│   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 (<sm 은 햄버거+검색바)
 │   │   │   ├── RecruitRibbon.tsx    채용 CTA 하단 고정 LED 마퀴 (홈 `/` 에서만, recruitCTA 토글)
 │   │   │   ├── Footer.tsx           메뉴 + 회사 정보 + 저작권 (좁은 화면 2열)
 │   │   │   └── Layout.tsx           페이지 wrapper
@@ -85,7 +82,6 @@ imweb_techblog/
 │   │   │   ├── slugify.ts           제목 → URL slug
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
-│   │   ├── useTheme.ts              라이트/다크 테마 훅 (토글·localStorage, 기본 라이트)
 │   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
 │   │
 │   ├── pages/
@@ -98,7 +94,7 @@ imweb_techblog/
 │   │   ├── tags.tsx                 태그 목록
 │   │   └── posts/[slug].tsx         글 상세
 │   │
-│   ├── styles/globals.css           Tailwind base + CSS 변수 팔레트(:root/.dark) + .notion 본문 스타일 + .chip 등
+│   ├── styles/globals.css           Tailwind base + CSS 변수 팔레트(:root) + .notion 본문 스타일 + .chip 등
 │   └── types/index.ts               TPost / TAuthor / TPostStatus
 │
 ├── scripts/
@@ -187,11 +183,11 @@ flowchart LR
 
 ```
 Layout
-├── Header                  로고(SVG) / 네비(또는 햄버거+검색바, <sm) / 검색 / 테마 토글
+├── Header                  로고(SVG) / 네비(또는 햄버거+검색바, <sm) / 검색
 ├── EventPopup              메인 전용 이벤트 홍보 모달 (eventPopup 활성 시)
 ├── HomePage
 │   ├── Banner              상단 슬로건 이미지
-│   ├── Sidebar             카테고리 / 태그 필터
+│   ├── Sidebar             카테고리 / 태그 필터 (태그 상위 12개 + '전체 태그' 링크)
 │   │   ├── DesktopFilters  (lg+) sticky 좌측 vertical 리스트
 │   │   └── NarrowFilters   (< lg) 토글 + 2컬럼 칩
 │   └── PostGrid            글 목록 + 페이지네이션
@@ -274,30 +270,24 @@ flowchart TB
 
 ### 컬러 / 토큰 (`globals.css`)
 
-색상은 모두 CSS 변수로, `:root`(라이트)와 `.dark`(다크) 두 블록에서 값만 전환합니다. Tailwind 의 `ink/surface/line/base/card` 색상이 이 변수를 참조하므로 컴포넌트는 그대로 두고 변수만 바꾸면 됩니다.
+색상은 모두 `:root` 의 CSS 변수로 정의합니다. Tailwind 의 `ink/surface/line/base/card` 색상이 이 변수를 참조하므로 컴포넌트는 그대로 두고 변수만 바꾸면 됩니다.
 
-| 토큰 | 라이트 | 다크 | 용도 |
-|---|---|---|---|
-| `--color-brand` | `#3182F6` | `#3182F6` | 포커스 / 강조 (공통) |
-| `--color-bg` | `#FFFFFF` | `#0F1115` | 페이지 배경 (`bg-base`) |
-| `--color-card` | `#FFFFFF` | `#181B20` | 카드/입력 표면 (`bg-card`) |
-| `--color-surface` | `#F9FAFB` | `#1F242B` | 칩/보조 배경 (`bg-surface`) |
-| `--color-text` | `#191F28` | `#E7EAEE` | 본문 (`text-ink-900`) |
-| `--color-subtext` | `#4E5968` | `#A7B0BC` | 보조 (`text-ink-700`) |
-| `--color-border` | `#E5E8EB` | `#2A2F37` | 구분선 (`border-line`) |
-| `--ease-smooth` | `cubic-bezier(0.16, 1, 0.3, 1)` | — | hover/transition |
-
-### 다크 모드
-
-- `tailwind.config.js` → `darkMode: "class"`. `<html class="dark">` 여부로 전환.
-- `_document.tsx` 의 인라인 스크립트가 페인트 전에 `localStorage.theme` 을 읽어 클래스를 주입 → **FOUC 방지**. 저장값이 `dark` 일 때만 다크로 시작(**기본 라이트**).
-- `ThemeToggle` + `useTheme()` 가 토글/저장/구독 담당. 헤더 로고(black/white SVG)와 giscus 테마가 모드에 따라 자동 전환.
+| 토큰 | 값 | 용도 |
+|---|---|---|
+| `--color-brand` | `#3182F6` | 포커스 / 강조 |
+| `--color-bg` | `#FFFFFF` | 페이지 배경 (`bg-base`) |
+| `--color-card` | `#FFFFFF` | 카드/입력 표면 (`bg-card`) |
+| `--color-surface` | `#F9FAFB` | 칩/보조 배경 (`bg-surface`) |
+| `--color-text` | `#191F28` | 본문 (`text-ink-900`) |
+| `--color-subtext` | `#4E5968` | 보조 (`text-ink-700`) |
+| `--color-border` | `#E5E8EB` | 구분선 (`border-line`) |
+| `--ease-smooth` | `cubic-bezier(0.16, 1, 0.3, 1)` | hover/transition |
 
 ### 재사용 클래스
 
 | 클래스 | 사용처 |
 |---|---|
-| `.notion` 하위 | 본문(react-notion-x) 블록 — 콜아웃/인용구/제목/코드 등을 톤앤매너로 재정의 (라이트/다크 대응) |
+| `.notion` 하위 | 본문(react-notion-x) 블록 — 콜아웃/인용구/제목/코드 등을 톤앤매너로 재정의 |
 | `.lift-card` | 카드 hover 시 그림자 + Y -4px |
 | `.chip` | 태그/카테고리 칩 (`.is-active` 로 활성) |
 | `.cta-marquee-track` / `.cta-led` / `.cta-led-logo` | 채용 CTA LED 전광판 — 좌→우 흐름 + 파란 네온 글로우 (`prefers-reduced-motion` 시 정지) |

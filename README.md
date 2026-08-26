@@ -9,7 +9,7 @@ Notion 을 CMS 로 사용하는 정적 사이트. GitHub Pages 로 배포됩니�
 **콘텐츠 (Notion 기반)**
 
 - **notion-client** — 비공식 Notion API, 토큰 불필요. DB 가 "웹에 게시" 만 되어 있으면 빌드 시 자동 페치 (개수 제한 없음)
-- **react-notion-x** — 코드·콜아웃·이미지·수식 렌더링. 본문 톤앤매너 커스텀 (`globals.css`, 라이트/다크 대응)
+- **react-notion-x** — 코드·콜아웃·이미지·수식 렌더링. 본문 톤앤매너 커스텀 (`globals.css`)
 - **검색** — 제목·요약·카테고리·태그 substring (`/search?q=...`)
 - **graceful fallback** — 노션 5xx 자동 재시도, 영구 실패 시 "잠시만 기다려주세요" 안내. 썸네일 미설정·404 시 이니셜 그라데이션 placeholder
 
@@ -19,8 +19,8 @@ Notion 을 CMS 로 사용하는 정적 사이트. GitHub Pages 로 배포됩니�
 - **썸네일** — 그리드·리스트 모두 16:10 flush, 리스트는 sm 이상에서 우측 배치
 - **페이지네이션** — 9개/페이지, 필터 변경 시 1페이지로 초기화. 목록은 발행일 최신순, 같은 날 발행 글은 먼저 작성한 글이 위 (시리즈 읽기 순서 유지)
 - **상태 기억** — 카테고리·태그 필터는 URL 쿼리(`?category=...&tag=...`)에 동기화돼 글 진입 후 뒤로가기로 돌아와도 복원. 그리드/리스트 뷰 모드는 `localStorage` 에 영구 저장
+- **태그 노출** — 사이드바에는 많이 쓰인 상위 12개만. 나머지는 `/tags/` 페이지로 (`TAG_DISPLAY_LIMIT`)
 - **반응형 헤더** — `< 640px` 햄버거 메뉴 + 검색바, 그 외 인라인 네비
-- **다크모드** — 헤더 토글, 기본 라이트, `localStorage` 기억. 로고·giscus 댓글 테마 자동 연동
 - **댓글 / 공유** — giscus (GitHub Discussions 기반) / Web Share API + 클립보드 fallback
 - **이전·다음 글 내비** — 글 하단에 발행일 인접 기준 좌·우 카드로 이어보기 동선 제공
 
@@ -79,8 +79,8 @@ npm run lint
 |---|---|
 | [`site.config.js`](./site.config.js) | 사이트 메타·네비·회사 정보·노션 DB·giscus·recruitCTA·eventPopup·analytics·alternateNames·seo.slugAliases |
 | [`tailwind.config.js`](./tailwind.config.js) | 컬러·타이포·이징 토큰 |
-| [`src/styles/globals.css`](./src/styles/globals.css) | 본문/카드/칩/마퀴/팝업 스타일 + CSS 변수 팔레트 (`:root`/`.dark`) |
-| [`public/Logo_ImwebTech_*.svg`](./public/) | 헤더 로고 (라이트=검정 / 다크=흰색) |
+| [`src/styles/globals.css`](./src/styles/globals.css) | 본문/카드/칩/마퀴/팝업 스타일 + CSS 변수 팔레트 (`:root`) |
+| [`public/Logo_ImwebTech_black.svg`](./public/) | 헤더 로고 |
 | [`public/OG_imweb_tech.png`](./public/) | OG 기본 이미지 |
 
 ## 배포

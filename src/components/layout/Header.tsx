@@ -2,7 +2,6 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState, useEffect, useRef, FormEvent } from "react"
 import { withBasePath } from "@/lib/utils/withBasePath"
-import ThemeToggle from "./ThemeToggle"
 
 const CONFIG = require("../../../site.config")
 
@@ -72,18 +71,11 @@ export default function Header() {
           className="flex items-center"
           aria-label={CONFIG.blog.title}
         >
-          {/* 라이트=검정, 다크=흰색 로고 자동 전환 */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={withBasePath("/Logo_ImwebTech_black.svg")}
             alt={CONFIG.blog.title}
-            className="h-7 w-auto dark:hidden"
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={withBasePath("/Logo_ImwebTech_white.svg")}
-            alt={CONFIG.blog.title}
-            className="h-7 w-auto hidden dark:block"
+            className="h-7 w-auto"
           />
         </Link>
 
@@ -154,8 +146,6 @@ export default function Header() {
               )}
             </svg>
           </button>
-
-          <ThemeToggle />
         </div>
       </div>
 

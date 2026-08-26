@@ -3,7 +3,6 @@ const CONFIG = require("./site.config")
 
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class",
   theme: {
     container: {
       center: true,
@@ -28,7 +27,7 @@ module.exports = {
           dark: CONFIG.brand.primaryDark,
           accent: CONFIG.brand.accent,
         },
-        // 시맨틱 색상은 CSS 변수로 → globals.css 의 :root / .dark 에서 값 전환
+        // 시맨틱 색상은 CSS 변수로 → globals.css 의 :root 에서 값 정의
         ink: {
           900: "var(--color-text)",
           700: "var(--color-subtext)",
