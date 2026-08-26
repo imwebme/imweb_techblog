@@ -55,6 +55,16 @@ const pickSelect = (
   return text || null
 }
 
+// multi-select 값 파싱.
+//
+// 노션에서 옵션을 삭제해도 이미 그 값을 쓰던 페이지의 속성에는 raw 문자열이
+// 그대로 남습니다. 노션 UI 는 옵션에 없는 값을 숨기지만 비공식 API 는 raw 를
+// 그대로 주기 때문에, 걸러내지 않으면 운영자가 지운 태그·카테고리가 사이트에
+// 유령처럼 계속 노출됩니다. 스키마의 옵션 목록을 단일 진실 원천으로 삼아
+// 정의되지 않은 값은 버립니다.
+//
+// 단, 옵션 목록을 못 읽은 경우(스키마 형태가 바뀌는 등)에는 필터를 적용하지
+// 않습니다 — 전체 태그가 한꺼번에 사라지는 쪽이 유령 하나보다 훨씬 위험합니다.
 const pickMultiSelect = (
   block: any,
   schema: any,
@@ -62,10 +72,19 @@ const pickMultiSelect = (
 ): string[] => {
   const text = pickText(block, schema, names)
   if (!text) return []
-  return text
+  const values = text
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean)
+
+  const propId = findPropId(schema, names)
+  const options: { value?: string }[] = propId
+    ? schema[propId]?.options || []
+    : []
+  if (options.length === 0) return values
+
+  const defined = new Set(options.map((o) => o.value).filter(Boolean))
+  return values.filter((v) => defined.has(v))
 }
 
 const pickDate = (block: any, schema: any, names: string[]): string => {
