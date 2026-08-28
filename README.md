@@ -9,7 +9,7 @@ Notion 을 CMS 로 사용하는 정적 사이트. GitHub Pages 로 배포됩니�
 **콘텐츠 (Notion 기반)**
 
 - **notion-client** — 비공식 Notion API, 토큰 불필요. DB 가 "웹에 게시" 만 되어 있으면 빌드 시 자동 페치 (개수 제한 없음)
-- **react-notion-x** — 코드·콜아웃·이미지·수식 렌더링. 본문 톤앤매너 커스텀 (`globals.css`)
+- **react-notion-x** — 코드·콜아웃·이미지·수식 렌더링. 본문 톤앤매너 커스텀 (`globals.css`). 콜아웃은 모양만 통일하고 **색은 노션에서 고른 값을 그대로** 반영(10색 팔레트)
 - **검색** — 제목·요약·카테고리·태그 substring (`/search?q=...`)
 - **graceful fallback** — 노션 5xx 자동 재시도, 영구 실패 시 "잠시만 기다려주세요" 안내. 썸네일 미설정·404 시 이니셜 그라데이션 placeholder
 

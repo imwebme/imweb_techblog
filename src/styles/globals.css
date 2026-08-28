@@ -257,16 +257,63 @@ a {
   font-style: normal;
 }
 
-/* 콜아웃 — 노션에서 어떤 색을 골랐든 일관된 브랜드 톤으로 통일 */
+/* 콜아웃 — 모양(라운드/여백)만 통일하고 색은 노션에서 고른 값을 따른다.
+   react-notion-x 는 색을 `.notion-<색>_background_co` 클래스로 넘겨준다.
+   라이브러리 기본값은 alpha 0.3 이라 너무 흐리고 green/default 는 정의 자체가
+   없어, 블로그 톤에 맞춘 팔레트를 아래에서 직접 정의한다. */
 .notion .notion-callout {
   align-items: flex-start;
   gap: 10px;
   padding: 14px 16px;
   margin: 1.5rem 0;
   border-radius: 14px;
-  background: #f4f8ff;
-  border: 1px solid #e1ecff;
   color: var(--color-text);
+  /* 노션에서 색을 안 고른(default) 경우의 기본값 */
+  background: #f7f8fa;
+  border: 1px solid var(--color-border);
+}
+
+/* 색별 팔레트 — 배경은 옅게, 테두리는 같은 계열 한 톤 진하게.
+   선택자에 `.notion-callout` 을 함께 써 라이브러리 규칙보다 우선하게 한다. */
+.notion .notion-callout.notion-gray_background_co {
+  background: #f6f7f9;
+  border-color: #e3e6ea;
+}
+.notion .notion-callout.notion-blue_background_co {
+  background: #f0f6ff;
+  border-color: #d5e4fa;
+}
+.notion .notion-callout.notion-green_background_co {
+  background: #eff8f2;
+  border-color: #d3ead9;
+}
+.notion .notion-callout.notion-yellow_background_co {
+  background: #fff9e8;
+  border-color: #f2e3ba;
+}
+.notion .notion-callout.notion-orange_background_co {
+  background: #fff4ea;
+  border-color: #f8dbc1;
+}
+.notion .notion-callout.notion-red_background_co {
+  background: #fff1f1;
+  border-color: #f8d5d5;
+}
+.notion .notion-callout.notion-pink_background_co {
+  background: #fdf0f6;
+  border-color: #f4d6e5;
+}
+.notion .notion-callout.notion-purple_background_co {
+  background: #f6f2fd;
+  border-color: #e3d8f5;
+}
+.notion .notion-callout.notion-teal_background_co {
+  background: #eef8f7;
+  border-color: #d0e9e6;
+}
+.notion .notion-callout.notion-brown_background_co {
+  background: #f7f4f2;
+  border-color: #e6ded8;
 }
 /* 콜아웃 아이콘(이모지)은 노출하지 않고 깔끔한 박스로 통일 */
 .notion .notion-callout .notion-page-icon-inline {
