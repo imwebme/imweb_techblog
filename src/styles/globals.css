@@ -257,6 +257,50 @@ a {
   font-style: normal;
 }
 
+/* 인용구 색 — 노션에서 고른 글자색(`.notion-<색>`)을 왼쪽 강조선과 옅은
+   배경으로 옮긴다. 글자에 그대로 칠하면 옅은 배경 위에서 노랑·초록 등이
+   읽히지 않으므로, 색은 강조선이 맡고 본문은 가독성을 유지한다. */
+.notion .notion-quote.notion-gray {
+  border-left-color: #9aa3ad;
+  background: #f6f7f9;
+}
+.notion .notion-quote.notion-brown {
+  border-left-color: #a9836b;
+  background: #f7f4f2;
+}
+.notion .notion-quote.notion-orange {
+  border-left-color: #e08a3c;
+  background: #fff4ea;
+}
+.notion .notion-quote.notion-yellow {
+  border-left-color: #d9a520;
+  background: #fff9e8;
+}
+.notion .notion-quote.notion-green {
+  border-left-color: #4aa06a;
+  background: #eff8f2;
+}
+.notion .notion-quote.notion-teal {
+  border-left-color: #3fa39a;
+  background: #eef8f7;
+}
+.notion .notion-quote.notion-blue {
+  border-left-color: #3182f6;
+  background: #f0f6ff;
+}
+.notion .notion-quote.notion-purple {
+  border-left-color: #8b6cd9;
+  background: #f6f2fd;
+}
+.notion .notion-quote.notion-pink {
+  border-left-color: #d96ba8;
+  background: #fdf0f6;
+}
+.notion .notion-quote.notion-red {
+  border-left-color: #e05252;
+  background: #fff1f1;
+}
+
 /* 콜아웃 — 모양(라운드/여백)만 통일하고 색은 노션에서 고른 값을 따른다.
    react-notion-x 는 색을 `.notion-<색>_background_co` 클래스로 넘겨준다.
    라이브러리 기본값은 alpha 0.3 이라 너무 흐리고 green/default 는 정의 자체가
@@ -314,6 +358,50 @@ a {
 .notion .notion-callout.notion-brown_background_co {
   background: #f7f4f2;
   border-color: #e6ded8;
+}
+
+/* 콜아웃에 배경색 대신 글자색(`.notion-<색>`)을 고른 경우도 같은 톤으로.
+   노션 메뉴가 '글자색'과 '배경색'으로 나뉘어 있어 어느 쪽을 골라도
+   사이트에 반영되도록 양쪽을 모두 받는다. */
+.notion .notion-callout.notion-gray {
+  background: #f6f7f9;
+  border-color: #e3e6ea;
+}
+.notion .notion-callout.notion-brown {
+  background: #f7f4f2;
+  border-color: #e6ded8;
+}
+.notion .notion-callout.notion-orange {
+  background: #fff4ea;
+  border-color: #f8dbc1;
+}
+.notion .notion-callout.notion-yellow {
+  background: #fff9e8;
+  border-color: #f2e3ba;
+}
+.notion .notion-callout.notion-green {
+  background: #eff8f2;
+  border-color: #d3ead9;
+}
+.notion .notion-callout.notion-teal {
+  background: #eef8f7;
+  border-color: #d0e9e6;
+}
+.notion .notion-callout.notion-blue {
+  background: #f0f6ff;
+  border-color: #d5e4fa;
+}
+.notion .notion-callout.notion-purple {
+  background: #f6f2fd;
+  border-color: #e3d8f5;
+}
+.notion .notion-callout.notion-pink {
+  background: #fdf0f6;
+  border-color: #f4d6e5;
+}
+.notion .notion-callout.notion-red {
+  background: #fff1f1;
+  border-color: #f8d5d5;
 }
 /* 콜아웃 아이콘(이모지)은 노출하지 않고 깔끔한 박스로 통일 */
 .notion .notion-callout .notion-page-icon-inline {
