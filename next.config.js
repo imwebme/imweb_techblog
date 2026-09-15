@@ -10,7 +10,6 @@ const basePath = isGithubPages ? (process.env.BASE_PATH ?? "/imweb_techblog") : 
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   output: "export",
   trailingSlash: true,
   // next/image 를 사용하지 않으므로 unoptimized true 만 켜두면 충분.
