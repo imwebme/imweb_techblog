@@ -76,10 +76,13 @@ export const snapshotFromRecordMap = (
   }
   const posts = allPosts
     .filter((p) => p.status === "Public" || (p.status as string) === "공개")
-    // 최신순. date 가 같은 날이면 먼저 작성된(노션 생성 시각이 이른) 글을
-    // 위로 — 같은 날 발행한 시리즈(1편/2편)가 읽기 순서대로 보이도록.
+    // 최신순. date 가 같은 날이면 나중에 작성된(노션 생성 시각이 늦은) 글을
+    // 위로 — 같은 날 올린 글 중 최신이 맨 위에 오도록.
+    //
+    // 주의: 같은 날 발행한 시리즈(1편/2편)는 2편이 위에 온다. 읽기 순서를
+    // 지키려면 노션에서 발행일을 하루씩 다르게 두어야 한다.
     .sort((a, b) =>
-      a.date !== b.date ? (a.date < b.date ? 1 : -1) : a.createdTime - b.createdTime
+      a.date !== b.date ? (a.date < b.date ? 1 : -1) : b.createdTime - a.createdTime
     )
 
   // ── categories: 스키마 정의 순서로 고정, 0건 카테고리도 노출 ──────────
