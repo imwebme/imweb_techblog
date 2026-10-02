@@ -301,6 +301,13 @@ a {
   background: #fff1f1;
 }
 
+/* 노션 목차 블록 — 글 우측 고정 레일(PostToc)이 같은 역할을 하므로 본문에서는
+   숨긴다. 노션에 목차 블록을 넣든 안 넣든 레일은 제목에서 자동 생성되므로,
+   이걸 남겨두면 같은 목차가 두 벌 보인다. */
+.notion .notion-table-of-contents {
+  display: none;
+}
+
 /* 콜아웃 — 모양(라운드/여백)만 통일하고 색은 노션에서 고른 값을 따른다.
    react-notion-x 는 색을 `.notion-<색>_background_co` 클래스로 넘겨준다.
    라이브러리 기본값은 alpha 0.3 이라 너무 흐리고 green/default 는 정의 자체가

@@ -66,6 +66,7 @@ imweb_techblog/
 │   │   └── post/
 │   │       ├── PostHeader.tsx       제목·메타·태그·커버
 │   │       ├── PostContent.tsx      <NotionRenderer /> 래핑
+│   │       ├── PostToc.tsx          우측 고정 목차 (스크롤 추적, xl 이상)
 │   │       ├── PostActions.tsx      공유 버튼
 │   │       ├── PostNavigation.tsx   이전/다음 글 카드 (발행일 인접)
 │   │       └── Comments.tsx         giscus 임베드 (테마 연동)
@@ -206,6 +207,9 @@ Layout
 ├── Header
 ├── PostHeader              카테고리 라벨 / 제목 / 요약 / 작성자·날짜 / 태그 칩 / 커버
 ├── PostContent             <NotionRenderer /> + dynamic Code/Collection/Equation/Modal
+├── PostToc                 우측 고정 목차 — 본문 제목에서 자동 생성, 스크롤 추적.
+│                           제목 2개 미만이면 미노출, xl(1280px) 미만에서 숨김.
+│                           노션 인라인 목차 블록은 중복이라 CSS 로 숨긴다.
 ├── PostActions             공유 버튼 (Web Share API + clipboard fallback)
 ├── PostNavigation          이전/다음 글 카드 (발행일 인접 기준)
 ├── Comments                giscus (활성 시, 테마 연동)

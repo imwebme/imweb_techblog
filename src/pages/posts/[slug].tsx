@@ -7,6 +7,7 @@ import PostHeader from "@/components/post/PostHeader"
 import PostContent from "@/components/post/PostContent"
 import PostActions from "@/components/post/PostActions"
 import PostNavigation, { type AdjacentPost } from "@/components/post/PostNavigation"
+import PostToc from "@/components/post/PostToc"
 import Comments from "@/components/post/Comments"
 import { getPostBySlug } from "@/lib/notion/getPostBySlug"
 import { getPosts } from "@/lib/notion/getPosts"
@@ -110,6 +111,7 @@ export default function PostPage({
         />
       </Head>
       <PostHeader post={post} />
+      <PostToc recordMap={recordMap} />
       <PostContent recordMap={recordMap} />
       <PostActions post={post} />
       <PostNavigation prev={prev} next={next} />
