@@ -2,6 +2,7 @@ import Link from "next/link"
 import type { TPost } from "@/types"
 import { formatDateShort } from "@/lib/utils/formatDate"
 import CoverImage from "@/components/common/CoverImage"
+import NewBadge from "@/components/home/NewBadge"
 
 type Variant = "default" | "featured"
 
@@ -37,11 +38,16 @@ export default function PostCard({
       </div>
 
       <div className={`flex flex-1 flex-col ${isFeatured ? "p-7" : "p-5"}`}>
-        {post.category.length > 0 && (
-          <div className="mb-2 text-xs font-semibold tracking-wider uppercase text-brand">
-            {post.category.join(" · ")}
-          </div>
-        )}
+        {/* 카테고리와 NEW 배지를 한 줄에. 둘 다 없으면 빈 줄이 여백만
+            차지하므로 empty:hidden 으로 접는다. */}
+        <div className="mb-2 flex items-center gap-1.5 empty:hidden">
+          {post.category.length > 0 && (
+            <span className="text-xs font-semibold tracking-wider uppercase text-brand">
+              {post.category.join(" · ")}
+            </span>
+          )}
+          <NewBadge date={post.date} />
+        </div>
         <h3
           className={`font-bold tracking-[-0.02em] text-ink-900 line-clamp-2 ${
             isFeatured ? "text-2xl leading-tight" : "text-[1.125rem] leading-snug"

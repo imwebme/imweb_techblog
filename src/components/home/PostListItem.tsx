@@ -2,6 +2,7 @@ import Link from "next/link"
 import type { TPost } from "@/types"
 import { formatDateShort } from "@/lib/utils/formatDate"
 import CoverImage from "@/components/common/CoverImage"
+import NewBadge from "@/components/home/NewBadge"
 
 // 리스트 뷰용 가로 카드. 좌측 작은 썸네일 + 우측 제목/요약/메타.
 export default function PostListItem({ post }: { post: TPost }) {
@@ -30,11 +31,15 @@ export default function PostListItem({ post }: { post: TPost }) {
         }`}
       >
         <div>
-          {post.category.length > 0 && (
-            <div className="mb-0 sm:mb-1 text-[11px] font-semibold tracking-wider uppercase text-brand">
-              {post.category.join(" · ")}
-            </div>
-          )}
+          {/* 카테고리와 NEW 배지를 한 줄에. 둘 다 없으면 접는다. */}
+          <div className="mb-0 flex items-center gap-1.5 empty:hidden sm:mb-1">
+            {post.category.length > 0 && (
+              <span className="text-[11px] font-semibold tracking-wider uppercase text-brand">
+                {post.category.join(" · ")}
+              </span>
+            )}
+            <NewBadge date={post.date} />
+          </div>
           <h3 className="text-sm sm:text-[1.05rem] font-bold tracking-[-0.02em] text-ink-900 leading-tight sm:leading-snug line-clamp-2">
             {post.title}
           </h3>
