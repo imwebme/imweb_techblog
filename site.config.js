@@ -120,15 +120,18 @@ const CONFIG = {
   // 개발자 행사 등 홍보용. enabled: false 면 안 뜸. 메인(/)에서만 노출.
   // 사용자가 "오늘 하루 보지 않기" 누르면 24시간 동안 안 보임(localStorage).
   eventPopup: {
+    // 오픈 예정일에 true 로 바꿔 푸시하면 메인에 노출된다.
     enabled: false,
-    image: "/brandcon_banner.png",
+    image: "/techground26_banner.webp",
     badge: "EVENT",
-    title: "BRANDCON26",
-    description: "깊이를 만든 브랜드 리더들의 성장 인사이트",
-    date: "2026.07.26 (화)",
-    place: "COEX GRAND BALLROOM",
+    title: "TECH GROUND 26",
+    // whitespace-pre-line 으로 렌더되므로 \n 이 줄바꿈으로 그대로 보인다.
+    description:
+      "선 넘는 개발자들의 이야기\n아임웹의 첫 번째 오프라인 기술 밋업에 초대합니다.",
+    date: "2026.11.18 (수) 19:00 – 22:00",
+    place: "서울시 강남구 테헤란로 501, 15층",
     ctaLabel: "지금 신청하기",
-    ctaHref: "https://brandcon.imweb.me/26",
+    ctaHref: "https://ticketa.co/event/qexwz60x",
   },
 }
 
