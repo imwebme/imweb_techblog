@@ -86,7 +86,8 @@ imweb_techblog/
 │   │   │   ├── slugify.ts           제목 → URL slug
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
-│   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유)
+│   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유).
+│   │                                "숨김"으로 시작해 마운트 후 판정 → 정적 HTML 에 박히지 않아 닫은 사람에게 깜빡이지 않음
 │   │
 │   ├── pages/
 │   │   ├── _app.tsx                 전역 CSS, OG meta
