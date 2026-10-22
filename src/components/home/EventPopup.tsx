@@ -45,19 +45,25 @@ export default function EventPopup() {
   const closeForDay = () => dismiss(msUntilNextMidnight())
 
   return (
+    // 바깥 레이어가 스크롤을 맡는다. 카드가 화면보다 길면(휴대폰 가로 모드 등)
+    // 화면 가운데 고정으로는 위아래가 잘려 X·신청 버튼에 닿을 수 없으므로,
+    // 넘칠 때는 위에서부터 스크롤되게 한다.
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="event-popup-title"
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] overflow-y-auto"
     >
-      {/* 배경 (클릭 시 닫힘) */}
-      <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={closeSession}
-        aria-hidden
-      />
+      {/* 배경 */}
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden />
 
+      {/* 화면에 들어가면 가운데, 넘치면 위에서부터. 카드 바깥을 누르면 닫힘. */}
+      <div
+        className="relative flex min-h-full items-center justify-center p-4"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) closeSession()
+        }}
+      >
       {/* 카드 — 사이즈 적당히, 화면 너무 안 가리게 */}
       <div className="event-popup-card relative w-full max-w-md overflow-hidden rounded-2xl border border-line bg-card shadow-2xl">
         <button
@@ -145,6 +151,7 @@ export default function EventPopup() {
           오늘 하루 보지 않기
         </button>
         </div>
+      </div>
       </div>
     </div>
   )

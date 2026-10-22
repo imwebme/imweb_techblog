@@ -60,7 +60,7 @@ imweb_techblog/
 │   │   │   ├── NewBadge.tsx           ↳ 발행 14일 이내 NEW 배지. 정적 HTML 에
 │   │   │   │                            굽지 않고 마운트 후 브라우저 시계로 판정
 │   │   │   │                            (빌드 시점에 굳으면 기간이 지나도 안 사라짐)
-│   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글, 선택적 상단 배너 이미지 — 비율 자동)
+│   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글, 선택적 상단 배너 이미지 — 비율 자동, 화면보다 길면 모달 안에서 스크롤)
 │   │   ├── layout/
 │   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 (<sm 은 햄버거+검색바)
 │   │   │   ├── RecruitRibbon.tsx    채용 CTA 하단 고정 LED 마퀴 (홈 `/` 에서만, recruitCTA 토글)
