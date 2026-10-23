@@ -118,10 +118,10 @@ const CONFIG = {
 
   // ── 메인 페이지 이벤트 팝업 ─────────────────────────────────────────────
   // 개발자 행사 등 홍보용. enabled: false 면 안 뜸. 메인(/)에서만 노출.
-  // 사용자가 "오늘 하루 보지 않기" 누르면 24시간 동안 안 보임(localStorage).
+  // 사용자가 "오늘 하루 보지 않기" 누르면 그날 자정까지 안 보임(localStorage).
   eventPopup: {
-    // 오픈 예정일에 true 로 바꿔 푸시하면 메인에 노출된다.
-    enabled: false,
+    // TECH GROUND 26 공지 중 (2026-10-23 오픈). 이벤트가 끝나면 false 로 내린다.
+    enabled: true,
     image: "/techground26_banner.webp",
     badge: "EVENT",
     title: "TECH GROUND 26",
