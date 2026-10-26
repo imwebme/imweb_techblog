@@ -157,11 +157,13 @@ const pickAuthors = (
   if (!id) return []
   const raw = block.properties?.[id]
   if (!raw) return []
-  // person 구조: [["‣", [["u", "<userId>"], ["u", "<userId>"]]]]
-  const annotations = raw?.[0]?.[1] || []
-  const userIds = annotations
-    .filter((a: any) => a?.[0] === "u")
-    .map((a: any) => a?.[1])
+  // person 구조: 사람마다 세그먼트가 따로 오고 사이에 구분자 세그먼트가 낀다.
+  //   [["‣", [["u", "<id1>"]]], [","], ["‣", [["u", "<id2>"]]]]
+  // 첫 세그먼트만 읽으면 공동 저자 중 첫 사람만 남으므로 전부 훑는다.
+  const userIds: string[] = raw
+    .flatMap((seg: any) => seg?.[1] || [])
+    .filter((a: any) => a?.[0] === "u" && typeof a[1] === "string")
+    .map((a: any) => a[1])
   return userIds
     .map((uid: string) => {
       const u = unwrap(recordMap.notion_user?.[uid])

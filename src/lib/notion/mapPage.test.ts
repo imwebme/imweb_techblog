@@ -93,6 +93,27 @@ describe("mapBlockToPost", () => {
     expect(post.status).toBe("Public")
   })
 
+  it("공동 저자를 모두 파싱한다 (사람마다 세그먼트가 따로 온다)", () => {
+    // 실제 노션 응답 형태 그대로 — 사람 사이에 [","] 구분자 세그먼트가 낀다.
+    const schema = { ...SCHEMA, p_auth: { name: "author", type: "person" } }
+    const block = {
+      id: "1",
+      type: "page",
+      properties: {
+        title: [["공동 작성 글"]],
+        p_auth: [["‣", [["u", "u1"]]], [","], ["‣", [["u", "u2"]]]],
+      },
+    }
+    const recordMap = {
+      notion_user: {
+        u1: { value: { value: { name: "이호수" } } },
+        u2: { value: { value: { name: "오민석" } } },
+      },
+    } as any
+    const post = mapBlockToPost(block, schema, recordMap)
+    expect(post.authors.map((a) => a.name)).toEqual(["이호수", "오민석"])
+  })
+
   it("tags 미지정 시 빈 배열", () => {
     const { block, recordMap } = blockOf("1", [
       { id: "1", title: "글", status: "Public" },

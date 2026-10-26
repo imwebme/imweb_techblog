@@ -62,7 +62,7 @@ npm run lint
 | summary    | Text         | `summary`, `description`, `요약` | 카드 · OG description |
 | date       | Date         | `date`, `published`, `발행일`    | 미설정 시 페이지 생성일 |
 | thumbnail  | File         | `thumbnail`, `cover`, `썸네일`   | 카드 썸네일 ([이미지 가이드](#카드-썸네일)) |
-| author     | Person       | `author`, `authors`, `작성자`    | 카드/상세 표시 |
+| author     | Person       | `author`, `authors`, `작성자`    | 카드/상세 표시. 여러 명 지정 시 모두 표시 |
 
 > 속성명 뒤에 운영 메모를 붙여도 인식됩니다 (예: `tags(최대 3개)` → 정상적으로 `tags` 로 매핑).
 >
