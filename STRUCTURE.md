@@ -63,6 +63,7 @@ imweb_techblog/
 │   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글, 선택적 상단 배너 이미지 — 비율 자동, 화면보다 길면 모달 안에서 스크롤)
 │   │   ├── layout/
 │   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 (<sm 은 햄버거+검색바)
+│   │   │   │                        + headerBadge: 메뉴 왼쪽 이벤트 배지 (md 이상 / 모바일은 햄버거 메뉴 맨 위)
 │   │   │   ├── RecruitRibbon.tsx    채용 CTA 하단 고정 LED 마퀴 (홈 `/` 에서만, recruitCTA 토글)
 │   │   │   ├── Footer.tsx           메뉴 + 회사 정보 + 저작권 (좁은 화면 2열)
 │   │   │   └── Layout.tsx           페이지 wrapper

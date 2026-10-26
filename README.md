@@ -29,6 +29,7 @@ Notion 을 CMS 로 사용하는 정적 사이트. GitHub Pages 로 배포됩니�
 **운영 모듈·분석·인프라**
 
 - **채용 CTA 전광판** — 하단 고정 LED 마퀴, 홈(`/`)에서만 노출. `site.config.js` 의 `recruitCTA` 한 줄로 토글. 방문자 닫기 기억
+- **헤더 배지** — 상단 메뉴 왼쪽의 강조 링크(이벤트 신청 안내 등). `site.config.js` 의 `headerBadge` 로 켜고 끄며 문구·링크·색(`background`/`color`)을 지정. PC 는 768px 이상, 모바일은 햄버거 메뉴 맨 위에 노출
 - **이벤트 팝업** — 메인 전용 모달, 자유 비율 배너 이미지. 화면보다 길면(휴대폰 가로 모드 등) 잘리지 않고 스크롤. "오늘 하루 보지 않기" 는 캘린더 자정 리셋. 팝업·리본 모두 브라우저에서 닫은 기록을 확인한 뒤에만 띄워, 닫은 사람에게 로딩 중 깜빡이지 않음
 - **Google Analytics 4** — 전수 집계 (동의 배너 없음). `analytics.enabled` 로 토글
 - **SEO 구조화 데이터** — 모든 페이지에 `schema.org/WebSite` + `Organization` JSON-LD, 글 상세에는 `BlogPosting` (작성자·발행일·이미지·태그) 추가. 검색 별칭은 `blog.alternateNames`
@@ -81,7 +82,7 @@ npm run lint
 
 | 파일 | 무엇을 |
 |---|---|
-| [`site.config.js`](./site.config.js) | 사이트 메타·네비·회사 정보·노션 DB·giscus·recruitCTA·eventPopup·analytics·alternateNames·seo.slugAliases |
+| [`site.config.js`](./site.config.js) | 사이트 메타·네비·회사 정보·노션 DB·giscus·recruitCTA·eventPopup·headerBadge·analytics·alternateNames·seo.slugAliases |
 | [`tailwind.config.js`](./tailwind.config.js) | 컬러·타이포·이징 토큰 |
 | [`src/styles/globals.css`](./src/styles/globals.css) | 본문/카드/칩/마퀴/팝업 스타일 + CSS 변수 팔레트 (`:root`) |
 | [`public/Logo_ImwebTech_black.svg`](./public/) | 헤더 로고 |

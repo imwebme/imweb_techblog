@@ -63,6 +63,19 @@ const CONFIG = {
     { label: "개발자센터", href: "https://developers.imweb.me/", external: true },
   ],
 
+  // 상단 메뉴 왼쪽의 강조 배지 (이벤트 신청 안내 등). 새 탭으로 열린다.
+  // PC 는 메뉴 왼쪽, 모바일은 햄버거 메뉴 맨 위에 노출.
+  // 이벤트가 끝나면 eventPopup 과 함께 enabled: false 로 내린다.
+  headerBadge: {
+    enabled: true,
+    label: "TECH GROUND26 신청 중!",
+    href: "https://ticketa.co/event/qexwz60x",
+    // 이벤트 배너 톤에 맞춘 색. 비우면 브랜드 블루 배경 + 흰 글자.
+    // (TECH GROUND 26 배너에서 추출: 배경 초록 / 등고선·정보 박스 청록)
+    background: "#002c00",
+    color: "#00c2ff",
+  },
+
   // ── 외부 링크 / 푸터 ────────────────────────────────────────────────────
   social: {
     homepage: "https://imweb.me",

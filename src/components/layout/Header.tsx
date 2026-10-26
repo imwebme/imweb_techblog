@@ -39,6 +39,43 @@ export default function Header() {
   type NavItem = { label: string; href: string; external?: boolean }
   const navItems = CONFIG.nav as NavItem[]
 
+  const badge = CONFIG.headerBadge as
+    | {
+        enabled?: boolean
+        label?: string
+        href?: string
+        background?: string
+        color?: string
+      }
+    | undefined
+  const showBadge = !!(badge?.enabled && badge.label && badge.href)
+
+  // 배지 색은 이벤트마다 달라 설정에서 받는다. Tailwind 는 빌드 때 소스의 클래스
+  // 문자열만 수집하므로 설정값으로 클래스를 만들 수 없어 inline style 로 칠한다.
+  // 테두리·점은 글자색(currentColor)을 따라가 한 가지 색만 지정하면 된다.
+  const badgeStyle = {
+    backgroundColor: badge?.background || CONFIG.brand.primary,
+    color: badge?.color || "#ffffff",
+  }
+
+  // 메뉴 왼쪽 강조 배지. "진행 중" 느낌을 주는 점은 모션 최소화 설정이면 깜빡이지 않는다.
+  // display 는 호출하는 쪽에서 정한다 (PC 는 md 이상에서만 보이게 하기 위해).
+  const renderBadge = (className: string) => (
+    <a
+      href={badge!.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={badgeStyle}
+      className={`shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-current px-3 py-1.5 text-xs font-semibold transition-[filter] hover:brightness-125 ${className}`}
+    >
+      <span className="relative flex h-1.5 w-1.5" aria-hidden>
+        <span className="absolute inline-flex h-full w-full rounded-full bg-current opacity-75 motion-safe:animate-ping" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-current" />
+      </span>
+      {badge!.label}
+    </a>
+  )
+
   // 인라인 네비 / 모바일 드롭다운에서 공용으로 사용
   const renderNavItem = (item: NavItem, className: string) =>
     item.external ? (
@@ -82,6 +119,8 @@ export default function Header() {
         <div className="flex flex-1 sm:flex-none items-center justify-end gap-1 sm:gap-2 min-w-0 pl-3 sm:pl-0">
           {/* 데스크탑(≥sm): 인라인 네비 */}
           <nav className="hidden sm:flex items-center gap-1 sm:gap-2">
+            {/* sm~md(640~767px) 에서는 배지까지 넣으면 로고가 눌려 찌그러지므로 md 부터 노출 */}
+            {showBadge && renderBadge("hidden md:inline-flex mr-1")}
             {navItems.map((item) => renderNavItem(item, navLinkClass))}
           </nav>
 
@@ -153,6 +192,7 @@ export default function Header() {
       {menuOpen && (
         <nav className="sm:hidden border-t border-line bg-[var(--color-header-bg)] backdrop-blur-md">
           <div className="container mx-auto flex flex-col py-2">
+            {showBadge && renderBadge("inline-flex my-2 self-start")}
             {navItems.map((item) => renderNavItem(item, mobileNavLinkClass))}
           </div>
         </nav>
