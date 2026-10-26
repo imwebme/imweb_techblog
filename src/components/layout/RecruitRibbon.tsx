@@ -1,20 +1,21 @@
 import { useRouter } from "next/router"
 import { withBasePath } from "@/lib/utils/withBasePath"
 import { useDismissible } from "@/lib/useDismissible"
+import { msUntilNextKstMidnight } from "@/lib/utils/kstMidnight"
 
 const CONFIG = require("../../../site.config")
 
 // 채용 이벤트 CTA — 화면 하단에 고정(fixed)되어 스크롤해도 계속 노출됩니다.
 // 홈(`/`)에서만 노출하고, 글 상세·태그·검색·소개 등 다른 페이지에선 미렌더.
 // site.config.js 의 recruitCTA.enabled 가 true 이고 href 가 있을 때만 표시.
-// 사용자가 닫으면 7일간 숨기고, 그 뒤엔 다시 띄웁니다.
-// (예전엔 영구 닫기라 한 번 닫은 방문자는 채용 문구가 바뀌어도 다시 볼 수 없었다)
+// 사용자가 닫으면 한국 시간(KST) 기준 그날 자정까지만 숨기고, 날이 바뀌면 다시 띄웁니다.
+// 방문자 컴퓨터 시간대와 무관하게 한국 날짜가 바뀌는 순간 초기화된다.
 //
-// 키 이름을 바꾼 이유: 예전 키(recruitCTADismissed)에는 영구 닫기 값 "1" 이
-// 남아 있어, 같은 키를 쓰면 이미 닫은 사람에겐 7일 규칙이 영영 적용되지 않는다.
-// 새 키로 옮겨 기존에 닫은 사람도 한 번 다시 보게 하고, 이후부턴 7일 주기를 따른다.
-const STORAGE_KEY = "recruitCTADismissedUntil"
-const HIDE_MS = 7 * 24 * 60 * 60 * 1000
+// 키 이름 변천: recruitCTADismissed(영구) → recruitCTADismissedUntil(7일) →
+// recruitCTAHiddenUntil(KST 자정). 이전 키에는 영구 값 "1" 이나 최대 7일 뒤
+// 만료 시각이 남아 있어, 같은 키를 쓰면 그 사람들에겐 새 규칙이 늦게 적용된다.
+// 키를 바꿔 모두 지금 규칙(하루)부터 다시 시작하게 한다.
+const STORAGE_KEY = "recruitCTAHiddenUntil"
 
 export default function RecruitRibbon() {
   const router = useRouter()
@@ -25,7 +26,7 @@ export default function RecruitRibbon() {
   if (router.pathname !== "/") return null
   if (!cta?.enabled || !cta.href || dismissed) return null
 
-  const close = () => dismiss(HIDE_MS)
+  const close = () => dismiss(msUntilNextKstMidnight())
 
   // 한 그룹 안에서 라벨을 여러 번 반복해 넓은 화면도 채우고, 트랙엔 그룹 2개를 둠
   const group = (

@@ -84,6 +84,7 @@ imweb_techblog/
 │   │   │   └── enrichUsers.ts       공개 페이지의 빈 notion_user 보강
 │   │   ├── utils/
 │   │   │   ├── formatDate.ts        "2026-05-13" → "2026.05.13"
+│   │   │   ├── kstMidnight.ts       한국 시간(KST) 기준 다음 자정까지 남은 ms (채용 리본 닫기)
 │   │   │   ├── slugify.ts           제목 → URL slug
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
