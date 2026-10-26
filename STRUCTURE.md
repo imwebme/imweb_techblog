@@ -237,7 +237,7 @@ Layout
 | `summary` | Text | 권장 | 카드/메타 description |
 | `date` | Date | 권장 | 발행일 (정렬 키) |
 | `thumbnail` | File | 선택 | 카드 썸네일. 노션 신형 attachment 는 미노출 — `public/post-images/` 권장 |
-| `author` | Person | 선택 | 카드/상세에 표시. 공동 저자는 모두 쉼표로 이어 표시 (아바타는 첫 저자) |
+| `author` | Person | 선택 | 카드/상세에 표시. 이름만 표시(프로필 배지 없음). 공동 저자는 쉼표로 이어 표시 |
 
 ---
 

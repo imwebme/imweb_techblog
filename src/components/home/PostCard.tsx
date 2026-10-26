@@ -66,23 +66,9 @@ export default function PostCard({
         )}
 
         <div className="mt-auto pt-5 flex items-center justify-between text-xs text-ink-500">
-          <div className="flex items-center gap-2">
-            {post.authors[0]?.avatar ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={post.authors[0].avatar}
-                alt={post.authors[0].name}
-                className="h-6 w-6 rounded-full object-cover"
-              />
-            ) : (
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-surface text-[10px] font-semibold text-ink-700">
-                {(post.authors[0]?.name || "I").slice(0, 1)}
-              </span>
-            )}
-            <span className="text-ink-700">
-              {post.authors.map((a) => a.name).join(", ") || "Imweb Tech"}
-            </span>
-          </div>
+          <span className="min-w-0 truncate text-ink-700">
+            {post.authors.map((a) => a.name).join(", ") || "Imweb Tech"}
+          </span>
           <time dateTime={post.date}>{formatDateShort(post.date)}</time>
         </div>
       </div>

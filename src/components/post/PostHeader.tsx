@@ -21,23 +21,9 @@ export default function PostHeader({ post }: { post: TPost }) {
       )}
 
       <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-ink-700">
-        <div className="flex items-center gap-2">
-          {post.authors[0]?.avatar ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={post.authors[0].avatar}
-              alt={post.authors[0].name}
-              className="h-8 w-8 rounded-full object-cover"
-            />
-          ) : (
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-surface text-xs font-semibold text-ink-700">
-              {(post.authors[0]?.name || "I").slice(0, 1)}
-            </span>
-          )}
-          <span className="font-medium text-ink-900">
-            {post.authors.map((a) => a.name).join(", ") || "Imweb Tech"}
-          </span>
-        </div>
+        <span className="font-medium text-ink-900">
+          {post.authors.map((a) => a.name).join(", ") || "Imweb Tech"}
+        </span>
         <span className="text-ink-500">·</span>
         <time dateTime={post.date}>{formatDate(post.date)}</time>
       </div>
