@@ -21,7 +21,7 @@
 | Framework | **Next.js 14** (`output: "export"` 로 정적 export) |
 | 언어 | TypeScript + React 18 |
 | 스타일 | Tailwind CSS + CSS 변수 토큰 (`globals.css`) |
-| 폰트 | Pretendard (한글) |
+| 폰트 | Pretendard (한글) — jsDelivr CDN, `_document.tsx` 의 `<link>` 로 로드 (CSS `@import` 는 빌드 후 CSS 중간에 놓여 무시되므로 쓰지 않음) |
 | 데이터 | **notion-client** (비공식 Notion API) |
 | 본문 렌더 | **react-notion-x** + Prism (코드) + KaTeX (수식) |
 | 댓글 | **giscus** (GitHub Discussions, 테마 연동) |
@@ -79,7 +79,7 @@ imweb_techblog/
 │   │   ├── notion/
 │   │   │   ├── client.ts            NotionAPI 인스턴스 (내부), fetchPage / fetchUsers 헬퍼
 │   │   │   ├── getPosts.ts          DB → TPost[] (목록, 카테고리/태그 집계)
-│   │   │   ├── getPostBySlug.ts     단일 글 → TPost + recordMap
+│   │   │   ├── getPostBySlug.ts     단일 글 → TPost + recordMap (crdt_data 제거 — 렌더에 안 쓰이는 노션 편집 이력, 페이지 데이터의 최대 80%)
 │   │   │   ├── mapPage.ts           notion block → TPost 매핑 (속성 파싱)
 │   │   │   └── enrichUsers.ts       공개 페이지의 빈 notion_user 보강
 │   │   ├── utils/
@@ -93,7 +93,7 @@ imweb_techblog/
 │   │
 │   ├── pages/
 │   │   ├── _app.tsx                 전역 CSS, OG meta
-│   │   ├── _document.tsx
+│   │   ├── _document.tsx         html lang, Pretendard 폰트 <link>
 │   │   ├── 404.tsx
 │   │   ├── index.tsx                메인 (홈)
 │   │   ├── about.tsx                소개

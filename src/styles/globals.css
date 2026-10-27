@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Pretendard 한글 가독성 향상을 위한 웹폰트 (CDN 변동성) ───────────── */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+/* Pretendard 웹폰트는 _document.tsx 의 <link> 로 불러온다 (여기서 @import 하면
+   빌드 후 CSS 중간에 놓여 브라우저가 무시함). */
 
 /* ── 컬러/사이즈 토큰 ──────────────────────────────────────────────────── */
 :root {
