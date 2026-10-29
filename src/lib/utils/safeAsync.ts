@@ -14,7 +14,7 @@ export const safeAsync = async <T>(
   try {
     return await fn()
   } catch (err) {
-    console.error(`[${label}] 노션 fetch 실패 — fallback 으로 진행:`, err)
+    console.error(`[${label}] 노션 fetch 실패, fallback 으로 진행:`, err)
     return fallback
   }
 }

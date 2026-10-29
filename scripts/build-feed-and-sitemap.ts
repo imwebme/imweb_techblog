@@ -114,7 +114,7 @@ function buildAliasRedirects(posts: Awaited<ReturnType<typeof getPosts>>) {
 <html lang="${CONFIG.blog.language || "ko-KR"}">
 <head>
 <meta charset="utf-8">
-<title>${escapeAttr(target.title)} — ${escapeAttr(CONFIG.blog.title)}</title>
+<title>${escapeAttr(target.title)} | ${escapeAttr(CONFIG.blog.title)}</title>
 <link rel="canonical" href="${safeUrl}">
 <meta http-equiv="refresh" content="0; url=${safeUrl}">
 <meta name="description" content="${escapeAttr(target.summary || CONFIG.blog.description)}">
@@ -143,7 +143,7 @@ async function main() {
   } catch (err) {
     // 빌드 자체는 끝났으므로, RSS/sitemap 생성 실패가 배포를 막지 않도록 경고만.
     console.warn(
-      "[feed/sitemap] 생성 실패 — 빈 sitemap 으로 fallback. 다음 빌드에서 자동 복구.",
+      "[feed/sitemap] 생성 실패, 빈 sitemap 으로 fallback. 다음 빌드에서 자동 복구.",
       err
     )
     // 최소한 빈 sitemap 이라도 만들어 두기 (404 방지)

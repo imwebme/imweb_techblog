@@ -54,7 +54,7 @@ export default function PostPage({
   prev,
   next,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const ogTitle = `${post.title} — ${CONFIG.blog.title}`
+  const ogTitle = `${post.title} | ${CONFIG.blog.title}`
   const ogDescription = post.summary || CONFIG.blog.description
   // og:image 는 절대 URL 이어야 슬랙·페이스북 등 파서가 안정적으로 인식.
   // post.cover 는 노션 thumbnail 컬럼의 URL — 운영자가 절대 URL 로 박는다는 전제.

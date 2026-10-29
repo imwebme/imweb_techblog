@@ -25,10 +25,10 @@ const posts = JSON.parse(match[1])?.props?.pageProps?.posts ?? []
 
 if (posts.length === 0) {
   console.error(
-    "[verify-build] 글이 0건입니다 — 노션 fetch 실패로 판단해 배포를 중단합니다.\n" +
+    "[verify-build] 글이 0건입니다. 노션 fetch 실패로 판단해 배포를 중단합니다.\n" +
       "빌드 로그의 '노션 fetch 실패' 항목을 확인하세요. 직전 배포본은 그대로 유지됩니다."
   )
   process.exit(1)
 }
 
-console.log(`[verify-build] 글 ${posts.length}건 확인 — 배포를 진행합니다.`)
+console.log(`[verify-build] 글 ${posts.length}건 확인, 배포를 진행합니다.`)
