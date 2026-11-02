@@ -3,7 +3,7 @@ const CONFIG = {
   // ── 사이트 기본 정보 ──────────────────────────────────────────────────────
   blog: {
     title: "아임웹 테크",
-    // SEO 별칭 — JSON-LD schema:WebSite#alternateName 으로 노출.
+    // SEO 별칭 - JSON-LD schema:WebSite#alternateName 으로 노출.
     // 사용자가 검색할 만한 표현을 모아둡니다.
     alternateNames: ["아임웹 기술블로그", "아임웹 기술 블로그", "Imweb Tech Blog"],
     description: "아임웹 기술블로그, 기술 조직의 이야기를 담습니다.",
@@ -25,7 +25,7 @@ const CONFIG = {
     // 경로가 아니라 "슬러그"만 적습니다. (예: /posts/foo/ → "foo")
     // 대상 슬러그가 없거나 살아있는 글과 이름이 겹치면 빌드 시 건너뛰고 경고합니다.
     slugAliases: {
-      // 2026-07-21 개명 — 슬러그·제목 동시 변경
+      // 2026-07-21 개명 - 슬러그·제목 동시 변경
       "legacy-to-verifiable-stage": "build-stage-ai-native",
       "eks-11-clusters-upgrade": "eks-11clusters-upgrade",
       // 오타 슬러그로 공유된 링크 구제

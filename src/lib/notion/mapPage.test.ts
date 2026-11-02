@@ -94,7 +94,7 @@ describe("mapBlockToPost", () => {
   })
 
   it("공동 저자를 모두 파싱한다 (사람마다 세그먼트가 따로 온다)", () => {
-    // 실제 노션 응답 형태 그대로 — 사람 사이에 [","] 구분자 세그먼트가 낀다.
+    // 실제 노션 응답 형태 그대로 - 사람 사이에 [","] 구분자 세그먼트가 낀다.
     const schema = { ...SCHEMA, p_auth: { name: "author", type: "person" } }
     const block = {
       id: "1",

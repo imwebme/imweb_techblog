@@ -89,7 +89,7 @@ const escapeAttr = (s: string) =>
 // GitHub Pages 는 서버 301 을 지원하지 않으므로 canonical + meta refresh 로 대신한다.
 // canonical 이 검색엔진에 "이 문서의 정본은 저기"라고 알려 링크 신호를 새 글로 넘기고,
 // meta refresh / JS 가 실제 방문자를 옮긴다.
-// noindex 는 일부러 넣지 않는다 — canonical 과 신호가 충돌해 통합이 아니라 색인 삭제로
+// noindex 는 일부러 넣지 않는다 - canonical 과 신호가 충돌해 통합이 아니라 색인 삭제로
 // 처리될 수 있기 때문.
 function buildAliasRedirects(posts: Awaited<ReturnType<typeof getPosts>>) {
   const aliases: Record<string, string> = CONFIG.seo?.slugAliases ?? {}
@@ -97,7 +97,7 @@ function buildAliasRedirects(posts: Awaited<ReturnType<typeof getPosts>>) {
   let made = 0
 
   for (const [oldSlug, newSlug] of Object.entries(aliases)) {
-    // 살아있는 글을 덮어쓰지 않도록 방어 — 이 경우 스텁이 진짜 글을 가려버린다.
+    // 살아있는 글을 덮어쓰지 않도록 방어 - 이 경우 스텁이 진짜 글을 가려버린다.
     if (bySlug.has(oldSlug)) {
       console.warn(`[alias] "${oldSlug}" 는 현재 발행 중인 슬러그라 건너뜁니다.`)
       continue

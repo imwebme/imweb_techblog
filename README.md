@@ -8,33 +8,33 @@ Notion 을 CMS 로 사용하는 정적 사이트. GitHub Pages 로 배포됩니�
 
 **콘텐츠 (Notion 기반)**
 
-- **notion-client** — 비공식 Notion API, 토큰 불필요. DB 가 "웹에 게시" 만 되어 있으면 빌드 시 자동 페치 (개수 제한 없음)
-- **react-notion-x** — 코드·콜아웃·이미지·수식 렌더링. 본문 톤앤매너 커스텀 (`globals.css`). 콜아웃은 모양만 통일하고 **색은 노션에서 고른 값을 그대로** 반영(10색 팔레트)
-- **검색** — 제목·요약·카테고리·태그 substring (`/search?q=...`)
-- **graceful fallback** — 노션 5xx 자동 재시도, 영구 실패 시 "잠시만 기다려주세요" 안내. 썸네일 미설정·404 시 이니셜 그라데이션 placeholder
+- **notion-client**: 비공식 Notion API, 토큰 불필요. DB 가 "웹에 게시" 만 되어 있으면 빌드 시 자동 페치 (개수 제한 없음)
+- **react-notion-x**: 코드·콜아웃·이미지·수식 렌더링. 본문 톤앤매너 커스텀 (`globals.css`). 콜아웃은 모양만 통일하고 **색은 노션에서 고른 값을 그대로** 반영(10색 팔레트)
+- **검색**: 제목·요약·카테고리·태그 substring (`/search?q=...`)
+- **graceful fallback**: 노션 5xx 자동 재시도, 영구 실패 시 "잠시만 기다려주세요" 안내. 썸네일 미설정·404 시 이니셜 그라데이션 placeholder
 
 **사용자 경험**
 
-- **메인 레이아웃** — 상단 배너 + 좌측 카테고리·태그 사이드바 + 카드/리스트 토글, Pretendard 한글 타이포
-- **썸네일** — 그리드·리스트 모두 16:10 flush, 리스트는 sm 이상에서 우측 배치
-- **페이지네이션** — 9개/페이지, 필터 변경 시 1페이지로 초기화. 목록은 발행일 최신순, 같은 날 발행 글은 나중에 작성한 글이 위. 같은 날 올린 시리즈를 읽기 순서대로 두려면 발행일을 하루씩 다르게 설정
-- **상태 기억** — 카테고리·태그 필터는 URL 쿼리(`?category=...&tag=...`)에 동기화돼 글 진입 후 뒤로가기로 돌아와도 복원. 그리드/리스트 뷰 모드는 `localStorage` 에 영구 저장
-- **태그 노출** — 사이드바에는 많이 쓰인 상위 12개만. 나머지는 `/tags/` 페이지로 (`TAG_DISPLAY_LIMIT`)
-- **반응형 헤더** — `< 640px` 햄버거 메뉴 + 검색바, 그 외 인라인 네비
-- **댓글 / 공유** — giscus (GitHub Discussions 기반) / Web Share API + 클립보드 fallback
-- **이전·다음 글 내비** — 글 하단에 발행일 인접 기준 좌·우 카드로 이어보기 동선 제공
-- **NEW 배지** — 발행 14일 이내 글에 표시 (`NEW_DAYS`). 정적 HTML 에 굽지 않고 브라우저 시계로 판정해, 재배포 없이도 기간이 지나면 사라짐
-- **목차** — 글 우측에 고정, 스크롤 따라 현재 섹션 강조. 본문 제목에서 자동 생성되므로 **노션에 목차 블록을 넣을 필요 없음**. 제목 2개 미만이면 미노출, 넓은 화면(1280px 이상) 전용
+- **메인 레이아웃**: 상단 배너 + 좌측 카테고리·태그 사이드바 + 카드/리스트 토글, Pretendard 한글 타이포
+- **썸네일**: 그리드·리스트 모두 16:10 flush, 리스트는 sm 이상에서 우측 배치
+- **페이지네이션**: 9개/페이지, 필터 변경 시 1페이지로 초기화. 목록은 발행일 최신순, 같은 날 발행 글은 나중에 작성한 글이 위. 같은 날 올린 시리즈를 읽기 순서대로 두려면 발행일을 하루씩 다르게 설정
+- **상태 기억**: 카테고리·태그 필터는 URL 쿼리(`?category=...&tag=...`)에 동기화돼 글 진입 후 뒤로가기로 돌아와도 복원. 그리드/리스트 뷰 모드는 `localStorage` 에 영구 저장
+- **태그 노출**: 사이드바에는 많이 쓰인 상위 12개만. 나머지는 `/tags/` 페이지로 (`TAG_DISPLAY_LIMIT`)
+- **반응형 헤더**: `< 640px` 햄버거 메뉴 + 검색바, 그 외 인라인 네비
+- **댓글 / 공유**: giscus (GitHub Discussions 기반) / Web Share API + 클립보드 fallback
+- **이전·다음 글 내비**: 글 하단에 발행일 인접 기준 좌·우 카드로 이어보기 동선 제공
+- **NEW 배지**: 발행 14일 이내 글에 표시 (`NEW_DAYS`). 정적 HTML 에 굽지 않고 브라우저 시계로 판정해, 재배포 없이도 기간이 지나면 사라짐
+- **목차**: 글 우측에 고정, 스크롤 따라 현재 섹션 강조. 본문 제목에서 자동 생성되므로 **노션에 목차 블록을 넣을 필요 없음**. 제목 2개 미만이면 미노출, 넓은 화면(1280px 이상) 전용
 
 **운영 모듈·분석·인프라**
 
-- **채용 CTA 전광판** — 하단 고정 LED 마퀴, 홈(`/`)에서만 노출. `site.config.js` 의 `recruitCTA` 한 줄로 토글. 방문자가 닫으면 한국 시간 기준 그날 자정까지 숨김
-- **헤더 배지** — 상단 메뉴 왼쪽의 강조 링크(이벤트 신청 안내 등). `site.config.js` 의 `headerBadge` 로 켜고 끄며 문구·링크·색(`background`/`color`)을 지정. PC 는 768px 이상, 모바일은 햄버거 메뉴 맨 위에 노출
-- **이벤트 팝업** — 메인 전용 모달, 자유 비율 배너 이미지. 화면보다 길면(휴대폰 가로 모드 등) 잘리지 않고 스크롤. "오늘 하루 보지 않기" 는 캘린더 자정 리셋. 팝업·리본 모두 브라우저에서 닫은 기록을 확인한 뒤에만 띄워, 닫은 사람에게 로딩 중 깜빡이지 않음
-- **Google Analytics 4** — 전수 집계 (동의 배너 없음). `analytics.enabled` 로 토글
-- **SEO 구조화 데이터** — 모든 페이지에 `schema.org/WebSite` + `Organization` JSON-LD, 글 상세에는 `BlogPosting` (작성자·발행일·이미지·태그) 추가. 검색 별칭은 `blog.alternateNames`
-- **canonical / 슬러그 리다이렉트** — 모든 페이지에 canonical (UTM 등 쿼리 붙은 URL 이 별개 문서로 색인되는 것 방지). 슬러그를 바꾼 글은 `seo.slugAliases` 에 옛 슬러그를 등록하면 빌드가 리다이렉트 스텁을 생성해 기존 공유 링크·검색 색인이 404 로 끊기지 않음
-- **정적 배포** — Next.js 14 `output: "export"` → GitHub Actions → GitHub Pages. 30분 cron 으로 자동 재빌드
+- **채용 CTA 전광판**: 하단 고정 LED 마퀴, 홈(`/`)에서만 노출. `site.config.js` 의 `recruitCTA` 한 줄로 토글. 방문자가 닫으면 한국 시간 기준 그날 자정까지 숨김
+- **헤더 배지**: 상단 메뉴 왼쪽의 강조 링크(이벤트 신청 안내 등). `site.config.js` 의 `headerBadge` 로 켜고 끄며 문구·링크·색(`background`/`color`)을 지정. PC 는 768px 이상, 모바일은 햄버거 메뉴 맨 위에 노출
+- **이벤트 팝업**: 메인 전용 모달, 자유 비율 배너 이미지. 화면보다 길면(휴대폰 가로 모드 등) 잘리지 않고 스크롤. "오늘 하루 보지 않기" 는 캘린더 자정 리셋. 팝업·리본 모두 브라우저에서 닫은 기록을 확인한 뒤에만 띄워, 닫은 사람에게 로딩 중 깜빡이지 않음
+- **Google Analytics 4**: 전수 집계 (동의 배너 없음). `analytics.enabled` 로 토글
+- **SEO 구조화 데이터**: 모든 페이지에 `schema.org/WebSite` + `Organization` JSON-LD, 글 상세에는 `BlogPosting` (작성자·발행일·이미지·태그) 추가. 검색 별칭은 `blog.alternateNames`
+- **canonical / 슬러그 리다이렉트**: 모든 페이지에 canonical (UTM 등 쿼리 붙은 URL 이 별개 문서로 색인되는 것 방지). 슬러그를 바꾼 글은 `seo.slugAliases` 에 옛 슬러그를 등록하면 빌드가 리다이렉트 스텁을 생성해 기존 공유 링크·검색 색인이 404 로 끊기지 않음
+- **정적 배포**: Next.js 14 `output: "export"` → GitHub Actions → GitHub Pages. 30분 cron 으로 자동 재빌드
 
 ## 빠른 시작
 
@@ -42,7 +42,7 @@ Notion 을 CMS 로 사용하는 정적 사이트. GitHub Pages 로 배포됩니�
 npm install
 npm run dev          # http://localhost:3000
 npm run build        # 정적 빌드 → ./out
-npm test             # vitest — 노션 파싱/스냅샷
+npm test             # vitest: 노션 파싱/스냅샷
 npm run type-check
 npm run lint
 ```
@@ -73,8 +73,8 @@ npm run lint
 
 노션 신형 attachment (`attachment:<uuid>:<file>`) 는 비공식 API 로 못 풉니다. 두 가지 우회:
 
-1. **레포 직접 호스팅 (권장)** — `public/post-images/` 에 커밋 → 노션 `thumbnail` 컬럼에 URL 임베드. 예: `https://tech.imweb.me/post-images/<파일명>`
-2. **외부 URL** — Unsplash 등 외부 호스팅 URL 그대로 임베드
+1. **레포 직접 호스팅 (권장)**: `public/post-images/` 에 커밋 → 노션 `thumbnail` 컬럼에 URL 임베드. 예: `https://tech.imweb.me/post-images/<파일명>`
+2. **외부 URL**: Unsplash 등 외부 호스팅 URL 그대로 임베드
 
 ## 디자인 커스터마이징
 

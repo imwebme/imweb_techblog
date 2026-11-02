@@ -8,7 +8,7 @@
 
 1. 대상 DB 페이지([링크](https://www.notion.so/imweb/09870e1112ce83098f628118b6ba9bb3))에서 우측 상단 `Share` → `Publish` 탭
 2. `Publish to web` 활성화
-3. (선택) `Search engine indexing` 끄기 — 구글 검색 노출은 막고, 우리 빌드만 접근하도록
+3. (선택) `Search engine indexing` 끄기: 구글 검색 노출은 막고, 우리 빌드만 접근하도록
 
 URL은 그대로(`notion.so/imweb/...`) 유지되지만, 비로그인 상태에서도 비공식 API로 접근이 가능해집니다.
 
@@ -65,10 +65,10 @@ npx serve out -l 4000
 
 ## 트러블슈팅
 
-- **빌드 단계에서 `missing user <uuid>` 경고** — 페이지의 모든 사용자 참조를 `notion.getUsers()` 로 보강하지만, 일부 케이스(권한이 부족한 사용자 ID 등)는 풀리지 않을 수 있습니다. 렌더링에 영향은 없습니다.
-- **"잠시만 기다려주세요" 화면이 표시됨** — 노션 API 호출이 retry 후에도 실패한 경우의 graceful fallback. Actions 로그의 `console.error` 흔적을 확인하고, 보통은 다음 cron(30분 이내) 또는 수동 트리거로 자연 복구됩니다.
-- **모든 노션 요청이 `403 Forbidden`** ("웹에 게시" 는 정상인데) — www.notion.so 앞단 Cloudflare 가 UA 없는 요청을 봇으로 차단하는 케이스. [`src/lib/notion/client.ts`](./src/lib/notion/client.ts) 가 브라우저 UA 를 명시해 우회하고, 빌드 산출물이 비어 있으면 [`scripts/verify-build.mjs`](./scripts/verify-build.mjs) 가 배포 전에 실패시킵니다 (2026-08-05 전 글 미노출 장애로 도입). 재발하면 UA 문자열 갱신을 먼저 시도해 보세요.
-- **빌드가 실패하며 "page not found" 같은 메시지** — 1번 단계의 "Publish to web" 가 풀려있을 가능성이 큽니다. 다시 켜주세요.
+- **빌드 단계에서 `missing user <uuid>` 경고**: 페이지의 모든 사용자 참조를 `notion.getUsers()` 로 보강하지만, 일부 케이스(권한이 부족한 사용자 ID 등)는 풀리지 않을 수 있습니다. 렌더링에 영향은 없습니다.
+- **"잠시만 기다려주세요" 화면이 표시됨**: 노션 API 호출이 retry 후에도 실패한 경우의 graceful fallback. Actions 로그의 `console.error` 흔적을 확인하고, 보통은 다음 cron(30분 이내) 또는 수동 트리거로 자연 복구됩니다.
+- **모든 노션 요청이 `403 Forbidden`** ("웹에 게시" 는 정상인데): www.notion.so 앞단 Cloudflare 가 UA 없는 요청을 봇으로 차단하는 케이스. [`src/lib/notion/client.ts`](./src/lib/notion/client.ts) 가 브라우저 UA 를 명시해 우회하고, 빌드 산출물이 비어 있으면 [`scripts/verify-build.mjs`](./scripts/verify-build.mjs) 가 배포 전에 실패시킵니다 (2026-08-05 전 글 미노출 장애로 도입). 재발하면 UA 문자열 갱신을 먼저 시도해 보세요.
+- **빌드가 실패하며 "page not found" 같은 메시지**: 1번 단계의 "Publish to web" 가 풀려있을 가능성이 큽니다. 다시 켜주세요.
 - **글이 50건이 넘어가면** 첫 페이지만 가져올 수 있습니다. 그때는 `src/lib/notion/getPosts.ts` 에서 `notion.getCollectionData(...)` 페이지네이션을 보강해야 합니다.
 
 ## 사이트를 외부에 공개하지 않으려면
@@ -84,9 +84,9 @@ gh api -X POST /repos/imwebme/imweb_techblog/pages -f "build_type=workflow"
 gh workflow run "Deploy to GitHub Pages" --ref main
 ```
 
-## Google Search Console — 검색 노출
+## Google Search Console: 검색 노출
 
-`tech.imweb.me` 가 구글 검색에 정상 노출되려면 Search Console 등록이 필요합니다. (코드 측 SEO — `<title>`, `<meta description>`, `JSON-LD`, `sitemap.xml`, `robots.txt` — 는 이미 다 박혀 있습니다.)
+`tech.imweb.me` 가 구글 검색에 정상 노출되려면 Search Console 등록이 필요합니다. (코드 측 SEO: `<title>`, `<meta description>`, `JSON-LD`, `sitemap.xml`, `robots.txt`: 는 이미 다 박혀 있습니다.)
 
 1. https://search.google.com/search-console 접속 → **속성 추가** → **URL 접두어**: `https://tech.imweb.me/`
 2. **소유권 확인**: 가장 쉬운 방법은 **HTML 태그** 방식.

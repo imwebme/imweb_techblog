@@ -1,4 +1,4 @@
-# 아임웹 테크 — 작업 규칙
+# 아임웹 테크: 작업 규칙
 
 Notion 기반 정적 블로그 (Next.js 14 정적 export → GitHub Pages).
 프로젝트 개요·구조·운영은 [README.md](./README.md) · [STRUCTURE.md](./STRUCTURE.md) · [DEPLOY.md](./DEPLOY.md) · [REQUIREMENTS.md](./REQUIREMENTS.md) 참고.

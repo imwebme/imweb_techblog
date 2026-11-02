@@ -64,7 +64,7 @@ export default function EventPopup() {
           if (e.target === e.currentTarget) closeSession()
         }}
       >
-      {/* 카드 — 사이즈 적당히, 화면 너무 안 가리게 */}
+      {/* 카드 - 사이즈 적당히, 화면 너무 안 가리게 */}
       <div className="event-popup-card relative w-full max-w-md overflow-hidden rounded-2xl border border-line bg-card shadow-2xl">
         <button
           type="button"
@@ -89,7 +89,7 @@ export default function EventPopup() {
 
         {ev.image && (
           // eslint-disable-next-line @next/next/no-img-element
-          // 이미지 본래 비율 그대로 — 16:9, OG(40:21), 1:1 등 어떤 비율도 자동 적응.
+          // 이미지 본래 비율 그대로 - 16:9, OG(40:21), 1:1 등 어떤 비율도 자동 적응.
           <img
             src={withBasePath(ev.image)}
             alt={ev.title || "event"}

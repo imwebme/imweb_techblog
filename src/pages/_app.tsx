@@ -12,7 +12,7 @@ const CONFIG = require("../../site.config")
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  // canonical — 쿼리스트링(UTM 등)이 붙은 URL 이 별개 문서로 색인되는 걸 막는다.
+  // canonical - 쿼리스트링(UTM 등)이 붙은 URL 이 별개 문서로 색인되는 걸 막는다.
   // 글 상세는 자기 URL 을 알고 있어 같은 key 로 이 값을 덮어쓴다(next/head 는 key 로 중복 제거).
   const canonicalPath = router.asPath.split(/[?#]/)[0]
   const canonicalUrl = `${CONFIG.blog.siteUrl.replace(/\/$/, "")}${canonicalPath}`
@@ -55,7 +55,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         {/*
           JSON-LD 구조화 데이터.
           - WebSite: 사이트명·별칭(검색 매칭에 핵심)·검색 액션을 명시
-          - Organization: 회사 정체성 — 지식 그래프 후보가 됩니다
+          - Organization: 회사 정체성 - 지식 그래프 후보가 됩니다
         */}
         <script
           type="application/ld+json"

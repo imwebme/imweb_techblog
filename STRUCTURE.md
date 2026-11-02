@@ -1,4 +1,4 @@
-# 아임웹 테크 — 프로젝트 구조
+# 아임웹 테크: 프로젝트 구조
 
 > 새로 합류한 개발자/기획자가 5분 안에 파악할 수 있도록 작성된 구조 안내서.
 >
@@ -21,11 +21,11 @@
 | Framework | **Next.js 14** (`output: "export"` 로 정적 export) |
 | 언어 | TypeScript + React 18 |
 | 스타일 | Tailwind CSS + CSS 변수 토큰 (`globals.css`) |
-| 폰트 | Pretendard (한글) — jsDelivr CDN, `_document.tsx` 의 `<link>` 로 로드 (CSS `@import` 는 빌드 후 CSS 중간에 놓여 무시되므로 쓰지 않음) |
+| 폰트 | Pretendard (한글): jsDelivr CDN, `_document.tsx` 의 `<link>` 로 로드 (CSS `@import` 는 빌드 후 CSS 중간에 놓여 무시되므로 쓰지 않음) |
 | 데이터 | **notion-client** (비공식 Notion API) |
 | 본문 렌더 | **react-notion-x** + Prism (코드) + KaTeX (수식) |
 | 댓글 | **giscus** (GitHub Discussions, 테마 연동) |
-| 분석 | **GA4** (동의 배너 없이 전수 집계 — 모든 방문에 gtag 로드) |
+| 분석 | **GA4** (동의 배너 없이 전수 집계: 모든 방문에 gtag 로드) |
 | 호스팅 | GitHub Pages + GitHub Actions (커스텀 도메인 `tech.imweb.me`) |
 
 ---
@@ -38,7 +38,7 @@ imweb_techblog/
 │   ├── banner_official_2400_405.png 메인 상단 슬로건 배너 (2400×405, 5.92:1)
 │   ├── Logo_ImwebTech_black.svg      헤더 로고 (라이트 모드)
 │   ├── imweb_Favicon_512_512.png    favicon (512×512)
-│   ├── symbol.webp                  (옛 favicon, 미사용 — 정리 예정)
+│   ├── symbol.webp                  (옛 favicon, 미사용: 정리 예정)
 │   ├── symbol_white.png             흰색 심볼 (채용 CTA 구분자)
 │   ├── OG_imweb_tech.png            OG 기본 이미지
 │   ├── robots.txt
@@ -50,7 +50,7 @@ imweb_techblog/
 │   ├── components/
 │   │   ├── common/
 │   │   │   ├── CoverImage.tsx       커버/썸네일 (미설정·404 시 placeholder fallback; 기본 그라데이션 내장)
-│   │   │   └── Analytics.tsx        GA4 — gtag 로드(전수) + 라우트 변경 시 page_view
+│   │   │   └── Analytics.tsx        GA4: gtag 로드(전수) + 라우트 변경 시 page_view
 │   │   ├── home/
 │   │   │   ├── Banner.tsx           메인 상단 고정 배너
 │   │   │   ├── Sidebar.tsx          카테고리/태그 필터 (lg+ sticky 좌측, < lg 토글; 태그는 상위 12개만)
@@ -60,7 +60,7 @@ imweb_techblog/
 │   │   │   ├── NewBadge.tsx           ↳ 발행 14일 이내 NEW 배지. 정적 HTML 에
 │   │   │   │                            굽지 않고 마운트 후 브라우저 시계로 판정
 │   │   │   │                            (빌드 시점에 굳으면 기간이 지나도 안 사라짐)
-│   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글, 선택적 상단 배너 이미지 — 비율 자동, 화면보다 길면 모달 안에서 스크롤)
+│   │   │   └── EventPopup.tsx       메인 페이지 이벤트 홍보 팝업 (eventPopup 토글, 선택적 상단 배너 이미지: 비율 자동, 화면보다 길면 모달 안에서 스크롤)
 │   │   ├── layout/
 │   │   │   ├── Header.tsx           로고(SVG) + 네비 + 검색 (<sm 은 햄버거+검색바)
 │   │   │   │                        + headerBadge: 메뉴 왼쪽 이벤트 배지 (md 이상 / 모바일은 햄버거 메뉴 맨 위)
@@ -79,7 +79,7 @@ imweb_techblog/
 │   │   ├── notion/
 │   │   │   ├── client.ts            NotionAPI 인스턴스 (내부), fetchPage / fetchUsers 헬퍼
 │   │   │   ├── getPosts.ts          DB → TPost[] (목록, 카테고리/태그 집계)
-│   │   │   ├── getPostBySlug.ts     단일 글 → TPost + recordMap (crdt_data 제거 — 렌더에 안 쓰이는 노션 편집 이력, 페이지 데이터의 최대 80%)
+│   │   │   ├── getPostBySlug.ts     단일 글 → TPost + recordMap (crdt_data 제거: 렌더에 안 쓰이는 노션 편집 이력, 페이지 데이터의 최대 80%)
 │   │   │   ├── mapPage.ts           notion block → TPost 매핑 (속성 파싱)
 │   │   │   └── enrichUsers.ts       공개 페이지의 빈 notion_user 보강
 │   │   ├── utils/
@@ -88,7 +88,7 @@ imweb_techblog/
 │   │   │   ├── slugify.ts           제목 → URL slug
 │   │   │   ├── safeAsync.ts         getStaticProps try/catch + fallback 헬퍼
 │   │   │   └── withBasePath.ts      GitHub Pages basePath 자동 prefix
-│   │   └── useDismissible.ts        공용 닫기 훅 — localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유).
+│   │   └── useDismissible.ts        공용 닫기 훅: localStorage 영구/TTL 기억 (RecruitRibbon·EventPopup 공유).
 │   │                                "숨김"으로 시작해 마운트 후 판정 → 정적 HTML 에 박히지 않아 닫은 사람에게 깜빡이지 않음
 │   │
 │   ├── pages/
@@ -105,7 +105,7 @@ imweb_techblog/
 │   └── types/index.ts               TPost / TAuthor / TPostStatus
 │
 ├── scripts/
-│   └── build-feed-and-sitemap.ts    postbuild — RSS/Atom/sitemap + 옛 슬러그 리다이렉트 스텁 생성
+│   └── build-feed-and-sitemap.ts    postbuild: RSS/Atom/sitemap + 옛 슬러그 리다이렉트 스텁 생성
 ├── .github/workflows/deploy.yml     CI: build + Pages 배포
 ├── next.config.js                   output: "export", basePath, image config
 ├── tailwind.config.js               컬러/타이포/easing 토큰
@@ -136,12 +136,12 @@ imweb_techblog/
 | `/feed.xml` | RSS 2.0 (최근 20개 글) |
 | `/atom.xml` | Atom 1.0 |
 | `/sitemap.xml` | 모든 페이지 + 글 목록 |
-| `/posts/<옛슬러그>/` | 리다이렉트 스텁 — `site.config.js` 의 `seo.slugAliases` 기준 생성 |
+| `/posts/<옛슬러그>/` | 리다이렉트 스텁: `site.config.js` 의 `seo.slugAliases` 기준 생성 |
 
 **옛 슬러그 리다이렉트**: 정적 배포(GitHub Pages)라 서버 301 을 쓸 수 없어, 옛 경로에
 `canonical` + `meta refresh` + `location.replace` 를 담은 스텁 HTML 을 만들어 대신합니다.
 canonical 이 검색엔진에 정본 위치를 알려 링크 신호를 새 글로 넘기고, refresh 가 실제 방문자를
-옮깁니다. `noindex` 는 일부러 넣지 않습니다 — canonical 과 신호가 충돌해 통합이 아니라
+옮깁니다. `noindex` 는 일부러 넣지 않습니다: canonical 과 신호가 충돌해 통합이 아니라
 색인 삭제로 처리될 수 있기 때문입니다. 대상 글이 없거나 살아있는 슬러그와 겹치면 건너뛰고 경고합니다.
 
 외부 링크 (네비):
@@ -184,7 +184,7 @@ flowchart LR
 
 ## 6. 컴포넌트 트리
 
-> `_app` 에서 `<Analytics />` (GA4 — 동의 배너 없이 gtag 로드 + 라우트 변경 시 page_view) 가 모든 페이지 공통으로 마운트됩니다.
+> `_app` 에서 `<Analytics />` (GA4: 동의 배너 없이 gtag 로드 + 라우트 변경 시 page_view) 가 모든 페이지 공통으로 마운트됩니다.
 
 ### 홈 (`/`)
 
@@ -213,14 +213,14 @@ Layout
 ├── Header
 ├── PostHeader              카테고리 라벨 / 제목 / 요약 / 작성자·날짜 / 태그 칩 / 커버
 ├── PostContent             <NotionRenderer /> + dynamic Code/Collection/Equation/Modal
-├── PostToc                 우측 고정 목차 — 본문 제목에서 자동 생성, 스크롤 추적.
+├── PostToc                 우측 고정 목차: 본문 제목에서 자동 생성, 스크롤 추적.
 │                           제목 2개 미만이면 미노출, xl(1280px) 미만에서 숨김.
 │                           노션 인라인 목차 블록은 중복이라 CSS 로 숨긴다.
 ├── PostActions             공유 버튼 (Web Share API + clipboard fallback)
 ├── PostNavigation          이전/다음 글 카드 (발행일 인접 기준)
 ├── Comments                giscus (활성 시, 테마 연동)
 └── Footer
-     (글 상세에는 RecruitRibbon 미노출 — 홈 전용)
+     (글 상세에는 RecruitRibbon 미노출: 홈 전용)
 ```
 
 ---
@@ -238,7 +238,7 @@ Layout
 | `tags` | Multi-select | 선택 | 사이드바 태그 |
 | `summary` | Text | 권장 | 카드/메타 description |
 | `date` | Date | 권장 | 발행일 (정렬 키) |
-| `thumbnail` | File | 선택 | 카드 썸네일. 노션 신형 attachment 는 미노출 — `public/post-images/` 권장 |
+| `thumbnail` | File | 선택 | 카드 썸네일. 노션 신형 attachment 는 미노출: `public/post-images/` 권장 |
 | `author` | Person | 선택 | 카드/상세에 표시. 이름만 표시(프로필 배지 없음). 공동 저자는 쉼표로 이어 표시 |
 
 ---
@@ -271,8 +271,8 @@ flowchart TB
 
 **트리거**
 - `push: branches: [main]`
-- `schedule: cron "*/30 * * * *"` — 30분마다 (노션 변경 자동 반영)
-- `workflow_dispatch` — Actions 탭에서 수동
+- `schedule: cron "*/30 * * * *"`: 30분마다 (노션 변경 자동 반영)
+- `workflow_dispatch`: Actions 탭에서 수동
 
 ---
 
@@ -297,10 +297,10 @@ flowchart TB
 
 | 클래스 | 사용처 |
 |---|---|
-| `.notion` 하위 | 본문(react-notion-x) 블록 — 콜아웃/인용구/제목/코드 등을 톤앤매너로 재정의 |
+| `.notion` 하위 | 본문(react-notion-x) 블록: 콜아웃/인용구/제목/코드 등을 톤앤매너로 재정의 |
 | `.lift-card` | 카드 hover 시 그림자 + Y -4px |
 | `.chip` | 태그/카테고리 칩 (`.is-active` 로 활성) |
-| `.cta-marquee-track` / `.cta-led` / `.cta-led-logo` | 채용 CTA LED 전광판 — 좌→우 흐름 + 파란 네온 글로우 (`prefers-reduced-motion` 시 정지) |
+| `.cta-marquee-track` / `.cta-led` / `.cta-led-logo` | 채용 CTA LED 전광판: 좌→우 흐름 + 파란 네온 글로우 (`prefers-reduced-motion` 시 정지) |
 | `.event-popup-card` | 메인 이벤트 팝업 등장 애니메이션 (페이드 + 스케일, reduced-motion 시 정지) |
 | `.no-scrollbar` | 가로 스크롤 영역의 스크롤바 숨김 |
 
@@ -319,7 +319,7 @@ flowchart TB
 | 파일 | 책임 |
 |---|---|
 | **`site.config.js`** | 블로그명, `alternateNames` (SEO 별칭), 설명, 네비, 회사 정보, 노션 DB ID, giscus 설정, 채용 CTA(recruitCTA), 이벤트 팝업(eventPopup), GA4(analytics), `seo.slugAliases` (옛 슬러그 → 새 슬러그 리다이렉트), `siteUrl` (RSS·sitemap·OG·JSON-LD 절대 URL 기준) |
-| `next.config.js` | basePath (CNAME 있으면 ""; 없으면 `/imweb_techblog` 폴백 — `??` 로 빈 문자열 보존), 정적 export, image unoptimized |
+| `next.config.js` | basePath (CNAME 있으면 ""; 없으면 `/imweb_techblog` 폴백: `??` 로 빈 문자열 보존), 정적 export, image unoptimized |
 | `public/CNAME` | 커스텀 도메인 (`tech.imweb.me`). 이 파일이 있으면 `configure-pages` 가 basePath 를 비웁니다 |
 | `tailwind.config.js` | 컬러/타이포/이징 토큰 → Tailwind 유틸로 노출 |
 | `.github/workflows/deploy.yml` | 빌드 + Pages 배포 (push / cron / 수동) |
@@ -333,6 +333,6 @@ flowchart TB
 | 1 | 노션 신형 attachment 이미지 (`attachment:...`) 가 비공식 API 로 안 풀림 | `public/post-images/` 직접 호스팅 + 노션 thumbnail 에 사이트 URL (`https://tech.imweb.me/post-images/<파일명>`) 임베드 |
 | 2 | 검색이 본문은 포함하지 않음 | 제목/요약/카테고리/태그 substring 만 |
 | 3 | dev 의 `getStaticPaths` 캐시 | 노션에 새 글 추가 후 dev 서버 재시작 |
-| 4 | 정적 배포라 서버 301 리다이렉트 불가 | 슬러그를 바꿨으면 `site.config.js` 의 `seo.slugAliases` 에 옛 슬러그를 등록 — 빌드가 canonical+meta refresh 스텁을 생성 |
+| 4 | 정적 배포라 서버 301 리다이렉트 불가 | 슬러그를 바꿨으면 `site.config.js` 의 `seo.slugAliases` 에 옛 슬러그를 등록: 빌드가 canonical+meta refresh 스텁을 생성 |
 
 > ※ "글 다수 시 누락" 은 `collectionReducerLimit`(client.ts) 로 전량 수집하도록 해결됨. 화면 목록은 `PostGrid` 가 9개/페이지로 나눠 보여줍니다(데이터 페치와 별개).

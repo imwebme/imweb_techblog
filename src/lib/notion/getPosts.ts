@@ -77,7 +77,7 @@ export const snapshotFromRecordMap = (
   const posts = allPosts
     .filter((p) => p.status === "Public" || (p.status as string) === "공개")
     // 최신순. date 가 같은 날이면 나중에 작성된(노션 생성 시각이 늦은) 글을
-    // 위로 — 같은 날 올린 글 중 최신이 맨 위에 오도록.
+    // 위로 - 같은 날 올린 글 중 최신이 맨 위에 오도록.
     //
     // 주의: 같은 날 발행한 시리즈(1편/2편)는 2편이 위에 온다. 읽기 순서를
     // 지키려면 노션에서 발행일을 하루씩 다르게 두어야 한다.
@@ -117,7 +117,7 @@ export const snapshotFromRecordMap = (
 const buildSnapshot = async (): Promise<DbSnapshot> => {
   const recordMap = await fetchPage(CONFIG.notion.databaseId)
 
-  // 작성자 보강 (notion_user 매핑 추가) — snapshotFromRecordMap 전에 수행
+  // 작성자 보강 (notion_user 매핑 추가) - snapshotFromRecordMap 전에 수행
   const coll = extractCollection(recordMap)
   if (coll) {
     const authorPropId = findPropId(coll.schema, ["author", "authors", "작성자"])
@@ -137,7 +137,7 @@ export const getDbSnapshot = (): Promise<DbSnapshot> => {
   return promise
 }
 
-// 이하 thin wrapper — 페이지 코드의 기존 호출 시그니처 그대로 유지.
+// 이하 thin wrapper - 페이지 코드의 기존 호출 시그니처 그대로 유지.
 export async function getPosts(): Promise<TPost[]> {
   return (await getDbSnapshot()).posts
 }

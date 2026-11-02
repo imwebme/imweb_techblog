@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 
 // localStorage 에 닫힘 상태를 기억하는 공용 훅.
-// - 영구 닫기: dismiss() — 값 "1" 저장. 다음 방문에도 안 뜸.
-// - 일정 시간 닫기: dismiss(ttlMs) — 만료 timestamp 저장. 만료 후 다시 노출.
+// - 영구 닫기: dismiss() - 값 "1" 저장. 다음 방문에도 안 뜸.
+// - 일정 시간 닫기: dismiss(ttlMs) - 만료 timestamp 저장. 만료 후 다시 노출.
 // 첫 페인트는 "숨김"(dismissed=true) 으로 시작하고, 마운트 후 localStorage 를
 // 읽어 닫은 기록이 없을 때만 보이게 합니다.
 //

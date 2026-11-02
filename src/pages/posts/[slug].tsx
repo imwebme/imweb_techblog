@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   if (!result) return { notFound: true }
   const { recordMap, ...post } = result
 
-  // 인접 글 계산 — getPosts 는 최신순 반환.
+  // 인접 글 계산 - getPosts 는 최신순 반환.
   // idx 0 이 가장 최신, idx length-1 이 가장 예전.
   const posts = await safeAsync(() => getPosts(), [] as TPost[], `posts/${slug}/nav`)
   const idx = posts.findIndex((p) => p.slug === slug)
@@ -57,7 +57,7 @@ export default function PostPage({
   const ogTitle = `${post.title} | ${CONFIG.blog.title}`
   const ogDescription = post.summary || CONFIG.blog.description
   // og:image 는 절대 URL 이어야 슬랙·페이스북 등 파서가 안정적으로 인식.
-  // post.cover 는 노션 thumbnail 컬럼의 URL — 운영자가 절대 URL 로 박는다는 전제.
+  // post.cover 는 노션 thumbnail 컬럼의 URL - 운영자가 절대 URL 로 박는다는 전제.
   // 비어 있으면 사이트 디폴트 OG 이미지로 fallback.
   const ogImage = post.cover || `${CONFIG.blog.siteUrl}/OG_imweb_tech.png`
   const ogUrl = `${CONFIG.blog.siteUrl}/posts/${post.slug}/`

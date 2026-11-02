@@ -22,7 +22,7 @@ export default function PostActions({ post }: { post: TPost }) {
         await nav.share({ title: post.title, text: post.summary || "", url })
         return
       } catch {
-        // 사용자가 공유 시트를 닫은 경우 — fallback 없이 종료
+        // 사용자가 공유 시트를 닫은 경우 - fallback 없이 종료
         return
       }
     }

@@ -5,7 +5,7 @@ import { msUntilNextKstMidnight } from "@/lib/utils/kstMidnight"
 
 const CONFIG = require("../../../site.config")
 
-// 채용 이벤트 CTA — 화면 하단에 고정(fixed)되어 스크롤해도 계속 노출됩니다.
+// 채용 이벤트 CTA - 화면 하단에 고정(fixed)되어 스크롤해도 계속 노출됩니다.
 // 홈(`/`)에서만 노출하고, 글 상세·태그·검색·소개 등 다른 페이지에선 미렌더.
 // site.config.js 의 recruitCTA.enabled 가 true 이고 href 가 있을 때만 표시.
 // 사용자가 닫으면 한국 시간(KST) 기준 그날 자정까지만 숨기고, 날이 바뀌면 다시 띄웁니다.

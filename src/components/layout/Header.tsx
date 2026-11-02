@@ -124,7 +124,7 @@ export default function Header() {
             {navItems.map((item) => renderNavItem(item, navLinkClass))}
           </nav>
 
-          {/* 검색 — 모바일에선 남는 폭을 채우고(검색바 노출), ≥sm 에선 고정폭 */}
+          {/* 검색 - 모바일에선 남는 폭을 채우고(검색바 노출), ≥sm 에선 고정폭 */}
           <form
             onSubmit={onSubmitSearch}
             role="search"

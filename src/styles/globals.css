@@ -119,7 +119,7 @@ a {
 }
 .cta-led {
   color: #ffffff;
-  /* 파란 네온 글로우 — 이전 대비 약 1.3배 강화 */
+  /* 파란 네온 글로우 - 이전 대비 약 1.3배 강화 */
   text-shadow:
     0 0 8px rgba(90, 150, 255, 1),
     0 0 18px rgba(90, 150, 255, 0.72),
@@ -139,7 +139,7 @@ a {
   }
 }
 
-/* ── 이벤트 팝업 — 부드러운 등장 ───────────────────────────────────────── */
+/* ── 이벤트 팝업 - 부드러운 등장 ───────────────────────────────────────── */
 @keyframes event-popup-in {
   from {
     opacity: 0;
@@ -194,7 +194,7 @@ a {
   line-height: 1.85;
 }
 
-/* 제목 — prose 와 동일한 위계/간격 */
+/* 제목 - prose 와 동일한 위계/간격 */
 .notion .notion-h1,
 .notion .notion-h2,
 .notion .notion-h3 {
@@ -245,7 +245,7 @@ a {
   border: 1px solid var(--color-border);
 }
 
-/* 인용구 — prose blockquote 와 통일 */
+/* 인용구 - prose blockquote 와 통일 */
 .notion .notion-quote {
   border-left: 3px solid var(--color-brand);
   background: var(--color-surface);
@@ -257,7 +257,7 @@ a {
   font-style: normal;
 }
 
-/* 인용구 색 — 노션에서 고른 글자색(`.notion-<색>`)을 왼쪽 강조선과 옅은
+/* 인용구 색 - 노션에서 고른 글자색(`.notion-<색>`)을 왼쪽 강조선과 옅은
    배경으로 옮긴다. 글자에 그대로 칠하면 옅은 배경 위에서 노랑·초록 등이
    읽히지 않으므로, 색은 강조선이 맡고 본문은 가독성을 유지한다. */
 .notion .notion-quote.notion-gray {
@@ -301,14 +301,14 @@ a {
   background: #fff1f1;
 }
 
-/* 노션 목차 블록 — 글 우측 고정 레일(PostToc)이 같은 역할을 하므로 본문에서는
+/* 노션 목차 블록 - 글 우측 고정 레일(PostToc)이 같은 역할을 하므로 본문에서는
    숨긴다. 노션에 목차 블록을 넣든 안 넣든 레일은 제목에서 자동 생성되므로,
    이걸 남겨두면 같은 목차가 두 벌 보인다. */
 .notion .notion-table-of-contents {
   display: none;
 }
 
-/* 콜아웃 — 모양(라운드/여백)만 통일하고 색은 노션에서 고른 값을 따른다.
+/* 콜아웃 - 모양(라운드/여백)만 통일하고 색은 노션에서 고른 값을 따른다.
    react-notion-x 는 색을 `.notion-<색>_background_co` 클래스로 넘겨준다.
    라이브러리 기본값은 alpha 0.3 이라 너무 흐리고 green/default 는 정의 자체가
    없어, 블로그 톤에 맞춘 팔레트를 아래에서 직접 정의한다. */
@@ -319,13 +319,13 @@ a {
   margin: 1.5rem 0;
   border-radius: 14px;
   color: var(--color-text);
-  /* 색을 안 고른(default) 콜아웃 — 채우지 않고 테두리만. 노션의 기본
+  /* 색을 안 고른(default) 콜아웃 - 채우지 않고 테두리만. 노션의 기본
      콜아웃 생김새와 같고, 회색 배경과 확실히 구분된다. */
   background: #fff;
   border: 1px solid var(--color-border);
 }
 
-/* 색별 팔레트 — 배경은 옅게, 테두리는 같은 계열 한 톤 진하게.
+/* 색별 팔레트 - 배경은 옅게, 테두리는 같은 계열 한 톤 진하게.
    선택자에 `.notion-callout` 을 함께 써 라이브러리 규칙보다 우선하게 한다. */
 .notion .notion-callout.notion-default_background_co {
   background: #fff;
@@ -424,7 +424,7 @@ a {
   line-height: 1.7;
 }
 
-/* 노션 표 — 본문 너비에 맞춤. react-notion-x 가 컬럼별로 inline width 를 박아
+/* 노션 표 - 본문 너비에 맞춤. react-notion-x 가 컬럼별로 inline width 를 박아
    본문을 넘치는 경우가 있어 !important 로 균등 배분. */
 .notion .notion-simple-table {
   width: 100% !important;
@@ -446,7 +446,7 @@ a {
   margin: 2.5rem 0;
 }
 
-/* 이미지 — 카드와 동일한 둥근 모서리 */
+/* 이미지 - 카드와 동일한 둥근 모서리 */
 .notion .notion-asset-wrapper-image img,
 .notion .notion-asset-object-fit {
   border-radius: 12px;

@@ -14,8 +14,8 @@ export const unwrap = (record: any): any => {
 }
 
 // 스키마에서 후보 이름들 중 하나와 매치되는 prop id 를 찾습니다.
-// 1차: 정확 일치 (대소문자 무시) — 의도된 정확한 매핑
-// 2차: prefix 매치 — 노션에서 사용자가 메모를 붙인 경우 ("tags(최대 3개)")도 잡아냄
+// 1차: 정확 일치 (대소문자 무시) - 의도된 정확한 매핑
+// 2차: prefix 매치 - 노션에서 사용자가 메모를 붙인 경우 ("tags(최대 3개)")도 잡아냄
 export const findPropId = (
   schema: Record<string, { name: string; type: string }>,
   names: string[]
@@ -64,7 +64,7 @@ const pickSelect = (
 // 정의되지 않은 값은 버립니다.
 //
 // 단, 옵션 목록을 못 읽은 경우(스키마 형태가 바뀌는 등)에는 필터를 적용하지
-// 않습니다 — 전체 태그가 한꺼번에 사라지는 쪽이 유령 하나보다 훨씬 위험합니다.
+// 않습니다 - 전체 태그가 한꺼번에 사라지는 쪽이 유령 하나보다 훨씬 위험합니다.
 const pickMultiSelect = (
   block: any,
   schema: any,

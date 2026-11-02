@@ -88,7 +88,7 @@ function DesktopFilters({
   )
 }
 
-// ── 좁은 화면 (< lg) — 토글 + 2 컬럼 ─────────────────────────────────────
+// ── 좁은 화면 (< lg) - 토글 + 2 컬럼 ─────────────────────────────────────
 function NarrowFilters({
   categories,
   tags,
