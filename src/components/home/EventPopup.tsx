@@ -133,15 +133,26 @@ export default function EventPopup() {
           </dl>
         )}
 
-        <a
-          href={ev.ctaHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-ink-900 px-5 py-3 text-sm font-semibold text-base transition-opacity hover:opacity-90"
-        >
-          {ev.ctaLabel}
-          <span aria-hidden>→</span>
-        </a>
+        {ev.ctaDisabled ? (
+          // 신청 마감 등으로 CTA 를 막을 때. 링크 대신 비활성 버튼이라 눌러도 이동하지 않는다.
+          <button
+            type="button"
+            disabled
+            className="mt-6 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink-500"
+          >
+            {ev.ctaLabel}
+          </button>
+        ) : (
+          <a
+            href={ev.ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-ink-900 px-5 py-3 text-sm font-semibold text-base transition-opacity hover:opacity-90"
+          >
+            {ev.ctaLabel}
+            <span aria-hidden>→</span>
+          </a>
+        )}
 
         <button
           type="button"

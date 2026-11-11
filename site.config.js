@@ -143,7 +143,9 @@ const CONFIG = {
       "선 넘는 개발자들의 이야기\n아임웹의 첫 번째 오프라인 기술 밋업에 초대합니다.",
     date: "2026.11.18 (수) 19:00 – 22:00",
     place: "서울시 강남구 테헤란로 501, 15층",
-    ctaLabel: "지금 신청하기",
+    // 신청이 끝나면 ctaDisabled: true 로 버튼을 비활성화한다 (링크로 이동하지 않음).
+    ctaLabel: "신청 마감",
+    ctaDisabled: true,
     ctaHref: "https://ticketa.co/event/qexwz60x",
   },
 }
