@@ -67,7 +67,7 @@ const CONFIG = {
   // PC 는 메뉴 왼쪽, 모바일은 햄버거 메뉴 맨 위에 노출.
   // 이벤트가 끝나면 eventPopup 과 함께 enabled: false 로 내린다.
   headerBadge: {
-    enabled: true,
+    enabled: false, // TECH GROUND 26 종료로 내림 (2026-11-19)
     label: "TECH GROUND26 신청 마감",
     href: "https://ticketa.co/event/qexwz60x",
     // 이벤트 배너 톤에 맞춘 색. 비우면 브랜드 블루 배경 + 흰 글자.
@@ -133,8 +133,8 @@ const CONFIG = {
   // 개발자 행사 등 홍보용. enabled: false 면 안 뜸. 메인(/)에서만 노출.
   // 사용자가 "오늘 하루 보지 않기" 누르면 그날 자정까지 안 보임(localStorage).
   eventPopup: {
-    // TECH GROUND 26 공지 중 (2026-10-23 오픈). 이벤트가 끝나면 false 로 내린다.
-    enabled: true,
+    // TECH GROUND 26 (2026-10-23 ~ 2026-11-19). 종료로 내림. 다음 이벤트 때 내용 바꿔 재사용.
+    enabled: false,
     image: "/techground26_banner.webp",
     badge: "EVENT",
     title: "TECH GROUND 26",
