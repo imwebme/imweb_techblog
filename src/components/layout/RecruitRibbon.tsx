@@ -33,7 +33,8 @@ export default function RecruitRibbon() {
     <span className="flex shrink-0 items-center">
       {Array.from({ length: 5 }).map((_, i) => (
         <span key={i} className="flex items-center">
-          <span className="cta-led px-6 text-sm font-bold uppercase">
+          {/* 대문자 변환(uppercase)은 쓰지 않는다. 영문 직무명이 들어가면 "PRODUCT ENGINEER" 처럼 바뀌어 설정 문구와 달라진다. */}
+          <span className="cta-led px-6 text-sm font-bold">
             {cta.label}
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}

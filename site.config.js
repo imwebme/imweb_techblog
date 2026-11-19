@@ -125,8 +125,8 @@ const CONFIG = {
   // 이벤트 기간에만 enabled: true. label/href 만 바꿔 운영합니다.
   recruitCTA: {
     enabled: true, // 이벤트 끝나면 false
-    label: "아임웹은 지금 채용 중! 보상금 100만 원",
-    href: "https://team.imweb.me/career?utm_source=techblog&utm_medium=blog",
+    label: "Product Engineer 적극 채용 중!",
+    href: "https://team.imweb.me/career_detail?id=245464&utm_source=techblog&utm_medium=blog&utm_campaign=product_engineer",
   },
 
   // ── 메인 페이지 이벤트 팝업 ─────────────────────────────────────────────
